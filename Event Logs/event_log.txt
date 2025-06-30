@@ -1,0 +1,439 @@
+2025-05-10 07:19:16,701 - ERROR - Trial Error
+NoneType: None
+2025-05-10 13:28:07,620 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-10 13:30:38,745 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-13 14:47:33,650 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-13 14:48:52,126 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-13 17:15:23,176 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 08:03:52,644 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 08:31:28,545 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 08:57:42,928 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 09:03:48,551 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 09:35:56,577 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 09:37:46,736 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 09:38:52,128 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 11:31:36,255 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 11:34:12,025 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 11:54:33,692 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 11:56:53,800 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 12:10:26,930 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 12:14:20,432 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 13:55:52,517 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 13:59:56,735 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 15:33:31,107 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 17:20:29,938 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-14 17:29:19,320 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-15 09:54:22,782 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-15 14:06:04,818 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-15 14:18:58,238 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-15 14:52:55,661 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-15 15:36:09,527 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-15 15:44:40,297 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-16 08:04:58,362 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-16 08:34:43,399 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-16 09:00:54,377 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-16 09:43:50,718 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-16 10:51:17,649 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-16 11:05:23,930 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-16 11:16:40,124 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-16 16:04:31,462 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-16 17:11:11,456 - ERROR - Creating MasterPump Or Running Failed
+Traceback (most recent call last):
+  File "\\192.168.2.19\ai_team\AI Program\Programs\PlcCompilerLatest4.0\Main.py", line 104, in start
+    PiMachineManager.CheckPICsv()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: partially initialized module 'PiMachineManager' has no attribute 'CheckPICsv' (most likely due to a circular import)
+2025-05-16 17:14:01,232 - ERROR - Creating MasterPump Or Running Failed
+Traceback (most recent call last):
+  File "\\192.168.2.19\ai_team\AI Program\Programs\PlcCompilerLatest4.0\Main.py", line 104, in start
+    PiMachineManager.CheckPICsv()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: partially initialized module 'PiMachineManager' has no attribute 'CheckPICsv' (most likely due to a circular import)
+2025-05-16 17:20:42,973 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-19 08:10:44,625 - ERROR - Creating MasterPump Or Running Failed
+Traceback (most recent call last):
+  File "\\192.168.2.19\ai_team\AI Program\Programs\PlcCompilerLatest4.0\Main.py", line 104, in start
+    PiMachineManager.CheckPICsv()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: partially initialized module 'PiMachineManager' has no attribute 'CheckPICsv' (most likely due to a circular import)
+2025-05-19 08:20:52,443 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-19 08:47:41,873 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-20 08:56:52,033 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-20 09:58:52,563 - ERROR - Creating MasterPump Or Running Failed
+Traceback (most recent call last):
+  File "<ipython-input-1-e210580e0127>", line 137, in start
+    PiMachineManager.CheckPICsv()
+  File "\\192.168.2.19\ai_team\AI Program\Programs\PlcCompilerLatest4.0\PiMachineManager.py", line 26, in CheckPICsv
+    dfPi = pd.read_csv(f'PICompiled{DateAndTimeManager.dateToReadDashFormat}.csv', encoding='latin1')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "c:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\common.py", line 873, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'PICompiled2025-05-22.csv'
+2025-05-20 10:00:44,124 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-20 10:33:45,672 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-20 14:50:43,514 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-20 15:06:07,329 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-20 15:58:41,319 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-20 16:02:01,361 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-20 16:36:27,171 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-21 07:41:48,827 - ERROR - Creating MasterPump Or Running Failed
+Traceback (most recent call last):
+  File "\\192.168.2.19\ai_team\AI Program\Programs\PlcCompilerLatest4.0\Main.py", line 234, in start
+    PiMachineManager.CheckPICsv()
+  File "\\192.168.2.19\ai_team\AI Program\Programs\PlcCompilerLatest4.0\PiMachineManager.py", line 26, in CheckPICsv
+    dfPi = pd.read_csv(f'PICompiled{DateAndTimeManager.dateToReadDashFormat}.csv', encoding='latin1')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\parsers\readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "c:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\common.py", line 873, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'PICompiled2025-05-21.csv'
+2025-05-21 08:19:54,201 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-21 08:38:59,064 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-21 08:46:45,850 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-21 08:47:35,626 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-21 08:50:22,822 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-21 08:51:38,855 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-21 08:53:11,380 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-21 08:57:18,778 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-21 08:59:31,745 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-22 10:45:37,310 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 08:19:49,037 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 10:43:55,522 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 14:53:05,928 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 14:58:30,944 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 15:01:30,065 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 15:06:17,366 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 15:08:56,741 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 15:27:26,681 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 15:30:35,897 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 15:32:47,678 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 15:35:14,120 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 15:47:24,334 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 15:48:36,117 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 16:19:09,319 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 16:29:57,905 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 16:32:19,756 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 17:02:24,601 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 17:08:17,928 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-26 17:17:42,475 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-27 08:19:03,141 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-27 08:51:29,452 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-27 09:31:46,531 - ERROR - Creating MasterPump Or Running Failed
+Traceback (most recent call last):
+  File "\\192.168.2.19\ai_team\AI Program\Programs\PlcCompilerLatest4.0\Main.py", line 242, in start
+    PiMachineManager.CompilePICsv()
+  File "\\192.168.2.19\ai_team\AI Program\Programs\PlcCompilerLatest4.0\PiMachineManager.py", line 332, in CompilePICsv
+    compiledFrame = pd.concat([compiledFrame, excelData2], ignore_index=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hpi.python\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\reshape\concat.py", line 382, in concat
+    op = _Concatenator(
+         ^^^^^^^^^^^^^^
+  File "C:\Users\hpi.python\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\reshape\concat.py", line 448, in __init__
+    ndims = self._get_ndims(objs)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hpi.python\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\reshape\concat.py", line 489, in _get_ndims
+    raise TypeError(msg)
+TypeError: cannot concatenate object of type '<class 'str'>'; only Series and DataFrame objs are valid
+2025-05-27 09:34:40,014 - ERROR - Creating MasterPump Or Running Failed
+Traceback (most recent call last):
+  File "\\192.168.2.19\ai_team\AI Program\Programs\PlcCompilerLatest4.0\Main.py", line 242, in start
+    PiMachineManager.CompilePICsv()
+  File "\\192.168.2.19\ai_team\AI Program\Programs\PlcCompilerLatest4.0\PiMachineManager.py", line 332, in CompilePICsv
+    compiledFrame = pd.concat([compiledFrame, excelData2], ignore_index=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\reshape\concat.py", line 382, in concat
+    op = _Concatenator(
+         ^^^^^^^^^^^^^^
+  File "C:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\reshape\concat.py", line 448, in __init__
+    ndims = self._get_ndims(objs)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\reshape\concat.py", line 489, in _get_ndims
+    raise TypeError(msg)
+TypeError: cannot concatenate object of type '<class 'str'>'; only Series and DataFrame objs are valid
+2025-05-27 09:36:50,490 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-27 09:48:30,874 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-27 09:55:56,378 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-27 09:57:41,461 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-28 08:52:40,061 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-05-28 08:56:02,936 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-11 11:14:44,532 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-13 08:30:16,872 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-13 08:42:09,875 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-13 08:49:30,000 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-13 09:00:18,109 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-17 16:46:55,541 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-17 17:11:26,048 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-17 17:19:33,230 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-19 09:32:21,386 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-19 09:50:09,384 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-19 09:52:02,275 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-19 10:08:14,775 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-19 11:05:37,145 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-19 11:42:18,184 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-19 11:50:23,624 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-19 12:11:34,896 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-19 12:19:33,390 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-19 13:41:17,523 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-19 13:46:02,935 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-19 13:54:49,324 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-19 15:09:57,298 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-20 07:54:12,885 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-24 16:12:29,860 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-24 16:21:41,478 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-24 16:24:11,985 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-24 16:33:55,718 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-24 16:49:59,297 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-24 17:06:43,867 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-25 07:50:21,371 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-25 08:06:16,074 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-25 09:10:32,908 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-25 10:52:15,392 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-25 11:56:30,720 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-25 12:06:04,375 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-25 12:14:51,584 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-25 15:44:26,563 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-25 15:52:59,732 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-25 16:49:35,254 - ERROR - Creating MasterPump Or Running Failed
+Traceback (most recent call last):
+  File "\\192.168.2.19\ai_team\AI Program\Programs\PlcCompilerLatest4.0\Main.py", line 242, in start
+    CsvWriter.WriteCsv(PiMachineManager.compiledFrame)
+  File "\\192.168.2.19\ai_team\AI Program\Programs\PlcCompilerLatest4.0\CsvWriter.py", line 14, in WriteCsv
+    wireFrame.to_csv(f"CompiledProcess{DateAndTimeManager.dateToReadDashFormat}.csv", index = False)
+  File "C:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\util\_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\generic.py", line 3967, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\formats\format.py", line 1014, in to_csv
+    csv_formatter.save()
+  File "C:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\formats\csvs.py", line 251, in save
+    with get_handle(
+         ^^^^^^^^^^^
+  File "C:\Users\c.raniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\io\common.py", line 873, in get_handle
+    handle = open(
+             ^^^^^
+PermissionError: [Errno 13] Permission denied: 'CompiledProcess2024-11-04.csv'
+2025-06-25 16:51:11,344 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-25 17:06:24,888 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-25 17:21:32,362 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-26 09:08:12,478 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-26 10:33:56,659 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-26 13:44:41,801 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-26 15:52:35,056 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-26 16:16:14,274 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-26 16:48:19,618 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-26 16:54:40,680 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-26 17:07:49,462 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 07:24:38,053 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 07:47:24,959 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 09:24:38,913 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 10:40:44,909 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 10:53:46,952 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 10:59:00,844 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 11:18:28,141 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 11:21:51,016 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 11:25:12,773 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 14:20:00,648 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 15:38:43,884 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 16:31:58,042 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 16:37:36,875 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 16:42:43,100 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 16:55:32,016 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 17:08:07,328 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-27 17:26:22,178 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-30 09:23:45,682 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-30 10:53:26,979 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-30 11:11:08,174 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-30 11:12:36,534 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-30 13:52:30,274 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-30 14:06:26,414 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-30 14:20:11,357 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-30 14:29:34,344 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-30 14:44:13,372 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
+2025-06-30 15:01:55,976 - ERROR - Creating MasterPump Or Running Successfully
+NoneType: None
