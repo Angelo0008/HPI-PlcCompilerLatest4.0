@@ -681,14 +681,21 @@ def ReadPreviousDateAndTime():
     global previousDate
     global previousTime
 
-    previousTempDfPiRow = PiMachineManager.dfPi.iloc[[PiMachineManager.piRow - 1], :]
+    piRowDiff = 1
+    while True:
+        try:
+            previousTempDfPiRow = PiMachineManager.dfPi.iloc[[PiMachineManager.piRow - piRowDiff], :]
 
-    previousDate = previousTempDfPiRow["DATE"].values
+            previousDate = previousTempDfPiRow["DATE"].values
 
-    previousTime = previousTempDfPiRow["TIME"].values[0]
-    previousTime = datetime2.strptime(previousTime, "%H:%M:%S")
-    previousTime = previousTime + timedelta(seconds=1)
-    previousTime = previousTime.strftime("%H:%M:%S")
+            previousTime = previousTempDfPiRow["TIME"].values[0]
+            previousTime = datetime2.strptime(previousTime, "%H:%M:%S")
+            previousTime = previousTime + timedelta(seconds=1)
+            previousTime = previousTime.strftime("%H:%M:%S")
+
+            break
+        except:
+            piRowDiff += 1
 
 def CompileCsv():
     global excelData
