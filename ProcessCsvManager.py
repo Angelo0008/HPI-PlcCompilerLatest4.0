@@ -1,6 +1,8 @@
 from Imports import *
 import PiMachineManager
 import DateAndTimeManager
+import Sql
+import ColumnCreator
 
 from Em2p import em2P
 from Em3p import em3P
@@ -71,10 +73,13 @@ def ReadCsv():
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
 
-    vt1Directory = (r'\\192.168.2.19\ai_team\AI Program\Outputs\FC1 CSV\VT1')
-    os.chdir(vt1Directory)
-    dfVt1 = pd.read_csv('log000_1.csv', encoding='latin1')
+    # vt1Directory = (r'\\192.168.2.19\ai_team\AI Program\Outputs\FC1 CSV\VT1')
+    # os.chdir(vt1Directory)
+    # dfVt1 = pd.read_csv('log000_1.csv', encoding='latin1')
+
+    dfVt1 = Sql.SelectAllDataFromTable("process1_data")
     dfVt1.columns = ["Process 1 DATA No",
+        "Process 1 DateTime",
         "Process 1 DATE",
         "Process 1 TIME",
         "Process 1 Model Code",
@@ -97,10 +102,15 @@ def ReadCsv():
         "Process 1 NG Cause",
         "Process 1 Repaired Action"]
     
-    vt2Directory = (r'\\192.168.2.19\ai_team\AI Program\Outputs\FC1 CSV\VT2')
-    os.chdir(vt2Directory)
-    dfVt2 = pd.read_csv('log000_2.csv', encoding='latin1')
+    dfVt1 = dfVt1.drop(['Process 1 DateTime'], axis=1)
+    
+    # vt2Directory = (r'\\192.168.2.19\ai_team\AI Program\Outputs\FC1 CSV\VT2')
+    # os.chdir(vt2Directory)
+    # dfVt2 = pd.read_csv('log000_2.csv', encoding='latin1')
+
+    dfVt2 = Sql.SelectAllDataFromTable("process2_data")
     dfVt2.columns = ["Process 2 DATA No",
+        "Process 2 DateTime",
         "Process 2 DATE",
         "Process 2 TIME",
         "Process 2 Model Code",
@@ -124,11 +134,16 @@ def ReadCsv():
         "Process 2 Actual Time",
         "Process 2 NG Cause",
         "Process 2 Repaired Action"]
+    
+    dfVt2 = dfVt2.drop(['Process 2 DateTime'], axis=1)
 
-    vt3Directory = (r'\\192.168.2.19\ai_team\AI Program\Outputs\FC1 CSV\VT3')
-    os.chdir(vt3Directory)
-    dfVt3 = pd.read_csv('log000_3.csv', encoding='latin1')
+    # vt3Directory = (r'\\192.168.2.19\ai_team\AI Program\Outputs\FC1 CSV\VT3')
+    # os.chdir(vt3Directory)
+    # dfVt3 = pd.read_csv('log000_3.csv', encoding='latin1')
+
+    dfVt3 = Sql.SelectAllDataFromTable("process3_data")
     dfVt3.columns = ["Process 3 DATA No",
+        "Process 3 DateTime",
         "Process 3 DATE",
         "Process 3 TIME",
         "Process 3 Model Code",
@@ -172,11 +187,16 @@ def ReadCsv():
         "Process 3 Actual Time",
         "Process 3 NG Cause",
         "Process 3 Repaired Action"]
+    
+    dfVt3 = dfVt3.drop(['Process 3 DateTime'], axis=1)
 
-    vt4Directory = (r'\\192.168.2.19\ai_team\AI Program\Outputs\FC1 CSV\VT4')
-    os.chdir(vt4Directory)
-    dfVt4 = pd.read_csv('log000_4.csv', encoding='latin1')
+    # vt4Directory = (r'\\192.168.2.19\ai_team\AI Program\Outputs\FC1 CSV\VT4')
+    # os.chdir(vt4Directory)
+    # dfVt4 = pd.read_csv('log000_4.csv', encoding='latin1')
+
+    dfVt4 = Sql.SelectAllDataFromTable("process4_data")
     dfVt4.columns = ["Process 4 DATA No",
+        "Process 4 DateTime",
         "Process 4 DATE",
         "Process 4 TIME",
         "Process 4 Model Code",
@@ -214,11 +234,16 @@ def ReadCsv():
         "Process 4 Actual Time",
         "Process 4 NG Cause",
         "Process 4 Repaired Action"]
+    
+    dfVt4 = dfVt4.drop(['Process 4 DateTime'], axis=1)
 
-    vt5Directory = (r'\\192.168.2.19\ai_team\AI Program\Outputs\FC1 CSV\VT5')
-    os.chdir(vt5Directory)
-    dfVt5 = pd.read_csv('log000_5.csv', encoding='latin1')
+    # vt5Directory = (r'\\192.168.2.19\ai_team\AI Program\Outputs\FC1 CSV\VT5')
+    # os.chdir(vt5Directory)
+    # dfVt5 = pd.read_csv('log000_5.csv', encoding='latin1')
+
+    dfVt5 = Sql.SelectAllDataFromTable("process5_data")
     dfVt5.columns = ["Process 5 DATA No",
+        "Process 5 DateTime",
         "Process 5 DATE",
         "Process 5 TIME",
         "Process 5 Model Code",
@@ -232,11 +257,16 @@ def ReadCsv():
         "Process 5 Actual Time",
         "Process 5 NG Cause",
         "Process 5 Repaired Action"]
+    
+    dfVt5 = dfVt5.drop(['Process 5 DateTime'], axis=1)
 
-    vt6Directory = (r'\\192.168.2.19\ai_team\AI Program\Outputs\FC1 CSV\VT6')
-    os.chdir(vt6Directory)
-    dfVt6 = pd.read_csv('log000_6.csv', encoding='latin1')
+    # vt6Directory = (r'\\192.168.2.19\ai_team\AI Program\Outputs\FC1 CSV\VT6')
+    # os.chdir(vt6Directory)
+    # dfVt6 = pd.read_csv('log000_6.csv', encoding='latin1')
+
+    dfVt6 = Sql.SelectAllDataFromTable("process6_data")
     dfVt6.columns = ["Process 6 DATA No",
+        "Process 6 DateTime",
         "Process 6 DATE",
         "Process 6 TIME",
         "Process 6 Model Code",
@@ -250,6 +280,8 @@ def ReadCsv():
         "Process 6 Actual Time",
         "Process 6 NG Cause",
         "Process 6 Repaired Action"]
+    
+    dfVt6 = dfVt6.drop(['Process 6 DateTime'], axis=1)
 
     dfVt1 = dfVt1[dfVt1["Process 1 Regular/Contractual"].str.contains("REG", na = False)]
     # dfVt1 = dfVt1[(dfVt1["Process 1 DATE"].isin([dateToday]))]
@@ -468,6 +500,13 @@ def CsvOrganize():
         print("INSPECTION ONLY")
     else:
         try:
+            print(f"Process1 Row: {process1Row}")
+            print(f"Process2 Row: {process2Row}")
+            print(f"Process3 Row: {process3Row}")
+            print(f"Process4 Row: {process4Row}")
+            print(f"Process5 Row: {process5Row}")
+            print(f"Process6 Row: {process6Row}")
+            
             #Checking If There's Value In tempDfVt1 To 6
             tempDfVt1 = dfVt1.iloc[[process1Row], :]
             tempDfVt2 = dfVt2.iloc[[process2Row], :]
@@ -751,6 +790,8 @@ def CompileCsv():
     csb.GettingData(tempDfVt3["Process 3 Casing Block"].values, tempDfVt3["Process 3 Casing Block Lot No"].values)
 
     excelData = {
+        # "DATETIME": pd.to_datetime(PiMachineManager.tempdfPi['DATE'] + ' ' + PiMachineManager.tempdfPi['TIME']),
+        "DATETIME": "",
         "DATE": PiMachineManager.tempdfPi["DATE"].values,
         "TIME": PiMachineManager.tempdfPi["TIME"].values,
         "MODEL CODE": PiMachineManager.tempdfPi["MODEL CODE"].values,
@@ -768,11 +809,9 @@ def CompileCsv():
         "WATTAGE MIN (W)": PiMachineManager.tempdfPi["WATTAGE MIN (W)"].values,
         "CLOSED PRESSURE MIN (kPa)": PiMachineManager.tempdfPi["CLOSED PRESSURE MIN (kPa)"].values,
 
-        "Process 1 Model Code": tempDfVt1["Process 1 Model Code"].values,
         "Process 1 S/N": tempDfVt1["Process 1 S/N"].values,
         "Process 1 ID": tempDfVt1["Process 1 ID"].values,
         "Process 1 NAME": tempDfVt1["Process 1 NAME"].values,
-        "Process 1 Regular/Contractual": tempDfVt1["Process 1 Regular/Contractual"].values,
         "Process 1 Em2p": tempDfVt1["Process 1 Em2p"].values,
         "Process 1 Em2p Lot No": tempDfVt1["Process 1 Em2p Lot No"].values,
         "Process 1 Em2p Inspection 3 Average Data": em2p.totalAverage3,
@@ -829,11 +868,9 @@ def CompileCsv():
         "Process 1 NG Cause": tempDfVt1["Process 1 NG Cause"].values,
         "Process 1 Repaired Action": tempDfVt1["Process 1 Repaired Action"].values,
 
-        "Process 2 Model Code": tempDfVt2["Process 2 Model Code"].values,
         "Process 2 S/N": tempDfVt2["Process 2 S/N"].values,
         "Process 2 ID": tempDfVt2["Process 2 ID"].values,
         "Process 2 NAME": tempDfVt2["Process 2 NAME"].values,
-        "Process 2 Regular/Contractual": tempDfVt2["Process 2 Regular/Contractual"].values,
         "Process 2 M4x40 Screw": tempDfVt2["Process 2 M4x40 Screw"].values,
         "Process 2 M4x40 Screw Lot No": tempDfVt2["Process 2 M4x40 Screw Lot No"].values,
         "Process 2 Rod Blk": tempDfVt2["Process 2 Rod Blk"].values,
@@ -911,11 +948,9 @@ def CompileCsv():
         "Process 2 NG Cause": tempDfVt2["Process 2 NG Cause"].values,
         "Process 2 Repaired Action": tempDfVt2["Process 2 Repaired Action"].values,
 
-        "Process 3 Model Code": tempDfVt3["Process 3 Model Code"].values,
         "Process 3 S/N": tempDfVt3["Process 3 S/N"].values,
         "Process 3 ID": tempDfVt3["Process 3 ID"].values,
         "Process 3 NAME": tempDfVt3["Process 3 NAME"].values,
-        "Process 3 Regular/Contractual": tempDfVt3["Process 3 Regular/Contractual"].values,
         "Process 3 Frame Gasket": tempDfVt3["Process 3 Frame Gasket"].values,
         "Process 3 Frame Gasket Lot No": tempDfVt3["Process 3 Frame Gasket Lot No"].values,
         "Process 3 Casing Block": tempDfVt3["Process 3 Casing Block"].values,
@@ -956,11 +991,9 @@ def CompileCsv():
         "Process 3 NG Cause": tempDfVt3["Process 3 NG Cause"].values,
         "Process 3 Repaired Action": tempDfVt3["Process 3 Repaired Action"].values,
 
-        "Process 4 Model Code": tempDfVt4["Process 4 Model Code"].values,
         "Process 4 S/N": tempDfVt4["Process 4 S/N"].values,
         "Process 4 ID": tempDfVt4["Process 4 ID"].values,
         "Process 4 NAME": tempDfVt4["Process 4 NAME"].values,
-        "Process 4 Regular/Contractual": tempDfVt4["Process 4 Regular/Contractual"].values,
         "Process 4 Tank": tempDfVt4["Process 4 Tank"].values,
         "Process 4 Tank Lot No": tempDfVt4["Process 4 Tank Lot No"].values,
         "Process 4 Upper Housing": tempDfVt4["Process 4 Upper Housing"].values,
@@ -992,11 +1025,9 @@ def CompileCsv():
         "Process 4 NG Cause": tempDfVt4["Process 4 NG Cause"].values,
         "Process 4 Repaired Action": tempDfVt4["Process 4 Repaired Action"].values,
         
-        "Process 5 Model Code": tempDfVt5["Process 5 Model Code"].values,
         "Process 5 S/N": tempDfVt5["Process 5 S/N"].values,
         "Process 5 ID": tempDfVt5["Process 5 ID"].values,
         "Process 5 NAME": tempDfVt5["Process 5 NAME"].values,
-        "Process 5 Regular/Contractual": tempDfVt5["Process 5 Regular/Contractual"].values,
         "Process 5 Rating Label": tempDfVt5["Process 5 Rating Label"].values,
         "Process 5 Rating Label Lot No": tempDfVt5["Process 5 Rating Label Lot No"].values,
         "Process 5 ST": tempDfVt5["Process 5 ST"].values,
@@ -1004,11 +1035,9 @@ def CompileCsv():
         "Process 5 NG Cause": tempDfVt5["Process 5 NG Cause"].values,
         "Process 5 Repaired Action": tempDfVt5["Process 5 Repaired Action"].values,
         
-        "Process 6 Model Code": tempDfVt6["Process 6 Model Code"].values,
         "Process 6 S/N": tempDfVt6["Process 6 S/N"].values,
         "Process 6 ID": tempDfVt6["Process 6 ID"].values,
         "Process 6 NAME": tempDfVt6["Process 6 NAME"].values,
-        "Process 6 Regular/Contractual": tempDfVt6["Process 6 Regular/Contractual"].values,
         "Process 6 Vinyl": tempDfVt6["Process 6 Vinyl"].values,
         "Process 6 Vinyl Lot No": tempDfVt6["Process 6 Vinyl Lot No"].values,
         "Process 6 ST": tempDfVt6["Process 6 ST"].values,
@@ -1028,72 +1057,71 @@ def CompileCsv():
     if piStatus == "INSPECTION ONLY":
         PiMachineManager.piRow += 1
 
-        excelData["Process 1 Model Code"] = piStatus
-        excelData["Process 1 S/N"] = piStatus
-        excelData["Process 1 ID"] = piStatus
-        excelData["Process 1 NAME"] = piStatus
-        excelData["Process 1 Regular/Contractual"] = piStatus
-        excelData["Process 1 Em2p"] = piStatus
-        excelData["Process 1 Em2p Lot No"] = piStatus
-        excelData["Process 1 Em2p Inspection 3 Average Data"] = piStatus
-        excelData["Process 1 Em2p Inspection 4 Average Data"] = piStatus
-        excelData["Process 1 Em2p Inspection 5 Average Data"] = piStatus
-        excelData["Process 1 Em2p Inspection 10 Average Data"] = piStatus
-        excelData["Process 1 Em2p Inspection 3 Minimum Data"] = piStatus
-        excelData["Process 1 Em2p Inspection 4 Minimum Data"] = piStatus
-        excelData["Process 1 Em2p Inspection 5 Minimum Data"] = piStatus
-        excelData["Process 1 Em2p Inspection 3 Maximum Data"] = piStatus
-        excelData["Process 1 Em2p Inspection 4 Maximum Data"] = piStatus
-        excelData["Process 1 Em2p Inspection 5 Maximum Data"] = piStatus
-        excelData["Process 1 Em3p"] = piStatus
-        excelData["Process 1 Em3p Lot No"] = piStatus
-        excelData["Process 1 Em3p Inspection 3 Average Data"] = piStatus
-        excelData["Process 1 Em3p Inspection 4 Average Data"] = piStatus
-        excelData["Process 1 Em3p Inspection 5 Average Data"] = piStatus
-        excelData["Process 1 Em3p Inspection 10 Average Data"] = piStatus
-        excelData["Process 1 Em3p Inspection 3 Minimum Data"] = piStatus
-        excelData["Process 1 Em3p Inspection 4 Minimum Data"] = piStatus
-        excelData["Process 1 Em3p Inspection 5 Minimum Data"] = piStatus
-        excelData["Process 1 Em3p Inspection 3 Maximum Data"] = piStatus
-        excelData["Process 1 Em3p Inspection 4 Maximum Data"] = piStatus
-        excelData["Process 1 Em3p Inspection 5 Maximum Data"] = piStatus
-        excelData["Process 1 Harness"] = piStatus
-        excelData["Process 1 Harness Lot No"] = piStatus
-        excelData["Process 1 Frame"] = piStatus
-        excelData["Process 1 Frame Lot No"] = piStatus
-        excelData["Process 1 Frame Inspection 1 Average Data"] = piStatus
-        excelData["Process 1 Frame Inspection 2 Average Data"] = piStatus
-        excelData["Process 1 Frame Inspection 3 Average Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 4 Average Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 5 Average Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 6 Average Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 7 Average Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 1 Minimum Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 2 Minimum Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 3 Minimum Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 4 Minimum Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 5 Minimum Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 6 Minimum Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 7 Minimum Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 1 Maximum Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 2 Maximum Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 3 Maximum Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 4 Maximum Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 5 Maximum Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 6 Maximum Data"] = piStatus 
-        excelData["Process 1 Frame Inspection 7 Maximum Data"] = piStatus 
-        excelData["Process 1 Bushing"] = piStatus
-        excelData["Process 1 Bushing Lot No"] = piStatus
-        excelData["Process 1 ST"] = piStatus
-        excelData["Process 1 Actual Time"] = piStatus
-        excelData["Process 1 NG Cause"] = piStatus
-        excelData["Process 1 Repaired Action"] = piStatus 
+        for column in ColumnCreator.process1Column:
+            excelData[column] = piStatus
 
-        excelData["Process 2 Model Code"] = piStatus
+        # excelData["Process 1 S/N"] = piStatus
+        # excelData["Process 1 ID"] = piStatus
+        # excelData["Process 1 NAME"] = piStatus
+        # excelData["Process 1 Em2p"] = piStatus
+        # excelData["Process 1 Em2p Lot No"] = piStatus
+        # excelData["Process 1 Em2p Inspection 3 Average Data"] = piStatus
+        # excelData["Process 1 Em2p Inspection 4 Average Data"] = piStatus
+        # excelData["Process 1 Em2p Inspection 5 Average Data"] = piStatus
+        # excelData["Process 1 Em2p Inspection 10 Average Data"] = piStatus
+        # excelData["Process 1 Em2p Inspection 3 Minimum Data"] = piStatus
+        # excelData["Process 1 Em2p Inspection 4 Minimum Data"] = piStatus
+        # excelData["Process 1 Em2p Inspection 5 Minimum Data"] = piStatus
+        # excelData["Process 1 Em2p Inspection 3 Maximum Data"] = piStatus
+        # excelData["Process 1 Em2p Inspection 4 Maximum Data"] = piStatus
+        # excelData["Process 1 Em2p Inspection 5 Maximum Data"] = piStatus
+        # excelData["Process 1 Em3p"] = piStatus
+        # excelData["Process 1 Em3p Lot No"] = piStatus
+        # excelData["Process 1 Em3p Inspection 3 Average Data"] = piStatus
+        # excelData["Process 1 Em3p Inspection 4 Average Data"] = piStatus
+        # excelData["Process 1 Em3p Inspection 5 Average Data"] = piStatus
+        # excelData["Process 1 Em3p Inspection 10 Average Data"] = piStatus
+        # excelData["Process 1 Em3p Inspection 3 Minimum Data"] = piStatus
+        # excelData["Process 1 Em3p Inspection 4 Minimum Data"] = piStatus
+        # excelData["Process 1 Em3p Inspection 5 Minimum Data"] = piStatus
+        # excelData["Process 1 Em3p Inspection 3 Maximum Data"] = piStatus
+        # excelData["Process 1 Em3p Inspection 4 Maximum Data"] = piStatus
+        # excelData["Process 1 Em3p Inspection 5 Maximum Data"] = piStatus
+        # excelData["Process 1 Harness"] = piStatus
+        # excelData["Process 1 Harness Lot No"] = piStatus
+        # excelData["Process 1 Frame"] = piStatus
+        # excelData["Process 1 Frame Lot No"] = piStatus
+        # excelData["Process 1 Frame Inspection 1 Average Data"] = piStatus
+        # excelData["Process 1 Frame Inspection 2 Average Data"] = piStatus
+        # excelData["Process 1 Frame Inspection 3 Average Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 4 Average Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 5 Average Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 6 Average Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 7 Average Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 1 Minimum Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 2 Minimum Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 3 Minimum Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 4 Minimum Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 5 Minimum Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 6 Minimum Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 7 Minimum Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 1 Maximum Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 2 Maximum Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 3 Maximum Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 4 Maximum Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 5 Maximum Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 6 Maximum Data"] = piStatus 
+        # excelData["Process 1 Frame Inspection 7 Maximum Data"] = piStatus 
+        # excelData["Process 1 Bushing"] = piStatus
+        # excelData["Process 1 Bushing Lot No"] = piStatus
+        # excelData["Process 1 ST"] = piStatus
+        # excelData["Process 1 Actual Time"] = piStatus
+        # excelData["Process 1 NG Cause"] = piStatus
+        # excelData["Process 1 Repaired Action"] = piStatus 
+
         excelData["Process 2 S/N"] = piStatus
         excelData["Process 2 ID"] = piStatus
         excelData["Process 2 NAME"] = piStatus
-        excelData["Process 2 Regular/Contractual"] = piStatus
         excelData["Process 2 M4x40 Screw"] = piStatus
         excelData["Process 2 M4x40 Screw Lot No"] = piStatus
         excelData["Process 2 Rod Blk"] = piStatus
@@ -1171,11 +1199,9 @@ def CompileCsv():
         excelData["Process 2 NG Cause"] = piStatus
         excelData["Process 2 Repaired Action"] = piStatus
 
-        excelData["Process 3 Model Code"] = piStatus
         excelData["Process 3 S/N"] = piStatus
         excelData["Process 3 ID"] = piStatus
         excelData["Process 3 NAME"] = piStatus
-        excelData["Process 3 Regular/Contractual"] = piStatus
         excelData["Process 3 Frame Gasket"] = piStatus
         excelData["Process 3 Frame Gasket Lot No"] = piStatus
         excelData["Process 3 Casing Block"] = piStatus
@@ -1216,11 +1242,9 @@ def CompileCsv():
         excelData["Process 3 NG Cause"] = piStatus
         excelData["Process 3 Repaired Action"] = piStatus
 
-        excelData["Process 4 Model Code"] = piStatus
         excelData["Process 4 S/N"] = piStatus
         excelData["Process 4 ID"] = piStatus
         excelData["Process 4 NAME"] = piStatus
-        excelData["Process 4 Regular/Contractual"] = piStatus
         excelData["Process 4 Tank"] = piStatus
         excelData["Process 4 Tank Lot No"] = piStatus
         excelData["Process 4 Upper Housing"] = piStatus
@@ -1252,11 +1276,9 @@ def CompileCsv():
         excelData["Process 4 NG Cause"] = piStatus
         excelData["Process 4 Repaired Action"] = piStatus
         
-        excelData["Process 5 Model Code"] = piStatus
         excelData["Process 5 S/N"] = piStatus
         excelData["Process 5 ID"] = piStatus
         excelData["Process 5 NAME"] = piStatus
-        excelData["Process 5 Regular/Contractual"] = piStatus
         excelData["Process 5 Rating Label"] = piStatus
         excelData["Process 5 Rating Label Lot No"] = piStatus
         excelData["Process 5 ST"] = piStatus
@@ -1264,11 +1286,9 @@ def CompileCsv():
         excelData["Process 5 NG Cause"] = piStatus
         excelData["Process 5 Repaired Action"] = piStatus
         
-        excelData["Process 6 Model Code"] = piStatus
         excelData["Process 6 S/N"] = piStatus
         excelData["Process 6 ID"] = piStatus
         excelData["Process 6 NAME"] = piStatus
-        excelData["Process 6 Regular/Contractual"] = piStatus
         excelData["Process 6 Vinyl"] = piStatus
         excelData["Process 6 Vinyl Lot No"] = piStatus
         excelData["Process 6 ST"] = piStatus
@@ -1323,11 +1343,9 @@ def CompileCsv():
                     excelData["WATTAGE MIN (W)"] = ngProcess
                     excelData["CLOSED PRESSURE MIN (kPa)"] = ngProcess
 
-                    excelData["Process 3 Model Code"] = ngProcess
                     excelData["Process 3 S/N"] = ngProcess
                     excelData["Process 3 ID"] = ngProcess
                     excelData["Process 3 NAME"] = ngProcess
-                    excelData["Process 3 Regular/Contractual"] = ngProcess
                     excelData["Process 3 Frame Gasket"] = ngProcess
                     excelData["Process 3 Frame Gasket Lot No"] = ngProcess
                     excelData["Process 3 Casing Block"] = ngProcess
@@ -1368,11 +1386,9 @@ def CompileCsv():
                     excelData["Process 3 NG Cause"] = ngProcess
                     excelData["Process 3 Repaired Action"] = ngProcess
 
-                    excelData["Process 4 Model Code"] = ngProcess
                     excelData["Process 4 S/N"] = ngProcess
                     excelData["Process 4 ID"] = ngProcess
                     excelData["Process 4 NAME"] = ngProcess
-                    excelData["Process 4 Regular/Contractual"] = ngProcess
                     excelData["Process 4 Tank"] = ngProcess
                     excelData["Process 4 Tank Lot No"] = ngProcess
                     excelData["Process 4 Upper Housing"] = ngProcess
@@ -1404,11 +1420,9 @@ def CompileCsv():
                     excelData["Process 4 NG Cause"] = ngProcess
                     excelData["Process 4 Repaired Action"] = ngProcess
                     
-                    excelData["Process 5 Model Code"] = ngProcess
                     excelData["Process 5 S/N"] = ngProcess
                     excelData["Process 5 ID"] = ngProcess
                     excelData["Process 5 NAME"] = ngProcess
-                    excelData["Process 5 Regular/Contractual"] = ngProcess
                     excelData["Process 5 Rating Label"] = ngProcess
                     excelData["Process 5 Rating Label Lot No"] = ngProcess
                     excelData["Process 5 ST"] = ngProcess
@@ -1416,11 +1430,9 @@ def CompileCsv():
                     excelData["Process 5 NG Cause"] = ngProcess
                     excelData["Process 5 Repaired Action"] = ngProcess
                     
-                    excelData["Process 6 Model Code"] = ngProcess
                     excelData["Process 6 S/N"] = ngProcess
                     excelData["Process 6 ID"] = ngProcess
                     excelData["Process 6 NAME"] = ngProcess
-                    excelData["Process 6 Regular/Contractual"] = ngProcess
                     excelData["Process 6 Vinyl"] = ngProcess
                     excelData["Process 6 Vinyl Lot No"] = ngProcess
                     excelData["Process 6 ST"] = ngProcess
@@ -1460,11 +1472,9 @@ def CompileCsv():
                     excelData["WATTAGE MIN (W)"] = ngProcess
                     excelData["CLOSED PRESSURE MIN (kPa)"] = ngProcess
 
-                    excelData["Process 4 Model Code"] = ngProcess
                     excelData["Process 4 S/N"] = ngProcess
                     excelData["Process 4 ID"] = ngProcess
                     excelData["Process 4 NAME"] = ngProcess
-                    excelData["Process 4 Regular/Contractual"] = ngProcess
                     excelData["Process 4 Tank"] = ngProcess
                     excelData["Process 4 Tank Lot No"] = ngProcess
                     excelData["Process 4 Upper Housing"] = ngProcess
@@ -1496,11 +1506,9 @@ def CompileCsv():
                     excelData["Process 4 NG Cause"] = ngProcess
                     excelData["Process 4 Repaired Action"] = ngProcess
                     
-                    excelData["Process 5 Model Code"] = ngProcess
                     excelData["Process 5 S/N"] = ngProcess
                     excelData["Process 5 ID"] = ngProcess
                     excelData["Process 5 NAME"] = ngProcess
-                    excelData["Process 5 Regular/Contractual"] = ngProcess
                     excelData["Process 5 Rating Label"] = ngProcess
                     excelData["Process 5 Rating Label Lot No"] = ngProcess
                     excelData["Process 5 ST"] = ngProcess
@@ -1508,11 +1516,9 @@ def CompileCsv():
                     excelData["Process 5 NG Cause"] = ngProcess
                     excelData["Process 5 Repaired Action"] = ngProcess
                     
-                    excelData["Process 6 Model Code"] = ngProcess
                     excelData["Process 6 S/N"] = ngProcess
                     excelData["Process 6 ID"] = ngProcess
                     excelData["Process 6 NAME"] = ngProcess
-                    excelData["Process 6 Regular/Contractual"] = ngProcess
                     excelData["Process 6 Vinyl"] = ngProcess
                     excelData["Process 6 Vinyl Lot No"] = ngProcess
                     excelData["Process 6 ST"] = ngProcess
@@ -1553,11 +1559,9 @@ def CompileCsv():
                     excelData["WATTAGE MIN (W)"] = ngProcess
                     excelData["CLOSED PRESSURE MIN (kPa)"] = ngProcess
 
-                    excelData["Process 5 Model Code"] = ngProcess
                     excelData["Process 5 S/N"] = ngProcess
                     excelData["Process 5 ID"] = ngProcess
                     excelData["Process 5 NAME"] = ngProcess
-                    excelData["Process 5 Regular/Contractual"] = ngProcess
                     excelData["Process 5 Rating Label"] = ngProcess
                     excelData["Process 5 Rating Label Lot No"] = ngProcess
                     excelData["Process 5 ST"] = ngProcess
@@ -1565,11 +1569,9 @@ def CompileCsv():
                     excelData["Process 5 NG Cause"] = ngProcess
                     excelData["Process 5 Repaired Action"] = ngProcess
                     
-                    excelData["Process 6 Model Code"] = ngProcess
                     excelData["Process 6 S/N"] = ngProcess
                     excelData["Process 6 ID"] = ngProcess
                     excelData["Process 6 NAME"] = ngProcess
-                    excelData["Process 6 Regular/Contractual"] = ngProcess
                     excelData["Process 6 Vinyl"] = ngProcess
                     excelData["Process 6 Vinyl Lot No"] = ngProcess
                     excelData["Process 6 ST"] = ngProcess
@@ -1612,11 +1614,9 @@ def CompileCsv():
                     excelData["WATTAGE MIN (W)"] = ngProcess
                     excelData["CLOSED PRESSURE MIN (kPa)"] = ngProcess
 
-                    excelData["Process 6 Model Code"] = ngProcess
                     excelData["Process 6 S/N"] = ngProcess
                     excelData["Process 6 ID"] = ngProcess
                     excelData["Process 6 NAME"] = ngProcess
-                    excelData["Process 6 Regular/Contractual"] = ngProcess
                     excelData["Process 6 Vinyl"] = ngProcess
                     excelData["Process 6 Vinyl Lot No"] = ngProcess
                     excelData["Process 6 ST"] = ngProcess
@@ -1640,11 +1640,9 @@ def CompileCsv():
                     process5Row += 1
                     PiMachineManager.piRow += 1
 
-                    excelData["Process 6 Model Code"] = ngProcess
                     excelData["Process 6 S/N"] = ngProcess
                     excelData["Process 6 ID"] = ngProcess
                     excelData["Process 6 NAME"] = ngProcess
-                    excelData["Process 6 Regular/Contractual"] = ngProcess
                     excelData["Process 6 Vinyl"] = ngProcess
                     excelData["Process 6 Vinyl Lot No"] = ngProcess
                     excelData["Process 6 ST"] = ngProcess
@@ -1695,67 +1693,69 @@ def CompileCsv():
                     excelData["WATTAGE MIN (W)"] = ngProcess
                     excelData["CLOSED PRESSURE MIN (kPa)"] = ngProcess
 
-                    excelData["Process 1 Model Code"] = repairedProcess
-                    excelData["Process 1 S/N"] = repairedProcess
-                    excelData["Process 1 ID"] = repairedProcess
-                    excelData["Process 1 NAME"] = repairedProcess
-                    excelData["Process 1 Regular/Contractual"] = repairedProcess
-                    excelData["Process 1 Em2p"] = repairedProcess
-                    excelData["Process 1 Em2p Lot No"] = repairedProcess
-                    excelData["Process 1 Em3p"] = repairedProcess
-                    excelData["Process 1 Em3p Lot No"] = repairedProcess
-                    excelData["Process 1 Harness"] = repairedProcess
-                    excelData["Process 1 Harness Lot No"] = repairedProcess
-                    excelData["Process 1 Frame"] = repairedProcess
-                    excelData["Process 1 Frame Lot No"] = repairedProcess 
-                    excelData["Process 1 Bushing"] = repairedProcess
-                    excelData["Process 1 Bushing Lot No"] = repairedProcess
-                    excelData["Process 1 ST"] = repairedProcess
-                    excelData["Process 1 Actual Time"] = repairedProcess
-                    excelData["Process 1 NG Cause"] = repairedProcess
-                    excelData["Process 1 Repaired Action"] = repairedProcess
+                    for column in ColumnCreator.process1Column:
+                        excelData[column] = repairedProcess
 
-                    excelData["Process 4 Model Code"] = ngProcess
-                    excelData["Process 4 S/N"] = ngProcess
-                    excelData["Process 4 ID"] = ngProcess
-                    excelData["Process 4 NAME"] = ngProcess
-                    excelData["Process 4 Regular/Contractual"] = ngProcess
-                    excelData["Process 4 Tank"] = ngProcess
-                    excelData["Process 4 Tank Lot No"] = ngProcess
-                    excelData["Process 4 Upper Housing"] = ngProcess
-                    excelData["Process 4 Upper Housing Lot No"] = ngProcess
-                    excelData["Process 4 Cord Hook" ] = ngProcess
-                    excelData["Process 4 Cord Hook Lot No"] = ngProcess
-                    excelData["Process 4 M4x16 Screw"] = ngProcess
-                    excelData["Process 4 M4x16 Screw Lot No"] = ngProcess
-                    excelData["Process 4 Tank Gasket"] = ngProcess
-                    excelData["Process 4 Tank Gasket Lot No"] = ngProcess
-                    excelData["Process 4 Tank Cover"] = ngProcess
-                    excelData["Process 4 Tank Cover Lot No"] = ngProcess
-                    excelData["Process 4 Housing Gasket"] = ngProcess
-                    excelData["Process 4 Housing Gasket Lot No"] = ngProcess
-                    excelData["Process 4 M4x40 Screw"] = ngProcess
-                    excelData["Process 4 M4x40 Screw Lot No"] = ngProcess
-                    excelData["Process 4 PartitionGasket"] = ngProcess
-                    excelData["Process 4 PartitionGasket Lot No"] = ngProcess
-                    excelData["Process 4 M4x12 Screw"] = ngProcess
-                    excelData["Process 4 M4x12 Screw Lot No"] = ngProcess
-                    excelData["Process 4 Muffler"] = ngProcess
-                    excelData["Process 4 Muffler Lot No"] = ngProcess
-                    excelData["Process 4 Muffler Gasket"] = ngProcess
-                    excelData["Process 4 Muffler Gasket Lot No"] = ngProcess
-                    excelData["Process 4 VCR"] = ngProcess
-                    excelData["Process 4 VCR Lot No"] = ngProcess
-                    excelData["Process 4 ST"] = ngProcess
-                    excelData["Process 4 Actual Time"] = ngProcess
-                    excelData["Process 4 NG Cause"] = ngProcess
-                    excelData["Process 4 Repaired Action"] = ngProcess
+                    # excelData["Process 1 S/N"] = repairedProcess
+                    # excelData["Process 1 ID"] = repairedProcess
+                    # excelData["Process 1 NAME"] = repairedProcess
+                    # excelData["Process 1 Em2p"] = repairedProcess
+                    # excelData["Process 1 Em2p Lot No"] = repairedProcess
+                    # excelData["Process 1 Em3p"] = repairedProcess
+                    # excelData["Process 1 Em3p Lot No"] = repairedProcess
+                    # excelData["Process 1 Harness"] = repairedProcess
+                    # excelData["Process 1 Harness Lot No"] = repairedProcess
+                    # excelData["Process 1 Frame"] = repairedProcess
+                    # excelData["Process 1 Frame Lot No"] = repairedProcess 
+                    # excelData["Process 1 Bushing"] = repairedProcess
+                    # excelData["Process 1 Bushing Lot No"] = repairedProcess
+                    # excelData["Process 1 ST"] = repairedProcess
+                    # excelData["Process 1 Actual Time"] = repairedProcess
+                    # excelData["Process 1 NG Cause"] = repairedProcess
+                    # excelData["Process 1 Repaired Action"] = repairedProcess
 
-                    excelData["Process 5 Model Code"] = ngProcess
+                    for column in ColumnCreator.process4Column:
+                        excelData[column] = ngProcess
+
+                    # excelData["Process 4 S/N"] = ngProcess
+                    # excelData["Process 4 ID"] = ngProcess
+                    # excelData["Process 4 NAME"] = ngProcess
+                    # excelData["Process 4 Tank"] = ngProcess
+                    # excelData["Process 4 Tank Lot No"] = ngProcess
+                    # excelData["Process 4 Upper Housing"] = ngProcess
+                    # excelData["Process 4 Upper Housing Lot No"] = ngProcess
+                    # excelData["Process 4 Cord Hook" ] = ngProcess
+                    # excelData["Process 4 Cord Hook Lot No"] = ngProcess
+                    # excelData["Process 4 M4x16 Screw"] = ngProcess
+                    # excelData["Process 4 M4x16 Screw Lot No"] = ngProcess
+                    # excelData["Process 4 Tank Gasket"] = ngProcess
+                    # excelData["Process 4 Tank Gasket Lot No"] = ngProcess
+                    # excelData["Process 4 Tank Cover"] = ngProcess
+                    # excelData["Process 4 Tank Cover Lot No"] = ngProcess
+                    # excelData["Process 4 Housing Gasket"] = ngProcess
+                    # excelData["Process 4 Housing Gasket Lot No"] = ngProcess
+                    # excelData["Process 4 M4x40 Screw"] = ngProcess
+                    # excelData["Process 4 M4x40 Screw Lot No"] = ngProcess
+                    # excelData["Process 4 PartitionGasket"] = ngProcess
+                    # excelData["Process 4 PartitionGasket Lot No"] = ngProcess
+                    # excelData["Process 4 M4x12 Screw"] = ngProcess
+                    # excelData["Process 4 M4x12 Screw Lot No"] = ngProcess
+                    # excelData["Process 4 Muffler"] = ngProcess
+                    # excelData["Process 4 Muffler Lot No"] = ngProcess
+                    # excelData["Process 4 Muffler Gasket"] = ngProcess
+                    # excelData["Process 4 Muffler Gasket Lot No"] = ngProcess
+                    # excelData["Process 4 VCR"] = ngProcess
+                    # excelData["Process 4 VCR Lot No"] = ngProcess
+                    # excelData["Process 4 ST"] = ngProcess
+                    # excelData["Process 4 Actual Time"] = ngProcess
+                    # excelData["Process 4 NG Cause"] = ngProcess
+                    # excelData["Process 4 Repaired Action"] = ngProcess
+
+                    
+
                     excelData["Process 5 S/N"] = ngProcess
                     excelData["Process 5 ID"] = ngProcess
                     excelData["Process 5 NAME"] = ngProcess
-                    excelData["Process 5 Regular/Contractual"] = ngProcess
                     excelData["Process 5 Rating Label"] = ngProcess
                     excelData["Process 5 Rating Label Lot No"] = ngProcess
                     excelData["Process 5 ST"] = ngProcess
@@ -1763,11 +1763,9 @@ def CompileCsv():
                     excelData["Process 5 NG Cause"] = ngProcess
                     excelData["Process 5 Repaired Action"] = ngProcess
 
-                    excelData["Process 6 Model Code"] = ngProcess
                     excelData["Process 6 S/N"] = ngProcess
                     excelData["Process 6 ID"] = ngProcess
                     excelData["Process 6 NAME"] = ngProcess
-                    excelData["Process 6 Regular/Contractual"] = ngProcess
                     excelData["Process 6 Vinyl"] = ngProcess
                     excelData["Process 6 Vinyl Lot No"] = ngProcess
                     excelData["Process 6 ST"] = ngProcess
@@ -1808,11 +1806,9 @@ def CompileCsv():
                     excelData["WATTAGE MIN (W)"] = ngProcess
                     excelData["CLOSED PRESSURE MIN (kPa)"] = ngProcess
 
-                    excelData["Process 1 Model Code"] = repairedProcess
                     excelData["Process 1 S/N"] = repairedProcess
                     excelData["Process 1 ID"] = repairedProcess
                     excelData["Process 1 NAME"] = repairedProcess
-                    excelData["Process 1 Regular/Contractual"] = repairedProcess
                     excelData["Process 1 Em2p"] = repairedProcess
                     excelData["Process 1 Em2p Lot No"] = repairedProcess
                     excelData["Process 1 Em3p"] = repairedProcess
@@ -1828,11 +1824,9 @@ def CompileCsv():
                     excelData["Process 1 NG Cause"] = repairedProcess
                     excelData["Process 1 Repaired Action"] = repairedProcess 
 
-                    excelData["Process 5 Model Code"] = ngProcess
                     excelData["Process 5 S/N"] = ngProcess
                     excelData["Process 5 ID"] = ngProcess
                     excelData["Process 5 NAME"] = ngProcess
-                    excelData["Process 5 Regular/Contractual"] = ngProcess
                     excelData["Process 5 Rating Label"] = ngProcess
                     excelData["Process 5 Rating Label Lot No"] = ngProcess
                     excelData["Process 5 ST"] = ngProcess
@@ -1840,11 +1834,9 @@ def CompileCsv():
                     excelData["Process 5 NG Cause"] = ngProcess
                     excelData["Process 5 Repaired Action"] = ngProcess
 
-                    excelData["Process 6 Model Code"] = ngProcess
                     excelData["Process 6 S/N"] = ngProcess
                     excelData["Process 6 ID"] = ngProcess
                     excelData["Process 6 NAME"] = ngProcess
-                    excelData["Process 6 Regular/Contractual"] = ngProcess
                     excelData["Process 6 Vinyl"] = ngProcess
                     excelData["Process 6 Vinyl Lot No"] = ngProcess
                     excelData["Process 6 ST"] = ngProcess
@@ -1887,11 +1879,9 @@ def CompileCsv():
                     excelData["WATTAGE MIN (W)"] = ngProcess
                     excelData["CLOSED PRESSURE MIN (kPa)"] = ngProcess
 
-                    excelData["Process 1 Model Code"] = repairedProcess
                     excelData["Process 1 S/N"] = repairedProcess
                     excelData["Process 1 ID"] = repairedProcess
                     excelData["Process 1 NAME"] = repairedProcess
-                    excelData["Process 1 Regular/Contractual"] = repairedProcess
                     excelData["Process 1 Em2p"] = repairedProcess
                     excelData["Process 1 Em2p Lot No"] = repairedProcess
                     excelData["Process 1 Em3p"] = repairedProcess
@@ -1907,11 +1897,9 @@ def CompileCsv():
                     excelData["Process 1 NG Cause"] = repairedProcess
                     excelData["Process 1 Repaired Action"] = repairedProcess  
 
-                    excelData["Process 6 Model Code"] = ngProcess
                     excelData["Process 6 S/N"] = ngProcess
                     excelData["Process 6 ID"] = ngProcess
                     excelData["Process 6 NAME"] = ngProcess
-                    excelData["Process 6 Regular/Contractual"] = ngProcess
                     excelData["Process 6 Vinyl"] = ngProcess
                     excelData["Process 6 Vinyl Lot No"] = ngProcess
                     excelData["Process 6 ST"] = ngProcess
@@ -1935,11 +1923,9 @@ def CompileCsv():
                     process5Row += 1
                     PiMachineManager.piRow += 1
 
-                    excelData["Process 1 Model Code"] = repairedProcess
                     excelData["Process 1 S/N"] = repairedProcess
                     excelData["Process 1 ID"] = repairedProcess
                     excelData["Process 1 NAME"] = repairedProcess
-                    excelData["Process 1 Regular/Contractual"] = repairedProcess
                     excelData["Process 1 Em2p"] = repairedProcess
                     excelData["Process 1 Em2p Lot No"] = repairedProcess
                     excelData["Process 1 Em3p"] = repairedProcess
@@ -1955,11 +1941,9 @@ def CompileCsv():
                     excelData["Process 1 NG Cause"] = repairedProcess
                     excelData["Process 1 Repaired Action"] = repairedProcess  
 
-                    excelData["Process 6 Model Code"] = ngProcess
                     excelData["Process 6 S/N"] = ngProcess
                     excelData["Process 6 ID"] = ngProcess
                     excelData["Process 6 NAME"] = ngProcess
-                    excelData["Process 6 Regular/Contractual"] = ngProcess
                     excelData["Process 6 Vinyl"] = ngProcess
                     excelData["Process 6 Vinyl Lot No"] = ngProcess
                     excelData["Process 6 ST"] = ngProcess
@@ -1984,11 +1968,9 @@ def CompileCsv():
                     process6Row += 1
                     PiMachineManager.piRow += 1
 
-                    excelData["Process 1 Model Code"] = repairedProcess
                     excelData["Process 1 S/N"] = repairedProcess
                     excelData["Process 1 ID"] = repairedProcess
                     excelData["Process 1 NAME"] = repairedProcess
-                    excelData["Process 1 Regular/Contractual"] = repairedProcess
                     excelData["Process 1 Em2p"] = repairedProcess
                     excelData["Process 1 Em2p Lot No"] = repairedProcess
                     excelData["Process 1 Em3p"] = repairedProcess
@@ -2037,11 +2019,9 @@ def CompileCsv():
                     excelData["WATTAGE MIN (W)"] = ngProcess
                     excelData["CLOSED PRESSURE MIN (kPa)"] = ngProcess
 
-                    excelData["Process 1 Model Code"] = repairedProcess
                     excelData["Process 1 S/N"] = repairedProcess
                     excelData["Process 1 ID"] = repairedProcess
                     excelData["Process 1 NAME"] = repairedProcess
-                    excelData["Process 1 Regular/Contractual"] = repairedProcess
                     excelData["Process 1 Em2p"] = repairedProcess
                     excelData["Process 1 Em2p Lot No"] = repairedProcess
                     excelData["Process 1 Em3p"] = repairedProcess
@@ -2057,11 +2037,9 @@ def CompileCsv():
                     excelData["Process 1 NG Cause"] = repairedProcess
                     excelData["Process 1 Repaired Action"] = repairedProcess  
 
-                    excelData["Process 2 Model Code"] = repairedProcess
                     excelData["Process 2 S/N"] = repairedProcess
                     excelData["Process 2 ID"] = repairedProcess
                     excelData["Process 2 NAME"] = repairedProcess
-                    excelData["Process 2 Regular/Contractual"] = repairedProcess
                     excelData["Process 2 M4x40 Screw"] = repairedProcess
                     excelData["Process 2 M4x40 Screw Lot No"] = repairedProcess
                     excelData["Process 2 Rod Blk"] = repairedProcess
@@ -2079,11 +2057,9 @@ def CompileCsv():
                     excelData["Process 2 NG Cause"] = repairedProcess
                     excelData["Process 2 Repaired Action"] = repairedProcess
 
-                    excelData["Process 5 Model Code"] = ngProcess
                     excelData["Process 5 S/N"] = ngProcess
                     excelData["Process 5 ID"] = ngProcess
                     excelData["Process 5 NAME"] = ngProcess
-                    excelData["Process 5 Regular/Contractual"] = ngProcess
                     excelData["Process 5 Rating Label"] = ngProcess
                     excelData["Process 5 Rating Label Lot No"] = ngProcess
                     excelData["Process 5 ST"] = ngProcess
@@ -2091,11 +2067,9 @@ def CompileCsv():
                     excelData["Process 5 NG Cause"] = ngProcess
                     excelData["Process 5 Repaired Action"] = ngProcess
 
-                    excelData["Process 6 Model Code"] = ngProcess
                     excelData["Process 6 S/N"] = ngProcess
                     excelData["Process 6 ID"] = ngProcess
                     excelData["Process 6 NAME"] = ngProcess
-                    excelData["Process 6 Regular/Contractual"] = ngProcess
                     excelData["Process 6 Vinyl"] = ngProcess
                     excelData["Process 6 Vinyl Lot No"] = ngProcess
                     excelData["Process 6 ST"] = ngProcess
@@ -2137,11 +2111,9 @@ def CompileCsv():
                     excelData["WATTAGE MIN (W)"] = ngProcess
                     excelData["CLOSED PRESSURE MIN (kPa)"] = ngProcess
 
-                    excelData["Process 1 Model Code"] = repairedProcess
                     excelData["Process 1 S/N"] = repairedProcess
                     excelData["Process 1 ID"] = repairedProcess
                     excelData["Process 1 NAME"] = repairedProcess
-                    excelData["Process 1 Regular/Contractual"] = repairedProcess
                     excelData["Process 1 Em2p"] = repairedProcess
                     excelData["Process 1 Em2p Lot No"] = repairedProcess
                     excelData["Process 1 Em3p"] = repairedProcess

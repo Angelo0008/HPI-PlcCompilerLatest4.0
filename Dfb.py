@@ -312,7 +312,15 @@ class Tensile():
 
 
 #%%
-# tensile = Tensile()
-# tensile.GettingData("DFB6600600", "T000727-02"[:-3])
+# DateAndTimeManager.GetDateToday()
+
+# filesreader = filesReader()
+# filesreader.readingYearStored = DateAndTimeManager.yearNow
+# filesreader.ReadAllFiles()
+
+# #GETTING DFB INSPECTION DATA
+# dfb = dFB()
+# dfb.ReadDfbSnap("20250106-A")
+# dfb.GettingData("DFB6600600")
 
 # %%

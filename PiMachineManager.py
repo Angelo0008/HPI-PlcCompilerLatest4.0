@@ -60,6 +60,7 @@ def CompilePICsv():
         
 
         excelData2 = {
+                    "DATETIME": pd.to_datetime(tempdfPi['DATE'] + ' ' + tempdfPi['TIME']),
                     "DATE": tempdfPi["DATE"].values,
                     "TIME": tempdfPi["TIME"].values,
                     "MODEL CODE": tempdfPi["MODEL CODE"].values,
@@ -77,11 +78,9 @@ def CompilePICsv():
                     "WATTAGE MIN (W)": tempdfPi["WATTAGE MIN (W)"].values,
                     "CLOSED PRESSURE MIN (kPa)": tempdfPi["CLOSED PRESSURE MIN (kPa)"].values,
             
-                    "Process 1 Model Code" : [processData],
                     "Process 1 S/N" : [processData],
                     "Process 1 ID" : [processData],
                     "Process 1 NAME" : [processData],
-                    "Process 1 Regular/Contractual" : [processData],
                     "Process 1 Em2p" : [processData],
                     "Process 1 Em2p Lot No" : [processData],
                     "Process 1 Em2p Inspection 3 Average Data" : [processData],
@@ -138,11 +137,9 @@ def CompilePICsv():
                     "Process 1 NG Cause" : [processData],
                     "Process 1 Repaired Action" : [processData],
 
-                    "Process 2 Model Code" : [processData],
                     "Process 2 S/N" : [processData],
                     "Process 2 ID" : [processData],
                     "Process 2 NAME" : [processData],
-                    "Process 2 Regular/Contractual" : [processData],
                     "Process 2 M4x40 Screw" : [processData],
                     "Process 2 M4x40 Screw Lot No" : [processData],
                     "Process 2 Rod Blk" : [processData],
@@ -220,11 +217,9 @@ def CompilePICsv():
                     "Process 2 NG Cause" : [processData],
                     "Process 2 Repaired Action" : [processData],
 
-                    "Process 3 Model Code" : [processData],
                     "Process 3 S/N" : [processData],
                     "Process 3 ID" : [processData],
                     "Process 3 NAME" : [processData],
-                    "Process 3 Regular/Contractual" : [processData],
                     "Process 3 Frame Gasket" : [processData],
                     "Process 3 Frame Gasket Lot No" : [processData],
                     "Process 3 Casing Block" : [processData],
@@ -265,11 +260,9 @@ def CompilePICsv():
                     "Process 3 NG Cause" : [processData],
                     "Process 3 Repaired Action" : [processData],
 
-                    "Process 4 Model Code" : [processData],
                     "Process 4 S/N" : [processData],
                     "Process 4 ID" : [processData],
                     "Process 4 NAME" : [processData],
-                    "Process 4 Regular/Contractual" : [processData],
                     "Process 4 Tank" : [processData],
                     "Process 4 Tank Lot No" : [processData],
                     "Process 4 Upper Housing" : [processData],
@@ -301,11 +294,9 @@ def CompilePICsv():
                     "Process 4 NG Cause" : [processData],
                     "Process 4 Repaired Action" : [processData],
                     
-                    "Process 5 Model Code" : [processData],
                     "Process 5 S/N" : [processData],
                     "Process 5 ID" : [processData],
                     "Process 5 NAME" : [processData],
-                    "Process 5 Regular/Contractual" : [processData],
                     "Process 5 Rating Label" : [processData],
                     "Process 5 Rating Label Lot No" : [processData],
                     "Process 5 ST" : [processData],
@@ -313,11 +304,9 @@ def CompilePICsv():
                     "Process 5 NG Cause" : [processData],
                     "Process 5 Repaired Action" : [processData],
                     
-                    "Process 6 Model Code" : [processData],
                     "Process 6 S/N" : [processData],
                     "Process 6 ID" : [processData],
                     "Process 6 NAME" : [processData],
-                    "Process 6 Regular/Contractual" : [processData],
                     "Process 6 Vinyl" : [processData],
                     "Process 6 Vinyl Lot No" : [processData],
                     "Process 6 ST" : [processData],

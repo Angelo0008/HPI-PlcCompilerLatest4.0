@@ -9,8 +9,18 @@ from FilesReader import *
 
 import EventLogging
 import ProcessCsvManager
+import Sql
 
-ProcessCsvManager.ReadCsv()
+Sql.SqlConnection()
+
+Sql.DeleteDataFromDatabaseData('2024-11-04')
+
+# ProcessCsvManager.ReadCsv()
+# PiMachineManager.CheckPICsv()
+
+# Sql.SelectAllDataFromTable("process1_data")
+
+# ProcessCsvManager.ReadCsv()
 
 # piDirectory = (r'\\192.168.2.19\ai_team\AI Program\Outputs\PICompiled')
 # os.chdir(piDirectory)

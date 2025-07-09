@@ -9,6 +9,7 @@ from FilesReader import *
 
 import EventLogging
 import ProcessCsvManager
+import Sql
 
 #GUI Variables
 root = ""
@@ -218,6 +219,8 @@ def start():
     #Loading GUI
     Loading()
 
+    Sql.SqlConnection()
+
     #Creating Empty Data Frame
     ColumnCreator.createEmptyColumn()
     PiMachineManager.compiledFrame = pd.DataFrame(columns=ColumnCreator.emptyColumn)
@@ -230,37 +233,38 @@ def start():
     filesreader.readingYearStored = DateAndTimeManager.yearNow
     filesreader.ReadAllFiles()
 
-    try:
-        #Resetting Variables
-        # PiMachineManager.ResetVariables()
-        #Checking For Master Pump Data And Running Data
-        PiMachineManager.CheckPICsv()
+    # try:
+    #Resetting Variables
+    # PiMachineManager.ResetVariables()
+    #Checking For Master Pump Data And Running Data
+    PiMachineManager.CheckPICsv()
 
-        #Checking If Master Pump Or Running Data Existed
-        if PiMachineManager.canCompilePI:
-            PiMachineManager.CompilePICsv()
-            CsvWriter.WriteCsv(PiMachineManager.compiledFrame)
-        else:
-            ErrorPopUp("Error Creating MasterPump Or Running")
-
-        EventLogging.logEvent("Creating MasterPump Or Running Successfully")
-    except:
+    #Checking If Master Pump Or Running Data Existed
+    if PiMachineManager.canCompilePI:
+        PiMachineManager.CompilePICsv()
+        # CsvWriter.WriteCsv(PiMachineManager.compiledFrame)
+        Sql.InsertDataToFC1DatabaseTable(PiMachineManager.compiledFrame)
+    else:
         ErrorPopUp("Error Creating MasterPump Or Running")
-        EventLogging.logEvent("Creating MasterPump Or Running Failed")
+
+    EventLogging.logEvent("Creating MasterPump Or Running Successfully")
+    # except:
+    #     ErrorPopUp("Error Creating MasterPump Or Running")
+    #     EventLogging.logEvent("Creating MasterPump Or Running Failed")
 
     
     try:
         #Reading VT CSV Files
         isCsvReaded = False
         while not isCsvReaded:
-            try:
-                ProcessCsvManager.ResetVariables()
-                ProcessCsvManager.ReadCsv()
-                isCsvReaded = True
-            except:
-                print("Cannot Read Csv Retrying In 1 Seconds")
-                isCsvReaded = False
-                time.sleep(1)
+            # try:
+            ProcessCsvManager.ResetVariables()
+            ProcessCsvManager.ReadCsv()
+            isCsvReaded = True
+            # except:
+                # print("Cannot Read Csv Retrying In 1 Seconds")
+                # isCsvReaded = False
+                # time.sleep(1)
     except:
         pass
 
@@ -269,7 +273,8 @@ def start():
         if ProcessCsvManager.canCompile:
             ProcessCsvManager.CompileCsv()
         
-    CsvWriter.WriteCsv(PiMachineManager.compiledFrame)
+    # CsvWriter.WriteCsv(PiMachineManager.compiledFrame)
+    Sql.InsertDataToFC1DatabaseTable(PiMachineManager.compiledFrame)
 
     FinishedLoading()
 

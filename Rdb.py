@@ -549,7 +549,7 @@ class rDB():
 
 # rdb = rDB()
 # rdb.readingYear = int(DateAndTimeManager.yearNow)
-# rdb.ReadCheckSheet("20241018-F", "RDB5200200")
+# rdb.ReadCheckSheet("20250108-A", "RDB5200200")
 # rdb.GettingData("RDB5200200")
 
 
