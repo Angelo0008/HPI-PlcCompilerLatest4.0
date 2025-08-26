@@ -27,6 +27,8 @@ off = ""
 
 time_picker = ""
 
+logWindow = None
+
 def showGui():
     global root
 
@@ -41,6 +43,8 @@ def showGui():
     global off
 
     global time_picker
+
+    global logWindow
 
     #Fixing Blur
     windll.shcore.SetProcessDpiAwareness(1)
@@ -89,6 +93,8 @@ def showGui():
     calendarPicker = DateEntry(frame1, width=16, background='darkblue', foreground='white', borderwidth=2, date_pattern='yyyy/mm/dd')
     calendarPicker.grid(column=0, row=4, pady=20, padx=(200, 0))
 
+    InstantiateLogWindow()
+
     #FRAME2
 
     message = tk.Label(frame2, text="Configure", font=("Arial", 12, "bold"))
@@ -104,8 +110,33 @@ def showGui():
     theme = AnalogThemes(time_picker)
     theme.setNavyBlue()
 
+
     root.protocol("WM_DELETE_WINDOW", StopProgram)
     root.mainloop()
+
+def InstantiateLogWindow():
+    global logWindow
+
+    logWindow = st.ScrolledText(frame1, width = 60, height = 8, font = ("Times New Roman", 10))
+    logWindow.grid(column = 0, row=5, columnspan=2, pady = 10)
+
+    # Making the text read only
+    logWindow.configure(state ='disabled')
+
+def InsertInLogWindow(message):
+    global logWindow
+
+    logWindow.configure(state ='normal')
+    # Inserting Text which is read only
+    logWindow.insert(tk.INSERT, f"{message}\n")
+    logWindow.configure(state ='disabled')
+
+def ClearLogWindow():
+    global logWindow
+
+    logWindow.configure(state='normal')
+    logWindow.delete('1.0', tk.END)
+    logWindow.configure(state='disabled')
 
 def Loading():
     global compileButton
@@ -213,6 +244,8 @@ def StartProgram():
     threading.Thread(target=start).start()
 
 def start():
+    ClearLogWindow()
+    InsertInLogWindow("Started")
     #Setting Date From Calendar Picker
     setDate()
 
@@ -221,6 +254,12 @@ def start():
 
     Sql.SqlConnection()
 
+    Sql.DeleteDataFromDatabaseData(DateAndTimeManager.dateToReadDashFormat)
+
+    # Resetting Variables
+    PiMachineManager.ResetVariables()
+    ProcessCsvManager.ResetVariables()
+
     #Creating Empty Data Frame
     ColumnCreator.createEmptyColumn()
     PiMachineManager.compiledFrame = pd.DataFrame(columns=ColumnCreator.emptyColumn)
@@ -228,6 +267,7 @@ def start():
     #Reading Date Today
     DateAndTimeManager.GetDateToday()
 
+    InsertInLogWindow("Reading Files In QC And Production")
     #READING ALL FILES USING FILES READER
     filesreader = filesReader()
     filesreader.readingYearStored = DateAndTimeManager.yearNow
@@ -244,6 +284,7 @@ def start():
         PiMachineManager.CompilePICsv()
         # CsvWriter.WriteCsv(PiMachineManager.compiledFrame)
         Sql.InsertDataToFC1DatabaseTable(PiMachineManager.compiledFrame)
+        InsertInLogWindow("Master Pump Compiled")
     else:
         ErrorPopUp("Error Creating MasterPump Or Running")
 
@@ -258,7 +299,7 @@ def start():
         isCsvReaded = False
         while not isCsvReaded:
             # try:
-            ProcessCsvManager.ResetVariables()
+            # ProcessCsvManager.ResetVariables()
             ProcessCsvManager.ReadCsv()
             isCsvReaded = True
             # except:

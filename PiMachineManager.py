@@ -25,7 +25,7 @@ def CheckPICsv():
 
     dfPi = pd.read_csv(f'PICompiled{DateAndTimeManager.dateToReadDashFormat}.csv', encoding='latin1')
     
-    dfPiNotDone = dfPi[(dfPi["CHECKING"].isin(["-"])) & (dfPi["PROCESS S/N"].isin(["MASTER PUMP"])) | (dfPi["PROCESS S/N"].isin(["RUNNING"]))]
+    dfPiNotDone = dfPi[(dfPi["PROCESS S/N"].isin(["MASTER PUMP"])) | (dfPi["PROCESS S/N"].isin(["RUNNING"]))]
     if len(dfPiNotDone) != 0:
         canCompilePI = True
     else:
@@ -63,7 +63,7 @@ def CompilePICsv():
                     "DATETIME": pd.to_datetime(tempdfPi['DATE'] + ' ' + tempdfPi['TIME']),
                     "DATE": tempdfPi["DATE"].values,
                     "TIME": tempdfPi["TIME"].values,
-                    "MODEL CODE": tempdfPi["MODEL CODE"].values,
+                    "MODEL CODE": tempdfPi["MODEL CODE"].str.replace('"', '', regex=False),
                     "PROCESS S/N": tempdfPi["PROCESS S/N"].values,
                     "S/N": tempdfPi["S/N"].values,
                     "PASS/NG": tempdfPi["PASS/NG"].values,

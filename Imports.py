@@ -20,6 +20,7 @@ import threading
 #GUI
 from tkinter import *
 import tkinter as tk
+import tkinter.scrolledtext as st
 from tkinter import ttk
 from tkcalendar import Calendar, DateEntry
 from tkinter import filedialog

@@ -522,56 +522,80 @@ def CsvOrganize():
                 tempDfVt1 = dfVt1.iloc[[process1Row], :]
                 isVt1Blank = False
             except:
-                print("VT1 Blank")
-                isVt1Blank = True
-                tempDfVt1 = dfVt1.iloc[[len(dfVt1) - 1], :]
-                tempDfVt1["Process 1 Repaired Action"] = "-"
-                tempDfVt1["Process 1 NG Cause"] = "-"
+                try:
+                    print("VT1 Blank")
+                    isVt1Blank = True
+                    tempDfVt1 = dfVt1.iloc[[len(dfVt1) - 1], :]
+                    tempDfVt1["Process 1 Repaired Action"] = "-"
+                    tempDfVt1["Process 1 NG Cause"] = "-"
+                except:
+                    print("VT1 Blank")
+                    isVt1Blank = True
             try:
                 tempDfVt2 = dfVt2.iloc[[process2Row], :]
                 isVt2Blank = False
             except:
-                print("VT2 Blank")
-                isVt2Blank = True
-                tempDfVt2 = dfVt2.iloc[[len(dfVt2) - 1], :]
-                tempDfVt2["Process 2 Repaired Action"] = "-"
-                tempDfVt2["Process 2 NG Cause"] = "-"
+                try:
+                    print("VT2 Blank")
+                    isVt2Blank = True
+                    tempDfVt2 = dfVt2.iloc[[len(dfVt2) - 1], :]
+                    tempDfVt2["Process 2 Repaired Action"] = "-"
+                    tempDfVt2["Process 2 NG Cause"] = "-"
+                except:
+                    print("VT2 Blank")
+                    isVt2Blank = True
             try:
                 tempDfVt3 = dfVt3.iloc[[process3Row], :]
                 isVt3Blank = False
             except:
-                print("VT3 Blank")
-                isVt3Blank = True
-                tempDfVt3 = dfVt3.iloc[[len(dfVt3) - 1], :]
-                tempDfVt3["Process 3 Repaired Action"] = "-"
-                tempDfVt3["Process 3 NG Cause"] = "-"
+                try:
+                    print("VT3 Blank")
+                    isVt3Blank = True
+                    tempDfVt3 = dfVt3.iloc[[len(dfVt3) - 1], :]
+                    tempDfVt3["Process 3 Repaired Action"] = "-"
+                    tempDfVt3["Process 3 NG Cause"] = "-"
+                except:
+                    print("VT3 Blank")
+                    isVt3Blank = True
             try:
                 tempDfVt4 = dfVt4.iloc[[process4Row], :]
                 isVt4Blank = False
             except:
-                print("VT4 Blank")
-                isVt4Blank = True
-                tempDfVt4 = dfVt4.iloc[[len(dfVt4) - 1], :]
-                tempDfVt4["Process 4 Repaired Action"] = "-"
-                tempDfVt4["Process 4 NG Cause"] = "-"
+                try:
+                    print("VT4 Blank")
+                    isVt4Blank = True
+                    tempDfVt4 = dfVt4.iloc[[len(dfVt4) - 1], :]
+                    tempDfVt4["Process 4 Repaired Action"] = "-"
+                    tempDfVt4["Process 4 NG Cause"] = "-"
+                except:
+                    print("VT4 Blank")
+                    isVt4Blank = True
             try:
                 tempDfVt5 = dfVt5.iloc[[process5Row], :]
                 isVt5Blank = False
             except:
-                print("VT5 Blank")
-                isVt5Blank = True
-                tempDfVt5 = dfVt5.iloc[[len(dfVt5) - 1], :]
-                tempDfVt5["Process 5 Repaired Action"] = "-"
-                tempDfVt5["Process 5 NG Cause"] = "-"
+                try:
+                    print("VT5 Blank")
+                    isVt5Blank = True
+                    tempDfVt5 = dfVt5.iloc[[len(dfVt5) - 1], :]
+                    tempDfVt5["Process 5 Repaired Action"] = "-"
+                    tempDfVt5["Process 5 NG Cause"] = "-"
+                except:
+                    print("VT5 Blank")
+                    isVt5Blank = True
             try:
                 tempDfVt6 = dfVt6.iloc[[process6Row], :]
                 isVt6Blank = False
             except:
-                print("VT6 Blank")
-                isVt6Blank = True
-                tempDfVt6 = dfVt6.iloc[[len(dfVt6) - 1], :]
-                tempDfVt6["Process 6 Repaired Action"] = "-"
-                tempDfVt6["Process 6 NG Cause"] = "-"
+                try:
+                    print("VT6 Blank")
+                    isVt6Blank = True
+                    tempDfVt6 = dfVt6.iloc[[len(dfVt6) - 1], :]
+                    tempDfVt6["Process 6 Repaired Action"] = "-"
+                    tempDfVt6["Process 6 NG Cause"] = "-"
+                except:
+                    print("VT6 Blank")
+                    isVt6Blank = True
 
             #No Data In Next Row
             if isVt1Blank == True and isVt2Blank == True and isVt3Blank == True and isVt4Blank == True and isVt5Blank == True and isVt6Blank == True:
@@ -734,7 +758,7 @@ def ReadPreviousDateAndTime():
 
             break
         except:
-            piRowDiff += 1
+            piRowDiff += 2
 
 def CompileCsv():
     global excelData
@@ -794,7 +818,7 @@ def CompileCsv():
         "DATETIME": "",
         "DATE": PiMachineManager.tempdfPi["DATE"].values,
         "TIME": PiMachineManager.tempdfPi["TIME"].values,
-        "MODEL CODE": PiMachineManager.tempdfPi["MODEL CODE"].values,
+        "MODEL CODE": PiMachineManager.tempdfPi["MODEL CODE"].str.replace('"', '', regex=False),
         "PROCESS S/N": PiMachineManager.tempdfPi["PROCESS S/N"].values,
         "S/N": PiMachineManager.tempdfPi["S/N"].values,
         "PASS/NG": PiMachineManager.tempdfPi["PASS/NG"].values,
@@ -2233,6 +2257,9 @@ def ResetVariables():
     global excelData
     global compiledFrame
 
+    global previousDate
+    global previousTime
+
     dfVt1 = ""
     dfVt2 = ""
     dfVt3 = ""
@@ -2271,4 +2298,7 @@ def ResetVariables():
 
     excelData = ""
     compiledFrame = ""
+
+    previousDate = None
+    previousTime = None
     
