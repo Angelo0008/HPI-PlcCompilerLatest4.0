@@ -12,6 +12,13 @@ from Dfb import Tensile
 from Rdb import rDB
 from Csb import cSB
 
+import Em2pVer2
+import Em3pVer2
+import FmVer2
+import RdbVer2
+import CsbVer2
+import DfbVer2
+
 dfVt1 = ""
 dfVt2 = ""
 dfVt3 = ""
@@ -784,34 +791,29 @@ def CompileCsv():
     DateAndTimeManager.GetDateToday()
 
     # GETTING EM2P INSPECTION DATA
-    em2p = em2P()
-    em2p.GettingData(tempDfVt1["Process 1 Em2p"].values, tempDfVt1["Process 1 Em2p Lot No"].values)
+    Em2pVer2.ReadInspectionData(tempDfVt1["Process 1 Em2p"].values[0], tempDfVt1["Process 1 Em2p Lot No"].values[0])
 
     #GETTING EM3P INSPECTION DATA
-    em3p = em3P()
-    em3p.GettingData(tempDfVt1["Process 1 Em3p"].values, tempDfVt1["Process 1 Em3p Lot No"].values)
+    Em3pVer2.ReadInspectionData(tempDfVt1["Process 1 Em3p"].values[0], tempDfVt1["Process 1 Em3p Lot No"].values[0])
 
     #GETTING FM INSPECTION DATA
-    fm = fM()
-    fm.GettingData(tempDfVt1["Process 1 Frame"].values, tempDfVt1["Process 1 Frame Lot No"].values)
+    FmVer2.ReadInspectionData(tempDfVt1["Process 1 Frame"].values[0], tempDfVt1["Process 1 Frame Lot No"].values[0])
 
     #GETTING DFB INSPECTION DATA
-    dfb = dFB()
-    dfb.ReadDfbSnap(tempDfVt2["Process 2 Df Blk Lot No"].values[0])
-    dfb.GettingData(tempDfVt2["Process 2 Df Blk"].values[0])
+    DfbVer2.ReadDfbSnap(tempDfVt2["Process 2 Df Blk"].values[0], tempDfVt2["Process 2 Df Blk Lot No"].values[0])
+    DfbVer2.ReadInspectionData(tempDfVt2["Process 2 Df Blk"].values[0])
+    DfbVer2.ReadTensileData(tempDfVt2["Process 2 Df Blk"].values[0])
 
     #GETTING TENSILE FOR DFB
     tensile = Tensile()
-    tensile.GettingData(tempDfVt2["Process 2 Df Blk"].values[0], dfb.dfbLotNumber2[:-3])
+    # tensile.GettingData(tempDfVt2["Process 2 Df Blk"].values[0], dfb.dfbLotNumber2[:-3])
 
     #GETTING RDB INSPECTION DATA
-    rdb = rDB()
-    rdb.ReadCheckSheet(tempDfVt2["Process 2 Rod Blk Lot No"].values[0], tempDfVt2["Process 2 Rod Blk"].values)
-    rdb.GettingData(tempDfVt2["Process 2 Rod Blk"].values)
+    RdbVer2.ReadCheckSheet(tempDfVt2["Process 2 Rod Blk Lot No"].values[0], tempDfVt2["Process 2 Rod Blk"].values)
+    RdbVer2.ReadInspectionData()
 
     #GETTING CSB INSPECTION DATA
-    csb = cSB()
-    csb.GettingData(tempDfVt3["Process 3 Casing Block"].values, tempDfVt3["Process 3 Casing Block Lot No"].values)
+    CsbVer2.ReadInspectionData(tempDfVt3["Process 3 Casing Block"].values[0], tempDfVt3["Process 3 Casing Block Lot No"].values[0])
 
     excelData = {
         # "DATETIME": pd.to_datetime(PiMachineManager.tempdfPi['DATE'] + ' ' + PiMachineManager.tempdfPi['TIME']),
@@ -838,53 +840,53 @@ def CompileCsv():
         "Process 1 NAME": tempDfVt1["Process 1 NAME"].values,
         "Process 1 Em2p": tempDfVt1["Process 1 Em2p"].values,
         "Process 1 Em2p Lot No": tempDfVt1["Process 1 Em2p Lot No"].values,
-        "Process 1 Em2p Inspection 3 Average Data": em2p.totalAverage3,
-        "Process 1 Em2p Inspection 4 Average Data": em2p.totalAverage4,
-        "Process 1 Em2p Inspection 5 Average Data": em2p.totalAverage5,
-        "Process 1 Em2p Inspection 10 Average Data": em2p.totalAverage10,
-        "Process 1 Em2p Inspection 3 Minimum Data": em2p.totalMinimum3,
-        "Process 1 Em2p Inspection 4 Minimum Data": em2p.totalMinimum4,
-        "Process 1 Em2p Inspection 5 Minimum Data": em2p.totalMinimum5,
-        "Process 1 Em2p Inspection 3 Maximum Data": em2p.totalMaximum3,
-        "Process 1 Em2p Inspection 4 Maximum Data": em2p.totalMaximum4,
-        "Process 1 Em2p Inspection 5 Maximum Data": em2p.totalMaximum5,
+        "Process 1 Em2p Inspection 3 Average Data": Em2pVer2.totalAverage3,
+        "Process 1 Em2p Inspection 4 Average Data": Em2pVer2.totalAverage4,
+        "Process 1 Em2p Inspection 5 Average Data": Em2pVer2.totalAverage5,
+        "Process 1 Em2p Inspection 10 Average Data": Em2pVer2.totalAverage10,
+        "Process 1 Em2p Inspection 3 Minimum Data": Em2pVer2.totalMinimum3,
+        "Process 1 Em2p Inspection 4 Minimum Data": Em2pVer2.totalMinimum4,
+        "Process 1 Em2p Inspection 5 Minimum Data": Em2pVer2.totalMinimum5,
+        "Process 1 Em2p Inspection 3 Maximum Data": Em2pVer2.totalMaximum3,
+        "Process 1 Em2p Inspection 4 Maximum Data": Em2pVer2.totalMaximum4,
+        "Process 1 Em2p Inspection 5 Maximum Data": Em2pVer2.totalMaximum5,
         "Process 1 Em3p": tempDfVt1["Process 1 Em3p"].values,
         "Process 1 Em3p Lot No": tempDfVt1["Process 1 Em3p Lot No"].values,
-        "Process 1 Em3p Inspection 3 Average Data": em3p.totalAverage3,
-        "Process 1 Em3p Inspection 4 Average Data": em3p.totalAverage4,
-        "Process 1 Em3p Inspection 5 Average Data": em3p.totalAverage5,
-        "Process 1 Em3p Inspection 10 Average Data": em3p.totalAverage10,
-        "Process 1 Em3p Inspection 3 Minimum Data": em3p.totalMinimum3,
-        "Process 1 Em3p Inspection 4 Minimum Data": em3p.totalMinimum4,
-        "Process 1 Em3p Inspection 5 Minimum Data": em3p.totalMinimum5,
-        "Process 1 Em3p Inspection 3 Maximum Data": em3p.totalMaximum3,
-        "Process 1 Em3p Inspection 4 Maximum Data": em3p.totalMaximum4,
-        "Process 1 Em3p Inspection 5 Maximum Data": em3p.totalMaximum5,
+        "Process 1 Em3p Inspection 3 Average Data": Em3pVer2.totalAverage3,
+        "Process 1 Em3p Inspection 4 Average Data": Em3pVer2.totalAverage4,
+        "Process 1 Em3p Inspection 5 Average Data": Em3pVer2.totalAverage5,
+        "Process 1 Em3p Inspection 10 Average Data": Em3pVer2.totalAverage10,
+        "Process 1 Em3p Inspection 3 Minimum Data": Em3pVer2.totalMinimum3,
+        "Process 1 Em3p Inspection 4 Minimum Data": Em3pVer2.totalMinimum4,
+        "Process 1 Em3p Inspection 5 Minimum Data": Em3pVer2.totalMinimum5,
+        "Process 1 Em3p Inspection 3 Maximum Data": Em3pVer2.totalMaximum3,
+        "Process 1 Em3p Inspection 4 Maximum Data": Em3pVer2.totalMaximum4,
+        "Process 1 Em3p Inspection 5 Maximum Data": Em3pVer2.totalMaximum5,
         "Process 1 Harness": tempDfVt1["Process 1 Harness"].values,
         "Process 1 Harness Lot No": tempDfVt1["Process 1 Harness Lot No"].values,
         "Process 1 Frame": tempDfVt1["Process 1 Frame"].values,
         "Process 1 Frame Lot No": tempDfVt1["Process 1 Frame Lot No"].values,
-        "Process 1 Frame Inspection 1 Average Data": fm.totalAverage1, 
-        "Process 1 Frame Inspection 2 Average Data": fm.totalAverage2, 
-        "Process 1 Frame Inspection 3 Average Data": fm.totalAverage3, 
-        "Process 1 Frame Inspection 4 Average Data": fm.totalAverage4, 
-        "Process 1 Frame Inspection 5 Average Data": fm.totalAverage5, 
-        "Process 1 Frame Inspection 6 Average Data": fm.totalAverage6, 
-        "Process 1 Frame Inspection 7 Average Data": fm.totalAverage7, 
-        "Process 1 Frame Inspection 1 Minimum Data": fm.totalMinimum1, 
-        "Process 1 Frame Inspection 2 Minimum Data": fm.totalMinimum2, 
-        "Process 1 Frame Inspection 3 Minimum Data": fm.totalMinimum3, 
-        "Process 1 Frame Inspection 4 Minimum Data": fm.totalMinimum4, 
-        "Process 1 Frame Inspection 5 Minimum Data": fm.totalMinimum5, 
-        "Process 1 Frame Inspection 6 Minimum Data": fm.totalMinimum6, 
-        "Process 1 Frame Inspection 7 Minimum Data": fm.totalMinimum7, 
-        "Process 1 Frame Inspection 1 Maximum Data": fm.totalMaximum1, 
-        "Process 1 Frame Inspection 2 Maximum Data": fm.totalMaximum2, 
-        "Process 1 Frame Inspection 3 Maximum Data": fm.totalMaximum3, 
-        "Process 1 Frame Inspection 4 Maximum Data": fm.totalMaximum4, 
-        "Process 1 Frame Inspection 5 Maximum Data": fm.totalMaximum5, 
-        "Process 1 Frame Inspection 6 Maximum Data": fm.totalMaximum6, 
-        "Process 1 Frame Inspection 7 Maximum Data": fm.totalMaximum7, 
+        "Process 1 Frame Inspection 1 Average Data": FmVer2.totalAverage1, 
+        "Process 1 Frame Inspection 2 Average Data": FmVer2.totalAverage2, 
+        "Process 1 Frame Inspection 3 Average Data": FmVer2.totalAverage3, 
+        "Process 1 Frame Inspection 4 Average Data": FmVer2.totalAverage4, 
+        "Process 1 Frame Inspection 5 Average Data": FmVer2.totalAverage5, 
+        "Process 1 Frame Inspection 6 Average Data": FmVer2.totalAverage6, 
+        "Process 1 Frame Inspection 7 Average Data": FmVer2.totalAverage7, 
+        "Process 1 Frame Inspection 1 Minimum Data": FmVer2.totalMinimum1, 
+        "Process 1 Frame Inspection 2 Minimum Data": FmVer2.totalMinimum2, 
+        "Process 1 Frame Inspection 3 Minimum Data": FmVer2.totalMinimum3, 
+        "Process 1 Frame Inspection 4 Minimum Data": FmVer2.totalMinimum4, 
+        "Process 1 Frame Inspection 5 Minimum Data": FmVer2.totalMinimum5, 
+        "Process 1 Frame Inspection 6 Minimum Data": FmVer2.totalMinimum6, 
+        "Process 1 Frame Inspection 7 Minimum Data": FmVer2.totalMinimum7, 
+        "Process 1 Frame Inspection 1 Maximum Data": FmVer2.totalMaximum1, 
+        "Process 1 Frame Inspection 2 Maximum Data": FmVer2.totalMaximum2, 
+        "Process 1 Frame Inspection 3 Maximum Data": FmVer2.totalMaximum3, 
+        "Process 1 Frame Inspection 4 Maximum Data": FmVer2.totalMaximum4, 
+        "Process 1 Frame Inspection 5 Maximum Data": FmVer2.totalMaximum5, 
+        "Process 1 Frame Inspection 6 Maximum Data": FmVer2.totalMaximum6, 
+        "Process 1 Frame Inspection 7 Maximum Data": FmVer2.totalMaximum7, 
         "Process 1 Bushing": tempDfVt1["Process 1 Bushing"].values,
         "Process 1 Bushing Lot No": tempDfVt1["Process 1 Bushing Lot No"].values,
         "Process 1 ST": tempDfVt1["Process 1 ST"].values,
@@ -899,68 +901,68 @@ def CompileCsv():
         "Process 2 M4x40 Screw Lot No": tempDfVt2["Process 2 M4x40 Screw Lot No"].values,
         "Process 2 Rod Blk": tempDfVt2["Process 2 Rod Blk"].values,
         "Process 2 Rod Blk Lot No": tempDfVt2["Process 2 Rod Blk Lot No"].values,
-        "Process 2 Rod Blk Tesla 1 Average Data": rdb.rdbTeslaTotalAverage1,
-        "Process 2 Rod Blk Tesla 2 Average Data": rdb.rdbTeslaTotalAverage2,
-        "Process 2 Rod Blk Tesla 3 Average Data": rdb.rdbTeslaTotalAverage3,
-        "Process 2 Rod Blk Tesla 4 Average Data": rdb.rdbTeslaTotalAverage4,
-        "Process 2 Rod Blk Tesla 1 Minimum Data": rdb.rdbTeslaTotalMinimum1,
-        "Process 2 Rod Blk Tesla 2 Minimum Data": rdb.rdbTeslaTotalMinimum2,
-        "Process 2 Rod Blk Tesla 3 Minimum Data": rdb.rdbTeslaTotalMinimum3,
-        "Process 2 Rod Blk Tesla 4 Minimum Data": rdb.rdbTeslaTotalMinimum4,
-        "Process 2 Rod Blk Tesla 1 Maximum Data": rdb.rdbTeslaTotalMaximum1,
-        "Process 2 Rod Blk Tesla 2 Maximum Data": rdb.rdbTeslaTotalMaximum2,
-        "Process 2 Rod Blk Tesla 3 Maximum Data": rdb.rdbTeslaTotalMaximum3,
-        "Process 2 Rod Blk Tesla 4 Maximum Data": rdb.rdbTeslaTotalMaximum4,
-        "Process 2 Rod Blk Inspection 1 Average Data": rdb.rdbTotalAverage1,
-        "Process 2 Rod Blk Inspection 2 Average Data": rdb.rdbTotalAverage2,
-        "Process 2 Rod Blk Inspection 3 Average Data": rdb.rdbTotalAverage3,
-        "Process 2 Rod Blk Inspection 4 Average Data": rdb.rdbTotalAverage4,
-        "Process 2 Rod Blk Inspection 5 Average Data": rdb.rdbTotalAverage5,
-        "Process 2 Rod Blk Inspection 6 Average Data": rdb.rdbTotalAverage6,
-        "Process 2 Rod Blk Inspection 7 Average Data": rdb.rdbTotalAverage7,
-        "Process 2 Rod Blk Inspection 8 Average Data": rdb.rdbTotalAverage8,
-        "Process 2 Rod Blk Inspection 9 Average Data": rdb.rdbTotalAverage9,
-        "Process 2 Rod Blk Inspection 1 Minimum Data": rdb.rdbTotalMinimum1,
-        "Process 2 Rod Blk Inspection 2 Minimum Data": rdb.rdbTotalMinimum2,
-        "Process 2 Rod Blk Inspection 3 Minimum Data": rdb.rdbTotalMinimum3,
-        "Process 2 Rod Blk Inspection 4 Minimum Data": rdb.rdbTotalMinimum4,
-        "Process 2 Rod Blk Inspection 5 Minimum Data": rdb.rdbTotalMinimum5,
-        "Process 2 Rod Blk Inspection 6 Minimum Data": rdb.rdbTotalMinimum6,
-        "Process 2 Rod Blk Inspection 7 Minimum Data": rdb.rdbTotalMinimum7,
-        "Process 2 Rod Blk Inspection 8 Minimum Data": rdb.rdbTotalMinimum8,
-        "Process 2 Rod Blk Inspection 9 Minimum Data": rdb.rdbTotalMinimum9,
-        "Process 2 Rod Blk Inspection 1 Maximum Data": rdb.rdbTotalMaximum1,
-        "Process 2 Rod Blk Inspection 2 Maximum Data": rdb.rdbTotalMaximum2,
-        "Process 2 Rod Blk Inspection 3 Maximum Data": rdb.rdbTotalMaximum3,
-        "Process 2 Rod Blk Inspection 4 Maximum Data": rdb.rdbTotalMaximum4,
-        "Process 2 Rod Blk Inspection 5 Maximum Data": rdb.rdbTotalMaximum5,
-        "Process 2 Rod Blk Inspection 6 Maximum Data": rdb.rdbTotalMaximum6,
-        "Process 2 Rod Blk Inspection 7 Maximum Data": rdb.rdbTotalMaximum7,
-        "Process 2 Rod Blk Inspection 8 Maximum Data": rdb.rdbTotalMaximum8,
-        "Process 2 Rod Blk Inspection 9 Maximum Data": rdb.rdbTotalMaximum9,
+        "Process 2 Rod Blk Tesla 1 Average Data": RdbVer2.rdbTeslaTotalAverage1,
+        "Process 2 Rod Blk Tesla 2 Average Data": RdbVer2.rdbTeslaTotalAverage2,
+        "Process 2 Rod Blk Tesla 3 Average Data": RdbVer2.rdbTeslaTotalAverage3,
+        "Process 2 Rod Blk Tesla 4 Average Data": RdbVer2.rdbTeslaTotalAverage4,
+        "Process 2 Rod Blk Tesla 1 Minimum Data": RdbVer2.rdbTeslaTotalMinimum1,
+        "Process 2 Rod Blk Tesla 2 Minimum Data": RdbVer2.rdbTeslaTotalMinimum2,
+        "Process 2 Rod Blk Tesla 3 Minimum Data": RdbVer2.rdbTeslaTotalMinimum3,
+        "Process 2 Rod Blk Tesla 4 Minimum Data": RdbVer2.rdbTeslaTotalMinimum4,
+        "Process 2 Rod Blk Tesla 1 Maximum Data": RdbVer2.rdbTeslaTotalMaximum1,
+        "Process 2 Rod Blk Tesla 2 Maximum Data": RdbVer2.rdbTeslaTotalMaximum2,
+        "Process 2 Rod Blk Tesla 3 Maximum Data": RdbVer2.rdbTeslaTotalMaximum3,
+        "Process 2 Rod Blk Tesla 4 Maximum Data": RdbVer2.rdbTeslaTotalMaximum4,
+        "Process 2 Rod Blk Inspection 1 Average Data": RdbVer2.rdbTotalAverage1,
+        "Process 2 Rod Blk Inspection 2 Average Data": RdbVer2.rdbTotalAverage2,
+        "Process 2 Rod Blk Inspection 3 Average Data": RdbVer2.rdbTotalAverage3,
+        "Process 2 Rod Blk Inspection 4 Average Data": RdbVer2.rdbTotalAverage4,
+        "Process 2 Rod Blk Inspection 5 Average Data": RdbVer2.rdbTotalAverage5,
+        "Process 2 Rod Blk Inspection 6 Average Data": RdbVer2.rdbTotalAverage6,
+        "Process 2 Rod Blk Inspection 7 Average Data": RdbVer2.rdbTotalAverage7,
+        "Process 2 Rod Blk Inspection 8 Average Data": RdbVer2.rdbTotalAverage8,
+        "Process 2 Rod Blk Inspection 9 Average Data": RdbVer2.rdbTotalAverage9,
+        "Process 2 Rod Blk Inspection 1 Minimum Data": RdbVer2.rdbTotalMinimum1,
+        "Process 2 Rod Blk Inspection 2 Minimum Data": RdbVer2.rdbTotalMinimum2,
+        "Process 2 Rod Blk Inspection 3 Minimum Data": RdbVer2.rdbTotalMinimum3,
+        "Process 2 Rod Blk Inspection 4 Minimum Data": RdbVer2.rdbTotalMinimum4,
+        "Process 2 Rod Blk Inspection 5 Minimum Data": RdbVer2.rdbTotalMinimum5,
+        "Process 2 Rod Blk Inspection 6 Minimum Data": RdbVer2.rdbTotalMinimum6,
+        "Process 2 Rod Blk Inspection 7 Minimum Data": RdbVer2.rdbTotalMinimum7,
+        "Process 2 Rod Blk Inspection 8 Minimum Data": RdbVer2.rdbTotalMinimum8,
+        "Process 2 Rod Blk Inspection 9 Minimum Data": RdbVer2.rdbTotalMinimum9,
+        "Process 2 Rod Blk Inspection 1 Maximum Data": RdbVer2.rdbTotalMaximum1,
+        "Process 2 Rod Blk Inspection 2 Maximum Data": RdbVer2.rdbTotalMaximum2,
+        "Process 2 Rod Blk Inspection 3 Maximum Data": RdbVer2.rdbTotalMaximum3,
+        "Process 2 Rod Blk Inspection 4 Maximum Data": RdbVer2.rdbTotalMaximum4,
+        "Process 2 Rod Blk Inspection 5 Maximum Data": RdbVer2.rdbTotalMaximum5,
+        "Process 2 Rod Blk Inspection 6 Maximum Data": RdbVer2.rdbTotalMaximum6,
+        "Process 2 Rod Blk Inspection 7 Maximum Data": RdbVer2.rdbTotalMaximum7,
+        "Process 2 Rod Blk Inspection 8 Maximum Data": RdbVer2.rdbTotalMaximum8,
+        "Process 2 Rod Blk Inspection 9 Maximum Data": RdbVer2.rdbTotalMaximum9,
         "Process 2 Df Blk": tempDfVt2["Process 2 Df Blk"].values,
         "Process 2 Df Blk Lot No": tempDfVt2["Process 2 Df Blk Lot No"].values,
-        "Process 2 Df Blk Inspection 1 Average Data": dfb.totalAverage1,
-        "Process 2 Df Blk Inspection 2 Average Data": dfb.totalAverage2,
-        "Process 2 Df Blk Inspection 3 Average Data": dfb.totalAverage3,
-        "Process 2 Df Blk Inspection 4 Average Data": dfb.totalAverage4,
-        "Process 2 Df Blk Inspection 1 Minimum Data": dfb.totalMinimum1,
-        "Process 2 Df Blk Inspection 2 Minimum Data": dfb.totalMinimum2,
-        "Process 2 Df Blk Inspection 3 Minimum Data": dfb.totalMinimum3,
-        "Process 2 Df Blk Inspection 4 Minimum Data": dfb.totalMinimum4,
-        "Process 2 Df Blk Inspection 1 Maximum Data": dfb.totalMaximum1,
-        "Process 2 Df Blk Inspection 2 Maximum Data": dfb.totalMaximum2,
-        "Process 2 Df Blk Inspection 3 Maximum Data": dfb.totalMaximum3,
-        "Process 2 Df Blk Inspection 4 Maximum Data": dfb.totalMaximum4,
-        "Process 2 Df Blk Tensile Rate Of Change Average" : tensile.rateOfChangeTotalAverage,
-        "Process 2 Df Blk Tensile Rate Of Change Minimum" : tensile.rateOfChangeTotalMinimum,
-        "Process 2 Df Blk Tensile Rate Of Change Maximum" : tensile.rateOfChangeTotalMaximum,
-        "Process 2 Df Blk Tensile Start Force Average" : tensile.startForceTotalAverage,
-        "Process 2 Df Blk Tensile Start Force Minimum" : tensile.startForceTotalMinimum,
-        "Process 2 Df Blk Tensile Start Force Maximum" : tensile.startForceTotalMaximum,
-        "Process 2 Df Blk Tensile Terminating Force Average" : tensile.terminatingForceTotalAverage,
-        "Process 2 Df Blk Tensile Terminating Force Minimum" : tensile.terminatingForceTotalMinimum,
-        "Process 2 Df Blk Tensile Terminating Force Maximum" : tensile.terminatingForceTotalMaximum,
+        "Process 2 Df Blk Inspection 1 Average Data": DfbVer2.totalAverage1,
+        "Process 2 Df Blk Inspection 2 Average Data": DfbVer2.totalAverage2,
+        "Process 2 Df Blk Inspection 3 Average Data": DfbVer2.totalAverage3,
+        "Process 2 Df Blk Inspection 4 Average Data": DfbVer2.totalAverage4,
+        "Process 2 Df Blk Inspection 1 Minimum Data": DfbVer2.totalMinimum1,
+        "Process 2 Df Blk Inspection 2 Minimum Data": DfbVer2.totalMinimum2,
+        "Process 2 Df Blk Inspection 3 Minimum Data": DfbVer2.totalMinimum3,
+        "Process 2 Df Blk Inspection 4 Minimum Data": DfbVer2.totalMinimum4,
+        "Process 2 Df Blk Inspection 1 Maximum Data": DfbVer2.totalMaximum1,
+        "Process 2 Df Blk Inspection 2 Maximum Data": DfbVer2.totalMaximum2,
+        "Process 2 Df Blk Inspection 3 Maximum Data": DfbVer2.totalMaximum3,
+        "Process 2 Df Blk Inspection 4 Maximum Data": DfbVer2.totalMaximum4,
+        "Process 2 Df Blk Tensile Rate Of Change Average" : DfbVer2.rateOfChangeTotalAverage,
+        "Process 2 Df Blk Tensile Rate Of Change Minimum" : DfbVer2.rateOfChangeTotalMinimum,
+        "Process 2 Df Blk Tensile Rate Of Change Maximum" : DfbVer2.rateOfChangeTotalMaximum,
+        "Process 2 Df Blk Tensile Start Force Average" : DfbVer2.startForceTotalAverage,
+        "Process 2 Df Blk Tensile Start Force Minimum" : DfbVer2.startForceTotalMinimum,
+        "Process 2 Df Blk Tensile Start Force Maximum" : DfbVer2.startForceTotalMaximum,
+        "Process 2 Df Blk Tensile Terminating Force Average" : DfbVer2.terminatingForceTotalAverage,
+        "Process 2 Df Blk Tensile Terminating Force Minimum" : DfbVer2.terminatingForceTotalMinimum,
+        "Process 2 Df Blk Tensile Terminating Force Maximum" : DfbVer2.terminatingForceTotalMaximum,
         "Process 2 Df Ring": tempDfVt2["Process 2 Df Ring"].values,
         "Process 2 Df Ring Lot No": tempDfVt2["Process 2 Df Ring Lot No"].values,
         "Process 2 Washer": tempDfVt2["Process 2 Washer"].values,
@@ -979,9 +981,9 @@ def CompileCsv():
         "Process 3 Frame Gasket Lot No": tempDfVt3["Process 3 Frame Gasket Lot No"].values,
         "Process 3 Casing Block": tempDfVt3["Process 3 Casing Block"].values,
         "Process 3 Casing Block Lot No": tempDfVt3["Process 3 Casing Block Lot No"].values,
-        "Process 3 Casing Block Inspection 1 Average Data": csb.totalAverage1,
-        "Process 3 Casing Block Inspection 1 Minimum Data": csb.totalMinimum1,
-        "Process 3 Casing Block Inspection 1 Maximum Data": csb.totalMaximum1,
+        "Process 3 Casing Block Inspection 1 Average Data": CsbVer2.totalAverage1,
+        "Process 3 Casing Block Inspection 1 Minimum Data": CsbVer2.totalMinimum1,
+        "Process 3 Casing Block Inspection 1 Maximum Data": CsbVer2.totalMaximum1,
         "Process 3 Casing Gasket": tempDfVt3["Process 3 Casing Gasket"].values,
         "Process 3 Casing Gasket Lot No": tempDfVt3["Process 3 Casing Gasket Lot No"].values,
         "Process 3 M4x16 Screw 1": tempDfVt3["Process 3 M4x16 Screw 1"].values,

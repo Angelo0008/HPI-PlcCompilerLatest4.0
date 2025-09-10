@@ -268,10 +268,6 @@ def start():
     DateAndTimeManager.GetDateToday()
 
     InsertInLogWindow("Reading Files In QC And Production")
-    #READING ALL FILES USING FILES READER
-    filesreader = filesReader()
-    filesreader.readingYearStored = DateAndTimeManager.yearNow
-    filesreader.ReadAllFiles()
 
     # try:
     #Resetting Variables
