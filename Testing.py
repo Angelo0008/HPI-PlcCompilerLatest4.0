@@ -13,7 +13,8 @@ import Sql
 
 Sql.SqlConnection()
 
-Sql.DeleteDataFromDatabaseData('2024-11-04')
+Sql.CreateDatabaseTable()
+# Sql.DeleteDataFromDatabaseData('2024-11-04')
 
 # ProcessCsvManager.ReadCsv()
 # PiMachineManager.CheckPICsv()

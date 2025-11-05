@@ -311,7 +311,10 @@ def start():
             ProcessCsvManager.CompileCsv()
         
     # CsvWriter.WriteCsv(PiMachineManager.compiledFrame)
-    Sql.InsertDataToFC1DatabaseTable(PiMachineManager.compiledFrame)
+    try:
+        Sql.InsertDataToFC1DatabaseTable(PiMachineManager.compiledFrame)
+    except Exception as error:
+        print(error)
 
     FinishedLoading()
 

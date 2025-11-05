@@ -357,6 +357,18 @@ def RowAnalyzer():
                         elif tempDfVt5["Process 5 NG Cause"].values[0].replace(' ', '') == "NGPRESSURE":
                             print("Process5 NG PRESSURE")
                             process5Status = "NG PRESSURE"
+                        elif tempDfVt5["Process 5 NG Cause"].values[0].replace(' ', '') == "NGFLOW":
+                            print("Process5 NG FLOW")
+                            process5Status = "NG FLOW"
+                        elif tempDfVt5["Process 5 NG Cause"].str.replace(" ", "").str.lower().str.contains("water").any():
+                            print("Process5 WATER MARK")
+                            process5Status = "WATER MARK"
+                        elif tempDfVt5["Process 5 NG Cause"].str.replace(" ", "").str.lower().str.contains("corrosion").any():
+                            print("Process5 CORROSION")
+                            process5Status = "CORROSION"
+                        elif tempDfVt5["Process 5 NG Cause"].str.replace(" ", "").str.lower().str.contains("black").any():
+                            print("Process5 BLACKSPOT")
+                            process5Status = "BLACKSPOTS"
                         else:
                             print("Process5 NG")
                             process5Status = "NG"
@@ -495,7 +507,7 @@ def CsvOrganize():
     isVt4Blank = False
     isVt5Blank = False
     isVt6Blank = False
-
+ 
     # ReadPI In PiRow Value
     try:
         PiMachineManager.tempdfPi = PiMachineManager.dfPi.iloc[[PiMachineManager.piRow], :]
@@ -1889,6 +1901,111 @@ def CompileCsv():
             ReadPreviousDateAndTime()
 
             ngProcess = "NG PRESSURE AT PROCESS5"
+            process5Row += 1
+            PiMachineManager.piRow += 1
+
+            excelData["DATETIME"] = pd.to_datetime(previousDate + ' ' + previousTime)
+            excelData["DATE"] = previousDate
+            excelData["TIME"] = previousTime
+            excelData["MODEL CODE"] = ngProcess
+            # excelData["PROCESS S/N"] = ngProcess
+            excelData["S/N"] = ngProcess
+            excelData["PASS/NG"] = ngProcess
+            excelData["VOLTAGE MAX (V)"] = ngProcess
+            excelData["WATTAGE MAX (W)"] = ngProcess
+            excelData["CLOSED PRESSURE_MAX (kPa)"] = ngProcess
+            excelData["VOLTAGE Middle (V)"] = ngProcess
+            excelData["WATTAGE Middle (W)"] = ngProcess
+            excelData["AMPERAGE Middle (A)"] = ngProcess
+            excelData["CLOSED PRESSURE Middle (kPa)"] = ngProcess
+            excelData["VOLTAGE MIN (V)"] = ngProcess
+            excelData["WATTAGE MIN (W)"] = ngProcess
+            excelData["CLOSED PRESSURE MIN (kPa)"] = ngProcess
+
+            for column in ColumnCreator.process6Column:
+                excelData[column] = ngProcess
+
+            # excelData["Process 1 SERIAL NO"] = ngProcess
+            # excelData["Process 2 SERIAL NO"] = ngProcess
+            # excelData["Process 3 SERIAL NO"] = ngProcess
+            # excelData["Process 4 SERIAL NO"] = ngProcess
+            # excelData["Process 5 SERIAL NO"] = ngProcess
+            excelData["Process 6 SERIAL NO"] = ngProcess
+
+        if process5Status == "WATER MARK":
+            ReadPreviousDateAndTime()
+
+            ngProcess = "WATER MARK AT PROCESS5"
+            process5Row += 1
+            PiMachineManager.piRow += 1
+
+            excelData["DATETIME"] = pd.to_datetime(previousDate + ' ' + previousTime)
+            excelData["DATE"] = previousDate
+            excelData["TIME"] = previousTime
+            excelData["MODEL CODE"] = ngProcess
+            # excelData["PROCESS S/N"] = ngProcess
+            excelData["S/N"] = ngProcess
+            excelData["PASS/NG"] = ngProcess
+            excelData["VOLTAGE MAX (V)"] = ngProcess
+            excelData["WATTAGE MAX (W)"] = ngProcess
+            excelData["CLOSED PRESSURE_MAX (kPa)"] = ngProcess
+            excelData["VOLTAGE Middle (V)"] = ngProcess
+            excelData["WATTAGE Middle (W)"] = ngProcess
+            excelData["AMPERAGE Middle (A)"] = ngProcess
+            excelData["CLOSED PRESSURE Middle (kPa)"] = ngProcess
+            excelData["VOLTAGE MIN (V)"] = ngProcess
+            excelData["WATTAGE MIN (W)"] = ngProcess
+            excelData["CLOSED PRESSURE MIN (kPa)"] = ngProcess
+
+            for column in ColumnCreator.process6Column:
+                excelData[column] = ngProcess
+
+            # excelData["Process 1 SERIAL NO"] = ngProcess
+            # excelData["Process 2 SERIAL NO"] = ngProcess
+            # excelData["Process 3 SERIAL NO"] = ngProcess
+            # excelData["Process 4 SERIAL NO"] = ngProcess
+            # excelData["Process 5 SERIAL NO"] = ngProcess
+            excelData["Process 6 SERIAL NO"] = ngProcess
+
+        if process5Status == "CORROSION":
+            ReadPreviousDateAndTime()
+
+            ngProcess = "CORROSION AT PROCESS5"
+            process5Row += 1
+            PiMachineManager.piRow += 1
+
+            excelData["DATETIME"] = pd.to_datetime(previousDate + ' ' + previousTime)
+            excelData["DATE"] = previousDate
+            excelData["TIME"] = previousTime
+            excelData["MODEL CODE"] = ngProcess
+            # excelData["PROCESS S/N"] = ngProcess
+            excelData["S/N"] = ngProcess
+            excelData["PASS/NG"] = ngProcess
+            excelData["VOLTAGE MAX (V)"] = ngProcess
+            excelData["WATTAGE MAX (W)"] = ngProcess
+            excelData["CLOSED PRESSURE_MAX (kPa)"] = ngProcess
+            excelData["VOLTAGE Middle (V)"] = ngProcess
+            excelData["WATTAGE Middle (W)"] = ngProcess
+            excelData["AMPERAGE Middle (A)"] = ngProcess
+            excelData["CLOSED PRESSURE Middle (kPa)"] = ngProcess
+            excelData["VOLTAGE MIN (V)"] = ngProcess
+            excelData["WATTAGE MIN (W)"] = ngProcess
+            excelData["CLOSED PRESSURE MIN (kPa)"] = ngProcess
+
+            for column in ColumnCreator.process6Column:
+                excelData[column] = ngProcess
+
+            # excelData["Process 1 SERIAL NO"] = ngProcess
+            # excelData["Process 2 SERIAL NO"] = ngProcess
+            # excelData["Process 3 SERIAL NO"] = ngProcess
+            # excelData["Process 4 SERIAL NO"] = ngProcess
+            # excelData["Process 5 SERIAL NO"] = ngProcess
+            excelData["Process 6 SERIAL NO"] = ngProcess
+
+        if process5Status == "BLACKSPOTS":
+            ReadPreviousDateAndTime()
+
+            ngProcess = "BLACKSPOTS AT PROCESS5"
             process5Row += 1
             PiMachineManager.piRow += 1
 
