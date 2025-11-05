@@ -1,5 +1,6 @@
 from Imports import *
 import DateAndTimeManager
+import Sql
 
 dfPi = ""
 dfPiNotDone = []
@@ -23,9 +24,20 @@ def CheckPICsv():
     piDirectory = (r'\\192.168.2.19\ai_team\AI Program\Outputs\PICompiled')
     os.chdir(piDirectory)
 
-    dfPi = pd.read_csv(f'PICompiled{DateAndTimeManager.dateToReadDashFormat}.csv', encoding='latin1')
+    Sql.SqlConnection()
+    # dfPi = pd.read_csv(f'PICompiled{DateAndTimeManager.dateToReadDashFormat}.csv', encoding='latin1')
+    dfPi = Sql.SelectAllDataFromTable("inspection_machine_sn_data")
+
+    dfPi = dfPi[(dfPi["DATE"].astype(str).isin([DateAndTimeManager.dateToReadDashFormat]))]
+
     
-    dfPiNotDone = dfPi[(dfPi["PROCESS S/N"].isin(["MASTER PUMP"])) | (dfPi["PROCESS S/N"].isin(["RUNNING"]))]
+    # dfPiNotDone = dfPi[(dfPi["PROCESS S/N"].isin(["MASTER PUMP"])) | (dfPi["PROCESS S/N"].isin(["RUNNING"]))]
+    # if len(dfPiNotDone) != 0:
+    #     canCompilePI = True
+    # else:
+    #     canCompilePI = False
+
+    dfPiNotDone = dfPi[(dfPi["PROCESS_S_N"].isin(["MASTER PUMP"])) | (dfPi["PROCESS_S_N"].isin(["RUNNING"]))]
     if len(dfPiNotDone) != 0:
         canCompilePI = True
     else:
@@ -46,10 +58,20 @@ def CompilePICsv():
 
         tempdfPi = dfPiNotDone.iloc[[a], :]
 
-        if tempdfPi["PROCESS S/N"].values[0] == "MASTER PUMP":
+        if tempdfPi["PROCESS_S_N"].values[0] == "MASTER PUMP":
             processData = "MASTER PUMP"
-        elif tempdfPi["PROCESS S/N"].values[0] == "RUNNING":
+        elif tempdfPi["PROCESS_S_N"].values[0] == "RUNNING":
             processData = "RUNNING"
+
+        time = tempdfPi['TIME'].values[0]
+        time = time.astype('timedelta64[ns]').astype('timedelta64[s]').astype(datetime.timedelta)
+        
+        # Convert timedelta to time string (HH:MM:SS) for MySQL compatibility
+        total_seconds = int(time.total_seconds())
+        hours = total_seconds // 3600
+        minutes = (total_seconds % 3600) // 60
+        seconds = total_seconds % 60
+        time_str = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
 
         # piDirectory = (r'\\192.168.2.19\ai_team\AI Program\Outputs')
         # os.chdir(piDirectory)
@@ -60,23 +82,23 @@ def CompilePICsv():
         
 
         excelData2 = {
-                    "DATETIME": pd.to_datetime(tempdfPi['DATE'] + ' ' + tempdfPi['TIME']),
+                    "DATETIME": pd.to_datetime(tempdfPi['DATE'].astype(str) + ' ' + str(time)),
                     "DATE": tempdfPi["DATE"].values,
-                    "TIME": tempdfPi["TIME"].values,
-                    "MODEL CODE": tempdfPi["MODEL CODE"].str.replace('"', '', regex=False),
-                    "PROCESS S/N": tempdfPi["PROCESS S/N"].values,
-                    "S/N": tempdfPi["S/N"].values,
-                    "PASS/NG": tempdfPi["PASS/NG"].values,
-                    "VOLTAGE MAX (V)": tempdfPi["VOLTAGE MAX (V)"].values,
-                    "WATTAGE MAX (W)": tempdfPi["WATTAGE MAX (W)"].values,
-                    "CLOSED PRESSURE_MAX (kPa)": tempdfPi["CLOSED PRESSURE_MAX (kPa)"].values,
-                    "VOLTAGE Middle (V)": tempdfPi["VOLTAGE Middle (V)"].values,
-                    "WATTAGE Middle (W)": tempdfPi["WATTAGE Middle (W)"].values,
-                    "AMPERAGE Middle (A)": tempdfPi["AMPERAGE Middle (A)"].values,
-                    "CLOSED PRESSURE Middle (kPa)": tempdfPi["CLOSED PRESSURE Middle (kPa)"].values,
-                    "VOLTAGE MIN (V)": tempdfPi["VOLTAGE MIN (V)"].values,
-                    "WATTAGE MIN (W)": tempdfPi["WATTAGE MIN (W)"].values,
-                    "CLOSED PRESSURE MIN (kPa)": tempdfPi["CLOSED PRESSURE MIN (kPa)"].values,
+                    "TIME": [time_str],
+                    "MODEL CODE": tempdfPi["MODEL_CODE"].str.replace('"', '', regex=False),
+                    "PROCESS S/N": tempdfPi["PROCESS_S_N"].values,
+                    "S/N": tempdfPi["S_N"].values,
+                    "PASS/NG": tempdfPi["PASS_NG"].values,
+                    "VOLTAGE MAX (V)": tempdfPi["VOLTAGE_MAX_V"].values,
+                    "WATTAGE MAX (W)": tempdfPi["WATTAGE_MAX_W"].values,
+                    "CLOSED PRESSURE_MAX (kPa)": tempdfPi["CLOSED_PRESSURE_MAX_kPa"].values,
+                    "VOLTAGE Middle (V)": tempdfPi["VOLTAGE_Middle_V"].values,
+                    "WATTAGE Middle (W)": tempdfPi["WATTAGE_Middle_W"].values,
+                    "AMPERAGE Middle (A)": tempdfPi["AMPERAGE_Middle_A"].values,
+                    "CLOSED PRESSURE Middle (kPa)": tempdfPi["CLOSED_PRESSURE_Middle_kPa"].values,
+                    "VOLTAGE MIN (V)": tempdfPi["VOLTAGE_MIN_V"].values,
+                    "WATTAGE MIN (W)": tempdfPi["WATTAGE_MIN_W"].values,
+                    "CLOSED PRESSURE MIN (kPa)": tempdfPi["CLOSED_PRESSURE_MIN_kPa"].values,
             
                     "Process 1 S/N" : [processData],
                     "Process 1 ID" : [processData],
