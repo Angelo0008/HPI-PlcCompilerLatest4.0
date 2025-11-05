@@ -30,6 +30,11 @@ def ReadInspectionData(itemCode):
     global totalAverage3
     global totalAverage4
 
+    global totalMedian1
+    global totalMedian2
+    global totalMedian3
+    global totalMedian4
+
     global totalMinimum1
     global totalMinimum2
     global totalMinimum3
@@ -44,6 +49,11 @@ def ReadInspectionData(itemCode):
     totalAverage2 = 0
     totalAverage3 = 0
     totalAverage4 = 0
+
+    totalMedian1 = 0
+    totalMedian2 = 0
+    totalMedian3 = 0
+    totalMedian4 = 0
 
     totalMinimum1 = 0
     totalMinimum2 = 0
@@ -63,58 +73,72 @@ def ReadInspectionData(itemCode):
 
         totalMinimum1 = filteredData["Inspection_1_Minimum"].values[0]
         totalAverage1 = filteredData["Inspection_1_Average"].values[0]
+        totalMedian1 = filteredData["Inspection_1_Median"].values[0]
         totalMaximum1 = filteredData["Inspection_1_Maximum"].values[0]
 
         totalMinimum2 = filteredData["Inspection_2_Minimum"].values[0]
         totalAverage2 = filteredData["Inspection_2_Average"].values[0]
+        totalMedian2 = filteredData["Inspection_2_Median"].values[0]
         totalMaximum2 = filteredData["Inspection_2_Maximum"].values[0]
 
         totalMinimum3 = filteredData["Inspection_3_Minimum"].values[0]
         totalAverage3 = filteredData["Inspection_3_Average"].values[0]
+        totalMedian3 = filteredData["Inspection_3_Median"].values[0]
         totalMaximum3 = filteredData["Inspection_3_Maximum"].values[0]
 
         totalMinimum4 = filteredData["Inspection_4_Minimum"].values[0]
         totalAverage4 = filteredData["Inspection_4_Average"].values[0]
+        totalMedian4 = filteredData["Inspection_4_Median"].values[0]
         totalMaximum4 = filteredData["Inspection_4_Maximum"].values[0]
 
         print(f"Inspection 1 Minimum:{totalMinimum1}")
         print(f"Inspection 1 Average:{totalAverage1}")
+        print(f"Inspection 1 Median:{totalMedian1}")
         print(f"Inspection 1 Maximum:{totalMaximum1}")
 
         print(f"Inspection 2 Minimum:{totalMinimum2}")
         print(f"Inspection 2 Average:{totalAverage2}")
+        print(f"Inspection 2 Median:{totalMedian2}")
         print(f"Inspection 2 Maximum:{totalMaximum2}")
 
         print(f"Inspection 3 Minimum:{totalMinimum3}")
         print(f"Inspection 3 Average:{totalAverage3}")
+        print(f"Inspection 3 Median:{totalMedian3}")
         print(f"Inspection 3 Maximum:{totalMaximum3}")
 
         print(f"Inspection 4 Minimum:{totalMinimum4}")
         print(f"Inspection 4 Average:{totalAverage4}")
+        print(f"Inspection 4 Median:{totalMedian4}")
         print(f"Inspection 4 Maximum:{totalMaximum4}")
 
 def ReadTensileData(itemCode):
     global rateOfChangeTotalAverage
+    global rateOfChangeTotalMedian
     global rateOfChangeTotalMinimum
     global rateOfChangeTotalMaximum
 
     global startForceTotalAverage
+    global startForceTotalMedian
     global startForceTotalMinimum
     global startForceTotalMaximum
 
     global terminatingForceTotalAverage
+    global terminatingForceTotalMedian
     global terminatingForceTotalMinimum
     global terminatingForceTotalMaximum
 
     rateOfChangeTotalAverage = 0
+    rateOfChangeTotalMedian = 0
     rateOfChangeTotalMinimum = 0
     rateOfChangeTotalMaximum = 0
 
     startForceTotalAverage = 0
+    startForceTotalMedian = 0
     startForceTotalMinimum = 0
     startForceTotalMaximum = 0
 
     terminatingForceTotalAverage = 0
+    terminatingForceTotalMedian = 0
     terminatingForceTotalMinimum = 0
     terminatingForceTotalMaximum = 0
 
@@ -126,26 +150,32 @@ def ReadTensileData(itemCode):
 
         rateOfChangeTotalMinimum = filteredData["RATE_OF_CHANGE_MIN"].values[0]
         rateOfChangeTotalAverage = filteredData["RATE_OF_CHANGE_AVE"].values[0]
+        rateOfChangeTotalMedian = filteredData["RATE_OF_CHANGE_MEDIAN"].values[0]
         rateOfChangeTotalMaximum = filteredData["RATE_OF_CHANGE_MAX"].values[0]
 
         startForceTotalMinimum = filteredData["START_FORCE_MIN"].values[0]
         startForceTotalAverage = filteredData["START_FORCE_AVE"].values[0]
+        startForceTotalMedian = filteredData["START_FORCE_MEDIAN"].values[0]
         startForceTotalMaximum = filteredData["START_FORCE_MAX"].values[0]
 
         terminatingForceTotalMinimum = filteredData["TERMINATING_FORCE_MIN"].values[0]
         terminatingForceTotalAverage = filteredData["TERMINATING_FORCE_AVE"].values[0]
+        terminatingForceTotalMedian = filteredData["TERMINATING_FORCE_MEDIAN"].values[0]
         terminatingForceTotalMaximum = filteredData["TERMINATING_FORCE_MAX"].values[0]
 
         print(f"RATE OF CHANGE MINIMUM: {rateOfChangeTotalMinimum}")
         print(f"RATE OF CHANGE AVERAGE: {rateOfChangeTotalAverage}")
+        print(f"RATE OF CHANGE AVERAGE: {rateOfChangeTotalMedian}")
         print(f"RATE OF CHANGE MAXIMUM: {rateOfChangeTotalMaximum}")
 
         print(f"START FORCE MINIMUM: {startForceTotalMinimum}")
         print(f"START FORCE AVERAGE: {startForceTotalAverage}")
+        print(f"START FORCE AVERAGE: {startForceTotalMedian}")
         print(f"START FORCE MAXIMUM: {startForceTotalMaximum}")
 
         print(f"TERMINATING FORCE MINIMUM: {terminatingForceTotalMinimum}")
         print(f"TERMINATING FORCE AVERAGE: {terminatingForceTotalAverage}")
+        print(f"TERMINATING FORCE AVERAGE: {terminatingForceTotalMedian}")
         print(f"TERMINATING FORCE MAXIMUM: {terminatingForceTotalMaximum}")
 
 #%%

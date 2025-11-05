@@ -12,6 +12,14 @@ def ReadInspectionData(itemCode, lotNumber):
     global totalAverage6
     global totalAverage7
 
+    global totalMedian1
+    global totalMedian2
+    global totalMedian3
+    global totalMedian4
+    global totalMedian5
+    global totalMedian6
+    global totalMedian7
+
     global totalMinimum1
     global totalMinimum2
     global totalMinimum3
@@ -35,6 +43,14 @@ def ReadInspectionData(itemCode, lotNumber):
     totalAverage5 = 0
     totalAverage6 = 0
     totalAverage7 = 0
+
+    totalMedian1 = 0
+    totalMedian2 = 0
+    totalMedian3 = 0
+    totalMedian4 = 0
+    totalMedian5 = 0
+    totalMedian6 = 0
+    totalMedian7 = 0
 
     totalMinimum1 = 0
     totalMinimum2 = 0
@@ -60,58 +76,72 @@ def ReadInspectionData(itemCode, lotNumber):
 
     totalMinimum1 = filteredData["Inspection_1_Minimum"].values[0]
     totalAverage1 = filteredData["Inspection_1_Average"].values[0]
+    totalMedian1 = filteredData["Inspection_1_Median"].values[0]
     totalMaximum1 = filteredData["Inspection_1_Maximum"].values[0]
 
     totalMinimum2 = filteredData["Inspection_2_Minimum"].values[0]
     totalAverage2 = filteredData["Inspection_2_Average"].values[0]
+    totalMedian2 = filteredData["Inspection_2_Median"].values[0]
     totalMaximum2 = filteredData["Inspection_2_Maximum"].values[0]
 
     totalMinimum3 = filteredData["Inspection_3_Minimum"].values[0]
     totalAverage3 = filteredData["Inspection_3_Average"].values[0]
+    totalMedian3 = filteredData["Inspection_3_Median"].values[0]
     totalMaximum3 = filteredData["Inspection_3_Maximum"].values[0]
 
     totalMinimum4 = filteredData["Inspection_4_Minimum"].values[0]
     totalAverage4 = filteredData["Inspection_4_Average"].values[0]
+    totalMedian4 = filteredData["Inspection_4_Median"].values[0]
     totalMaximum4 = filteredData["Inspection_4_Maximum"].values[0]
 
     totalMinimum5 = filteredData["Inspection_5_Minimum"].values[0]
     totalAverage5 = filteredData["Inspection_5_Average"].values[0]
+    totalMedian5 = filteredData["Inspection_5_Median"].values[0]
     totalMaximum5 = filteredData["Inspection_5_Maximum"].values[0]
 
     totalMinimum6 = filteredData["Inspection_6_Minimum"].values[0]
     totalAverage6 = filteredData["Inspection_6_Average"].values[0]
+    totalMedian6 = filteredData["Inspection_6_Median"].values[0]
     totalMaximum6 = filteredData["Inspection_6_Maximum"].values[0]
 
     totalMinimum7 = filteredData["Inspection_7_Minimum"].values[0]
     totalAverage7 = filteredData["Inspection_7_Average"].values[0]
+    totalMedian7 = filteredData["Inspection_7_Median"].values[0]
     totalMaximum7 = filteredData["Inspection_7_Maximum"].values[0]
 
     print(f"Inspection 1 Minimum:{totalMinimum1}")
     print(f"Inspection 1 Average:{totalAverage1}")
+    print(f"Inspection 1 Median:{totalMedian1}")
     print(f"Inspection 1 Maximum:{totalMaximum1}")
 
     print(f"Inspection 2 Minimum:{totalMinimum2}")
     print(f"Inspection 2 Average:{totalAverage2}")
+    print(f"Inspection 2 Median:{totalMedian2}")
     print(f"Inspection 2 Maximum:{totalMaximum2}")
 
     print(f"Inspection 3 Minimum:{totalMinimum3}")
     print(f"Inspection 3 Average:{totalAverage3}")
+    print(f"Inspection 3 Median:{totalMedian3}")
     print(f"Inspection 3 Maximum:{totalMaximum3}")
 
     print(f"Inspection 4 Minimum:{totalMinimum4}")
     print(f"Inspection 4 Average:{totalAverage4}")
+    print(f"Inspection 4 Median:{totalMedian4}")
     print(f"Inspection 4 Maximum:{totalMaximum4}")
 
     print(f"Inspection 5 Minimum:{totalMinimum5}")
     print(f"Inspection 5 Average:{totalAverage5}")
+    print(f"Inspection 5 Median:{totalMedian5}")
     print(f"Inspection 5 Maximum:{totalMaximum5}")
 
     print(f"Inspection 6 Minimum:{totalMinimum6}")
     print(f"Inspection 6 Average:{totalAverage6}")
+    print(f"Inspection 6 Median:{totalMedian6}")
     print(f"Inspection 6 Maximum:{totalMaximum6}")
 
     print(f"Inspection 7 Minimum:{totalMinimum7}")
     print(f"Inspection 7 Average:{totalAverage7}")
+    print(f"Inspection 7 Median:{totalMedian7}")
     print(f"Inspection 7 Maximum:{totalMaximum7}")
 
     # return filteredData

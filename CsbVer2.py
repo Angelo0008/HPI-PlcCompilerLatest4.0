@@ -5,12 +5,16 @@ import Sql
 
 def ReadInspectionData(itemCode, lotNumber):
     global totalAverage1
+
+    global totalMedian1
     
     global totalMinimum1
 
     global totalMaximum1
 
     totalAverage1 = 0
+
+    totalMedian1 = 0
     
     totalMinimum1 = 0
 
@@ -26,10 +30,12 @@ def ReadInspectionData(itemCode, lotNumber):
 
         totalMinimum1 = filteredData["Inspection_1_Minimum"].values[0]
         totalAverage1 = filteredData["Inspection_1_Average"].values[0]
+        totalMedian1 = filteredData["Inspection_1_Median"].values[0]
         totalMaximum1 = filteredData["Inspection_1_Maximum"].values[0]
 
         print(f"Inspection 1 Minimum:{totalMinimum1}")
         print(f"Inspection 1 Average:{totalAverage1}")
+        print(f"Inspection 1 Average:{totalMedian1}")
         print(f"Inspection 1 Maximum:{totalMaximum1}")
 
     except Exception as error:

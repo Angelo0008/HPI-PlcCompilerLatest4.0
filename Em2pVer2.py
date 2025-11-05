@@ -9,6 +9,10 @@ def ReadInspectionData(itemCode, lotNumber):
     global totalAverage5
     global totalAverage10
 
+    global totalMedian3
+    global totalMedian4
+    global totalMedian5
+
     global totalMinimum3
     global totalMinimum4
     global totalMinimum5
@@ -21,6 +25,10 @@ def ReadInspectionData(itemCode, lotNumber):
     totalAverage4 = 0
     totalAverage5 = 0
     totalAverage10 = 0
+
+    totalMedian3 = 0
+    totalMedian4 = 0
+    totalMedian5 = 0
 
     totalMinimum3 = 0
     totalMinimum4 = 0
@@ -51,28 +59,34 @@ def ReadInspectionData(itemCode, lotNumber):
 
         totalMinimum3 = filteredData["Inspection_3_Resistance_Minimum"].values[0]
         totalAverage3 = filteredData["Inspection_3_Resistance_Average"].values[0]
+        totalMedian3 = filteredData["Inspection_3_Resistance_Median"].values[0]
         totalMaximum3 = filteredData["Inspection_3_Resistance_Maximum"].values[0]
 
         totalMinimum4 = filteredData["Inspection_4_Dimension_Minimum"].values[0]
         totalAverage4 = filteredData["Inspection_4_Dimension_Average"].values[0]
+        totalMedian4 = filteredData["Inspection_4_Dimension_Median"].values[0]
         totalMaximum4 = filteredData["Inspection_4_Dimension_Maximum"].values[0]
 
         totalMinimum5 = filteredData["Inspection_5_Dimension_Minimum"].values[0]
         totalAverage5 = filteredData["Inspection_5_Dimension_Average"].values[0]
+        totalMedian5 = filteredData["Inspection_5_Dimension_Median"].values[0]
         totalMaximum5 = filteredData["Inspection_5_Dimension_Maximum"].values[0]
 
         totalAverage10 = filteredData["Inspection_10_Pull_Test"].values[0]
 
         print(f"Inspection 3 Minimum:{totalMinimum3}")
         print(f"Inspection 3 Average:{totalAverage3}")
+        print(f"Inspection 3 Median:{totalMedian3}")
         print(f"Inspection 3 Maximum:{totalMaximum3}")
 
         print(f"Inspection 4 Minimum:{totalMinimum4}")
         print(f"Inspection 4 Average:{totalAverage4}")
+        print(f"Inspection 4 Median:{totalMedian4}")
         print(f"Inspection 4 Maximum:{totalMaximum4}")
 
         print(f"Inspection 5 Minimum:{totalMinimum5}")
         print(f"Inspection 5 Average:{totalAverage5}")
+        print(f"Inspection 5 Median:{totalMedian5}")
         print(f"Inspection 5 Maximum:{totalMaximum5}")
 
         print(f"Inspection 10 Pull Test:{totalAverage10}")
