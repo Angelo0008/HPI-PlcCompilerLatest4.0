@@ -30,6 +30,10 @@ def CheckPICsv():
 
     dfPi = dfPi[(dfPi["DATE"].astype(str).isin([DateAndTimeManager.dateToReadDashFormat]))]
 
+    dfPi["DATE"] = dfPi["DATE"].astype(str)
+    dfPi["TIME"] = dfPi["TIME"].astype(str)
+    dfPi["TIME"] = dfPi["TIME"].replace("0 days", "", regex=True)
+    dfPi["TIME"] = dfPi["TIME"].replace(" ", "", regex=True)
     
     # dfPiNotDone = dfPi[(dfPi["PROCESS S/N"].isin(["MASTER PUMP"])) | (dfPi["PROCESS S/N"].isin(["RUNNING"]))]
     # if len(dfPiNotDone) != 0:
@@ -42,7 +46,6 @@ def CheckPICsv():
         canCompilePI = True
     else:
         canCompilePI = False
-
 # %%
 def CompilePICsv():
     global dfPi
@@ -63,15 +66,18 @@ def CompilePICsv():
         elif tempdfPi["PROCESS_S_N"].values[0] == "RUNNING":
             processData = "RUNNING"
 
-        time = tempdfPi['TIME'].values[0]
-        time = time.astype('timedelta64[ns]').astype('timedelta64[s]').astype(datetime.timedelta)
+        # time = tempdfPi['TIME'].values[0]
+        # time = time.astype('timedelta64[ns]').astype('timedelta64[s]').astype(datetime.timedelta)
         
         # Convert timedelta to time string (HH:MM:SS) for MySQL compatibility
-        total_seconds = int(time.total_seconds())
-        hours = total_seconds // 3600
-        minutes = (total_seconds % 3600) // 60
-        seconds = total_seconds % 60
-        time_str = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+        # total_seconds = int(time.total_seconds())
+        # hours = total_seconds // 3600
+        # minutes = (total_seconds % 3600) // 60
+        # seconds = total_seconds % 60
+        # time_str = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+
+
+
 
         # piDirectory = (r'\\192.168.2.19\ai_team\AI Program\Outputs')
         # os.chdir(piDirectory)
@@ -82,9 +88,10 @@ def CompilePICsv():
         
 
         excelData2 = {
-                    "DATETIME": pd.to_datetime(tempdfPi['DATE'].astype(str) + ' ' + str(time)),
+                    # "DATETIME": pd.to_datetime(tempdfPi['DATE'].astype(str) + ' ' + str(time)),
+                    "DATETIME": pd.to_datetime(tempdfPi['DATE'] + ' ' + tempdfPi['TIME']),
                     "DATE": tempdfPi["DATE"].values,
-                    "TIME": [time_str],
+                    "TIME": tempdfPi["TIME"].values,
                     "MODEL CODE": tempdfPi["MODEL_CODE"].str.replace('"', '', regex=False),
                     "PROCESS S/N": tempdfPi["PROCESS_S_N"].values,
                     "S/N": tempdfPi["S_N"].values,
