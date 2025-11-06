@@ -514,6 +514,8 @@ def CsvOrganize():
     except IndexError:
         pass
 
+    print(len(PiMachineManager.tempdfPi))
+
     if "INSPECTION ONLY" in PiMachineManager.tempdfPi["PROCESS_S_N"].values:
         piStatus = "INSPECTION ONLY"
         print("INSPECTION ONLY")
@@ -1898,6 +1900,41 @@ def CompileCsv():
             # excelData["Process 5 SERIAL NO"] = ngProcess
             excelData["Process 6 SERIAL NO"] = ngProcess
 
+        if process5Status == "NG FLOW":
+            ReadPreviousDateAndTime()
+
+            ngProcess = "NG FLOW AT PROCESS5"
+            process5Row += 1
+            PiMachineManager.piRow += 1
+
+            excelData["DATETIME"] = pd.to_datetime(previousDate + ' ' + previousTime)
+            excelData["DATE"] = previousDate
+            excelData["TIME"] = previousTime
+            excelData["MODEL CODE"] = ngProcess
+            # excelData["PROCESS S/N"] = ngProcess
+            excelData["S/N"] = ngProcess
+            excelData["PASS/NG"] = ngProcess
+            excelData["VOLTAGE MAX (V)"] = ngProcess
+            excelData["WATTAGE MAX (W)"] = ngProcess
+            excelData["CLOSED PRESSURE_MAX (kPa)"] = ngProcess
+            excelData["VOLTAGE Middle (V)"] = ngProcess
+            excelData["WATTAGE Middle (W)"] = ngProcess
+            excelData["AMPERAGE Middle (A)"] = ngProcess
+            excelData["CLOSED PRESSURE Middle (kPa)"] = ngProcess
+            excelData["VOLTAGE MIN (V)"] = ngProcess
+            excelData["WATTAGE MIN (W)"] = ngProcess
+            excelData["CLOSED PRESSURE MIN (kPa)"] = ngProcess
+
+            for column in ColumnCreator.process6Column:
+                excelData[column] = ngProcess
+
+            # excelData["Process 1 SERIAL NO"] = ngProcess
+            # excelData["Process 2 SERIAL NO"] = ngProcess
+            # excelData["Process 3 SERIAL NO"] = ngProcess
+            # excelData["Process 4 SERIAL NO"] = ngProcess
+            # excelData["Process 5 SERIAL NO"] = ngProcess
+            excelData["Process 6 SERIAL NO"] = ngProcess
+
         if process5Status == "WATER MARK":
             ReadPreviousDateAndTime()
 
@@ -1972,6 +2009,41 @@ def CompileCsv():
             ReadPreviousDateAndTime()
 
             ngProcess = "BLACKSPOTS AT PROCESS5"
+            process5Row += 1
+            PiMachineManager.piRow += 1
+
+            excelData["DATETIME"] = pd.to_datetime(previousDate + ' ' + previousTime)
+            excelData["DATE"] = previousDate
+            excelData["TIME"] = previousTime
+            excelData["MODEL CODE"] = ngProcess
+            # excelData["PROCESS S/N"] = ngProcess
+            excelData["S/N"] = ngProcess
+            excelData["PASS/NG"] = ngProcess
+            excelData["VOLTAGE MAX (V)"] = ngProcess
+            excelData["WATTAGE MAX (W)"] = ngProcess
+            excelData["CLOSED PRESSURE_MAX (kPa)"] = ngProcess
+            excelData["VOLTAGE Middle (V)"] = ngProcess
+            excelData["WATTAGE Middle (W)"] = ngProcess
+            excelData["AMPERAGE Middle (A)"] = ngProcess
+            excelData["CLOSED PRESSURE Middle (kPa)"] = ngProcess
+            excelData["VOLTAGE MIN (V)"] = ngProcess
+            excelData["WATTAGE MIN (W)"] = ngProcess
+            excelData["CLOSED PRESSURE MIN (kPa)"] = ngProcess
+
+            for column in ColumnCreator.process6Column:
+                excelData[column] = ngProcess
+
+            # excelData["Process 1 SERIAL NO"] = ngProcess
+            # excelData["Process 2 SERIAL NO"] = ngProcess
+            # excelData["Process 3 SERIAL NO"] = ngProcess
+            # excelData["Process 4 SERIAL NO"] = ngProcess
+            # excelData["Process 5 SERIAL NO"] = ngProcess
+            excelData["Process 6 SERIAL NO"] = ngProcess
+
+        if process5Status == "RUST":
+            ReadPreviousDateAndTime()
+
+            ngProcess = "RUST AT PROCESS5"
             process5Row += 1
             PiMachineManager.piRow += 1
 
