@@ -507,124 +507,142 @@ def CsvOrganize():
     isVt4Blank = False
     isVt5Blank = False
     isVt6Blank = False
+
+    canCompile = False
  
+    PiMachineManager.tempdfPi = pd.DataFrame()
     # ReadPI In PiRow Value
     try:
         PiMachineManager.tempdfPi = PiMachineManager.dfPi.iloc[[PiMachineManager.piRow], :]
-    except IndexError:
-        pass
+    except Exception as error:
+        print(error)
 
     print(len(PiMachineManager.tempdfPi))
 
-    if "INSPECTION ONLY" in PiMachineManager.tempdfPi["PROCESS_S_N"].values:
-        piStatus = "INSPECTION ONLY"
-        print("INSPECTION ONLY")
-    else:
+    try:
+        if "INSPECTION ONLY" in PiMachineManager.tempdfPi["PROCESS_S_N"].values:
+            piStatus = "INSPECTION ONLY"
+            print("INSPECTION ONLY")
+            canCompile = True
+            return
+        elif "TRIAL" in PiMachineManager.tempdfPi["PROCESS_S_N"].values:
+            piStatus = "TRIAL"
+            print("TRIAL")
+            canCompile = True
+            return
+    except:
+        pass
+    
+    try:
+        print(f"Process1 Row: {process1Row}")
+        print(f"Process2 Row: {process2Row}")
+        print(f"Process3 Row: {process3Row}")
+        print(f"Process4 Row: {process4Row}")
+        print(f"Process5 Row: {process5Row}")
+        print(f"Process6 Row: {process6Row}")
+        
+        #Checking If There's Value In tempDfVt1 To 6
+        tempDfVt1 = dfVt1.iloc[[process1Row], :]
+        tempDfVt2 = dfVt2.iloc[[process2Row], :]
+        tempDfVt3 = dfVt3.iloc[[process3Row], :]
+        tempDfVt4 = dfVt4.iloc[[process4Row], :]
+        tempDfVt5 = dfVt5.iloc[[process5Row], :]
+        tempDfVt6 = dfVt6.iloc[[process6Row], :]
+
+        RowAnalyzer()
+    except:
+        #Checking What tempDfVt Is Blank
         try:
-            print(f"Process1 Row: {process1Row}")
-            print(f"Process2 Row: {process2Row}")
-            print(f"Process3 Row: {process3Row}")
-            print(f"Process4 Row: {process4Row}")
-            print(f"Process5 Row: {process5Row}")
-            print(f"Process6 Row: {process6Row}")
-            
-            #Checking If There's Value In tempDfVt1 To 6
             tempDfVt1 = dfVt1.iloc[[process1Row], :]
-            tempDfVt2 = dfVt2.iloc[[process2Row], :]
-            tempDfVt3 = dfVt3.iloc[[process3Row], :]
-            tempDfVt4 = dfVt4.iloc[[process4Row], :]
-            tempDfVt5 = dfVt5.iloc[[process5Row], :]
-            tempDfVt6 = dfVt6.iloc[[process6Row], :]
-
-            RowAnalyzer()
+            isVt1Blank = False
         except:
-            #Checking What tempDfVt Is Blank
             try:
-                tempDfVt1 = dfVt1.iloc[[process1Row], :]
-                isVt1Blank = False
+                print("VT1 Blank")
+                isVt1Blank = True
+                tempDfVt1 = dfVt1.iloc[[len(dfVt1) - 1], :]
+                tempDfVt1["Process 1 Repaired Action"] = "-"
+                tempDfVt1["Process 1 NG Cause"] = "-"
             except:
-                try:
-                    print("VT1 Blank")
-                    isVt1Blank = True
-                    tempDfVt1 = dfVt1.iloc[[len(dfVt1) - 1], :]
-                    tempDfVt1["Process 1 Repaired Action"] = "-"
-                    tempDfVt1["Process 1 NG Cause"] = "-"
-                except:
-                    print("VT1 Blank")
-                    isVt1Blank = True
+                print("VT1 Blank")
+                isVt1Blank = True
+        try:
+            tempDfVt2 = dfVt2.iloc[[process2Row], :]
+            isVt2Blank = False
+        except:
             try:
-                tempDfVt2 = dfVt2.iloc[[process2Row], :]
-                isVt2Blank = False
+                print("VT2 Blank")
+                isVt2Blank = True
+                tempDfVt2 = dfVt2.iloc[[len(dfVt2) - 1], :]
+                tempDfVt2["Process 2 Repaired Action"] = "-"
+                tempDfVt2["Process 2 NG Cause"] = "-"
             except:
-                try:
-                    print("VT2 Blank")
-                    isVt2Blank = True
-                    tempDfVt2 = dfVt2.iloc[[len(dfVt2) - 1], :]
-                    tempDfVt2["Process 2 Repaired Action"] = "-"
-                    tempDfVt2["Process 2 NG Cause"] = "-"
-                except:
-                    print("VT2 Blank")
-                    isVt2Blank = True
+                print("VT2 Blank")
+                isVt2Blank = True
+        try:
+            tempDfVt3 = dfVt3.iloc[[process3Row], :]
+            isVt3Blank = False
+        except:
             try:
-                tempDfVt3 = dfVt3.iloc[[process3Row], :]
-                isVt3Blank = False
+                print("VT3 Blank")
+                isVt3Blank = True
+                tempDfVt3 = dfVt3.iloc[[len(dfVt3) - 1], :]
+                tempDfVt3["Process 3 Repaired Action"] = "-"
+                tempDfVt3["Process 3 NG Cause"] = "-"
             except:
-                try:
-                    print("VT3 Blank")
-                    isVt3Blank = True
-                    tempDfVt3 = dfVt3.iloc[[len(dfVt3) - 1], :]
-                    tempDfVt3["Process 3 Repaired Action"] = "-"
-                    tempDfVt3["Process 3 NG Cause"] = "-"
-                except:
-                    print("VT3 Blank")
-                    isVt3Blank = True
+                print("VT3 Blank")
+                isVt3Blank = True
+        try:
+            tempDfVt4 = dfVt4.iloc[[process4Row], :]
+            isVt4Blank = False
+        except:
             try:
-                tempDfVt4 = dfVt4.iloc[[process4Row], :]
-                isVt4Blank = False
+                print("VT4 Blank")
+                isVt4Blank = True
+                tempDfVt4 = dfVt4.iloc[[len(dfVt4) - 1], :]
+                tempDfVt4["Process 4 Repaired Action"] = "-"
+                tempDfVt4["Process 4 NG Cause"] = "-"
             except:
-                try:
-                    print("VT4 Blank")
-                    isVt4Blank = True
-                    tempDfVt4 = dfVt4.iloc[[len(dfVt4) - 1], :]
-                    tempDfVt4["Process 4 Repaired Action"] = "-"
-                    tempDfVt4["Process 4 NG Cause"] = "-"
-                except:
-                    print("VT4 Blank")
-                    isVt4Blank = True
+                print("VT4 Blank")
+                isVt4Blank = True
+        try:
+            tempDfVt5 = dfVt5.iloc[[process5Row], :]
+            isVt5Blank = False
+        except:
             try:
-                tempDfVt5 = dfVt5.iloc[[process5Row], :]
-                isVt5Blank = False
+                print("VT5 Blank")
+                isVt5Blank = True
+                tempDfVt5 = dfVt5.iloc[[len(dfVt5) - 1], :]
+                tempDfVt5["Process 5 Repaired Action"] = "-"
+                tempDfVt5["Process 5 NG Cause"] = "-"
             except:
-                try:
-                    print("VT5 Blank")
-                    isVt5Blank = True
-                    tempDfVt5 = dfVt5.iloc[[len(dfVt5) - 1], :]
-                    tempDfVt5["Process 5 Repaired Action"] = "-"
-                    tempDfVt5["Process 5 NG Cause"] = "-"
-                except:
-                    print("VT5 Blank")
-                    isVt5Blank = True
+                print("VT5 Blank")
+                isVt5Blank = True
+        try:
+            tempDfVt6 = dfVt6.iloc[[process6Row], :]
+            isVt6Blank = False
+        except:
             try:
-                tempDfVt6 = dfVt6.iloc[[process6Row], :]
-                isVt6Blank = False
+                print("VT6 Blank")
+                isVt6Blank = True
+                tempDfVt6 = dfVt6.iloc[[len(dfVt6) - 1], :]
+                tempDfVt6["Process 6 Repaired Action"] = "-"
+                tempDfVt6["Process 6 NG Cause"] = "-"
             except:
-                try:
-                    print("VT6 Blank")
-                    isVt6Blank = True
-                    tempDfVt6 = dfVt6.iloc[[len(dfVt6) - 1], :]
-                    tempDfVt6["Process 6 Repaired Action"] = "-"
-                    tempDfVt6["Process 6 NG Cause"] = "-"
-                except:
-                    print("VT6 Blank")
-                    isVt6Blank = True
+                print("VT6 Blank")
+                isVt6Blank = True
 
-            #No Data In Next Row
-            if isVt1Blank == True and isVt2Blank == True and isVt3Blank == True and isVt4Blank == True and isVt5Blank == True and isVt6Blank == True:
-                print("No More To Read")
-                canCompile = False
-            else:
-                RowAnalyzer()
+        #No Data In Next Row
+        if isVt1Blank == True and isVt2Blank == True and isVt3Blank == True and isVt4Blank == True and isVt5Blank == True and isVt6Blank == True:
+            print("No More To Read")
+            canCompile = False
+        else:
+            RowAnalyzer()
 
+        if not canCompile:
+            programRunning = False
+
+
+                
             # #Blank At Process2, Process3, Process4, Process5
             # elif isVt1Blank == False and isVt2Blank == True and isVt3Blank == True and isVt4Blank == True and isVt5Blank == True and isVt6Blank == True and tempDfVt1["Process 1 Repaired Action"].values[0] == "-":
             #     if tempDfVt1["Process 1 NG Cause"].values[0] != "-":
@@ -754,8 +772,6 @@ def CsvOrganize():
             # else:
             #     canCompile = False
 
-            if not canCompile:
-                programRunning = False
 
             # print("Program Stopped")
             # programRunning = False
@@ -804,261 +820,494 @@ def CompileCsv():
     #GETTING DATE TODAY
     DateAndTimeManager.GetDateToday()
 
-    # GETTING EM2P INSPECTION DATA
-    Em2pVer2.ReadInspectionData(tempDfVt1["Process 1 Em2p"].values[0], tempDfVt1["Process 1 Em2p Lot No"].values[0])
+    if piStatus != "TRIAL":
+        # GETTING EM2P INSPECTION DATA
+        Em2pVer2.ReadInspectionData(tempDfVt1["Process 1 Em2p"].values[0], tempDfVt1["Process 1 Em2p Lot No"].values[0])
 
-    #GETTING EM3P INSPECTION DATA
-    Em3pVer2.ReadInspectionData(tempDfVt1["Process 1 Em3p"].values[0], tempDfVt1["Process 1 Em3p Lot No"].values[0])
+        #GETTING EM3P INSPECTION DATA
+        Em3pVer2.ReadInspectionData(tempDfVt1["Process 1 Em3p"].values[0], tempDfVt1["Process 1 Em3p Lot No"].values[0])
 
-    #GETTING FM INSPECTION DATA
-    FmVer2.ReadInspectionData(tempDfVt1["Process 1 Frame"].values[0], tempDfVt1["Process 1 Frame Lot No"].values[0])
+        #GETTING FM INSPECTION DATA
+        FmVer2.ReadInspectionData(tempDfVt1["Process 1 Frame"].values[0], tempDfVt1["Process 1 Frame Lot No"].values[0])
 
-    #GETTING DFB INSPECTION DATA
-    DfbVer2.ReadDfbSnap(tempDfVt2["Process 2 Df Blk"].values[0], tempDfVt2["Process 2 Df Blk Lot No"].values[0])
-    DfbVer2.ReadInspectionData(tempDfVt2["Process 2 Df Blk"].values[0])
-    DfbVer2.ReadTensileData(tempDfVt2["Process 2 Df Blk"].values[0])
+        #GETTING DFB INSPECTION DATA
+        DfbVer2.ReadDfbSnap(tempDfVt2["Process 2 Df Blk"].values[0], tempDfVt2["Process 2 Df Blk Lot No"].values[0])
+        DfbVer2.ReadInspectionData(tempDfVt2["Process 2 Df Blk"].values[0])
+        DfbVer2.ReadTensileData(tempDfVt2["Process 2 Df Blk"].values[0])
 
-    #GETTING TENSILE FOR DFB
-    tensile = Tensile()
-    # tensile.GettingData(tempDfVt2["Process 2 Df Blk"].values[0], dfb.dfbLotNumber2[:-3])
+        #GETTING TENSILE FOR DFB
+        tensile = Tensile()
+        # tensile.GettingData(tempDfVt2["Process 2 Df Blk"].values[0], dfb.dfbLotNumber2[:-3])
 
-    #GETTING RDB INSPECTION DATA
-    RdbVer2.ReadCheckSheet(tempDfVt2["Process 2 Rod Blk Lot No"].values[0], tempDfVt2["Process 2 Rod Blk"].values)
-    RdbVer2.ReadInspectionData()
+        #GETTING RDB INSPECTION DATA
+        RdbVer2.ReadCheckSheet(tempDfVt2["Process 2 Rod Blk Lot No"].values[0], tempDfVt2["Process 2 Rod Blk"].values)
+        RdbVer2.ReadInspectionData()
 
-    #GETTING CSB INSPECTION DATA
-    CsbVer2.ReadInspectionData(tempDfVt3["Process 3 Casing Block"].values[0], tempDfVt3["Process 3 Casing Block Lot No"].values[0])
+        #GETTING CSB INSPECTION DATA
+        CsbVer2.ReadInspectionData(tempDfVt3["Process 3 Casing Block"].values[0], tempDfVt3["Process 3 Casing Block Lot No"].values[0])
 
-    excelData = {
-        # "DATETIME": pd.to_datetime(PiMachineManager.tempdfPi['DATE'] + ' ' + PiMachineManager.tempdfPi['TIME']),
-        "DATETIME": "",
-        "DATE": PiMachineManager.tempdfPi["DATE"].values,
-        "TIME": PiMachineManager.tempdfPi["TIME"].values,
-        "MODEL CODE": PiMachineManager.tempdfPi["MODEL_CODE"].str.replace('"', '', regex=False),
-        "PROCESS S/N": PiMachineManager.tempdfPi["PROCESS_S_N"].values,
-        "S/N": PiMachineManager.tempdfPi["S_N"].values,
-        "PASS/NG": PiMachineManager.tempdfPi["PASS_NG"].values,
-        "VOLTAGE MAX (V)": PiMachineManager.tempdfPi["VOLTAGE_MAX_V"].values,
-        "WATTAGE MAX (W)": PiMachineManager.tempdfPi["WATTAGE_MAX_W"].values,
-        "CLOSED PRESSURE_MAX (kPa)": PiMachineManager.tempdfPi["CLOSED_PRESSURE_MAX_kPa"].values,
-        "VOLTAGE Middle (V)": PiMachineManager.tempdfPi["VOLTAGE_Middle_V"].values,
-        "WATTAGE Middle (W)": PiMachineManager.tempdfPi["WATTAGE_Middle_W"].values,
-        "AMPERAGE Middle (A)": PiMachineManager.tempdfPi["AMPERAGE_Middle_A"].values,
-        "CLOSED PRESSURE Middle (kPa)": PiMachineManager.tempdfPi["CLOSED_PRESSURE_Middle_kPa"].values,
-        "VOLTAGE MIN (V)": PiMachineManager.tempdfPi["VOLTAGE_MIN_V"].values,
-        "WATTAGE MIN (W)": PiMachineManager.tempdfPi["WATTAGE_MIN_W"].values,
-        "CLOSED PRESSURE MIN (kPa)": PiMachineManager.tempdfPi["CLOSED_PRESSURE_MIN_kPa"].values,
+        excelData = {
+            # "DATETIME": pd.to_datetime(PiMachineManager.tempdfPi['DATE'] + ' ' + PiMachineManager.tempdfPi['TIME']),
+            "DATETIME": "",
+            "DATE": PiMachineManager.tempdfPi["DATE"].values,
+            "TIME": PiMachineManager.tempdfPi["TIME"].values,
+            "MODEL CODE": PiMachineManager.tempdfPi["MODEL_CODE"].str.replace('"', '', regex=False),
+            "PROCESS S/N": PiMachineManager.tempdfPi["PROCESS_S_N"].values,
+            "S/N": PiMachineManager.tempdfPi["S_N"].values,
+            "PASS/NG": PiMachineManager.tempdfPi["PASS_NG"].values,
+            "VOLTAGE MAX (V)": PiMachineManager.tempdfPi["VOLTAGE_MAX_V"].values,
+            "WATTAGE MAX (W)": PiMachineManager.tempdfPi["WATTAGE_MAX_W"].values,
+            "CLOSED PRESSURE_MAX (kPa)": PiMachineManager.tempdfPi["CLOSED_PRESSURE_MAX_kPa"].values,
+            "VOLTAGE Middle (V)": PiMachineManager.tempdfPi["VOLTAGE_Middle_V"].values,
+            "WATTAGE Middle (W)": PiMachineManager.tempdfPi["WATTAGE_Middle_W"].values,
+            "AMPERAGE Middle (A)": PiMachineManager.tempdfPi["AMPERAGE_Middle_A"].values,
+            "CLOSED PRESSURE Middle (kPa)": PiMachineManager.tempdfPi["CLOSED_PRESSURE_Middle_kPa"].values,
+            "VOLTAGE MIN (V)": PiMachineManager.tempdfPi["VOLTAGE_MIN_V"].values,
+            "WATTAGE MIN (W)": PiMachineManager.tempdfPi["WATTAGE_MIN_W"].values,
+            "CLOSED PRESSURE MIN (kPa)": PiMachineManager.tempdfPi["CLOSED_PRESSURE_MIN_kPa"].values,
 
-        "Process 1 S/N": tempDfVt1["Process 1 S/N"].values,
-        "Process 1 ID": tempDfVt1["Process 1 ID"].values,
-        "Process 1 NAME": tempDfVt1["Process 1 NAME"].values,
-        "Process 1 Em2p": tempDfVt1["Process 1 Em2p"].values,
-        "Process 1 Em2p Lot No": tempDfVt1["Process 1 Em2p Lot No"].values,
-        "Process 1 Em2p Inspection 3 Average Data": Em2pVer2.totalAverage3,
-        "Process 1 Em2p Inspection 4 Average Data": Em2pVer2.totalAverage4,
-        "Process 1 Em2p Inspection 5 Average Data": Em2pVer2.totalAverage5,
-        "Process 1 Em2p Inspection 10 Average Data": Em2pVer2.totalAverage10,
-        "Process 1 Em2p Inspection 3 Median Data": Em2pVer2.totalMedian3,
-        "Process 1 Em2p Inspection 4 Median Data": Em2pVer2.totalMedian4,
-        "Process 1 Em2p Inspection 5 Median Data": Em2pVer2.totalMedian5,
-        "Process 1 Em3p": tempDfVt1["Process 1 Em3p"].values,
-        "Process 1 Em3p Lot No": tempDfVt1["Process 1 Em3p Lot No"].values,
-        "Process 1 Em3p Inspection 3 Average Data": Em3pVer2.totalAverage3,
-        "Process 1 Em3p Inspection 4 Average Data": Em3pVer2.totalAverage4,
-        "Process 1 Em3p Inspection 5 Average Data": Em3pVer2.totalAverage5,
-        "Process 1 Em3p Inspection 10 Average Data": Em3pVer2.totalAverage10,
-        "Process 1 Em3p Inspection 3 Median Data": Em3pVer2.totalMedian3,
-        "Process 1 Em3p Inspection 4 Median Data": Em3pVer2.totalMedian4,
-        "Process 1 Em3p Inspection 5 Median Data": Em3pVer2.totalMedian5,
-        "Process 1 Harness": tempDfVt1["Process 1 Harness"].values,
-        "Process 1 Harness Lot No": tempDfVt1["Process 1 Harness Lot No"].values,
-        "Process 1 Frame": tempDfVt1["Process 1 Frame"].values,
-        "Process 1 Frame Lot No": tempDfVt1["Process 1 Frame Lot No"].values,
-        "Process 1 Frame Inspection 1 Average Data": FmVer2.totalAverage1, 
-        "Process 1 Frame Inspection 2 Average Data": FmVer2.totalAverage2, 
-        "Process 1 Frame Inspection 3 Average Data": FmVer2.totalAverage3, 
-        "Process 1 Frame Inspection 4 Average Data": FmVer2.totalAverage4, 
-        "Process 1 Frame Inspection 5 Average Data": FmVer2.totalAverage5, 
-        "Process 1 Frame Inspection 6 Average Data": FmVer2.totalAverage6, 
-        "Process 1 Frame Inspection 7 Average Data": FmVer2.totalAverage7, 
-        "Process 1 Frame Inspection 1 Median Data": FmVer2.totalMedian1, 
-        "Process 1 Frame Inspection 2 Median Data": FmVer2.totalMedian2, 
-        "Process 1 Frame Inspection 3 Median Data": FmVer2.totalMedian3, 
-        "Process 1 Frame Inspection 4 Median Data": FmVer2.totalMedian4, 
-        "Process 1 Frame Inspection 5 Median Data": FmVer2.totalMedian5, 
-        "Process 1 Frame Inspection 6 Median Data": FmVer2.totalMedian6, 
-        "Process 1 Frame Inspection 7 Median Data": FmVer2.totalMedian7, 
-        "Process 1 Bushing": tempDfVt1["Process 1 Bushing"].values,
-        "Process 1 Bushing Lot No": tempDfVt1["Process 1 Bushing Lot No"].values,
-        "Process 1 ST": tempDfVt1["Process 1 ST"].values,
-        "Process 1 Actual Time": tempDfVt1["Process 1 Actual Time"].values,
-        "Process 1 NG Cause": tempDfVt1["Process 1 NG Cause"].values,
-        "Process 1 Repaired Action": tempDfVt1["Process 1 Repaired Action"].values,
+            "Process 1 S/N": tempDfVt1["Process 1 S/N"].values,
+            "Process 1 ID": tempDfVt1["Process 1 ID"].values,
+            "Process 1 NAME": tempDfVt1["Process 1 NAME"].values,
+            "Process 1 Em2p": tempDfVt1["Process 1 Em2p"].values,
+            "Process 1 Em2p Lot No": tempDfVt1["Process 1 Em2p Lot No"].values,
+            "Process 1 Em2p Inspection 3 Average Data": Em2pVer2.totalAverage3,
+            "Process 1 Em2p Inspection 4 Average Data": Em2pVer2.totalAverage4,
+            "Process 1 Em2p Inspection 5 Average Data": Em2pVer2.totalAverage5,
+            "Process 1 Em2p Inspection 10 Average Data": Em2pVer2.totalAverage10,
+            "Process 1 Em2p Inspection 3 Median Data": Em2pVer2.totalMedian3,
+            "Process 1 Em2p Inspection 4 Median Data": Em2pVer2.totalMedian4,
+            "Process 1 Em2p Inspection 5 Median Data": Em2pVer2.totalMedian5,
+            "Process 1 Em3p": tempDfVt1["Process 1 Em3p"].values,
+            "Process 1 Em3p Lot No": tempDfVt1["Process 1 Em3p Lot No"].values,
+            "Process 1 Em3p Inspection 3 Average Data": Em3pVer2.totalAverage3,
+            "Process 1 Em3p Inspection 4 Average Data": Em3pVer2.totalAverage4,
+            "Process 1 Em3p Inspection 5 Average Data": Em3pVer2.totalAverage5,
+            "Process 1 Em3p Inspection 10 Average Data": Em3pVer2.totalAverage10,
+            "Process 1 Em3p Inspection 3 Median Data": Em3pVer2.totalMedian3,
+            "Process 1 Em3p Inspection 4 Median Data": Em3pVer2.totalMedian4,
+            "Process 1 Em3p Inspection 5 Median Data": Em3pVer2.totalMedian5,
+            "Process 1 Harness": tempDfVt1["Process 1 Harness"].values,
+            "Process 1 Harness Lot No": tempDfVt1["Process 1 Harness Lot No"].values,
+            "Process 1 Frame": tempDfVt1["Process 1 Frame"].values,
+            "Process 1 Frame Lot No": tempDfVt1["Process 1 Frame Lot No"].values,
+            "Process 1 Frame Inspection 1 Average Data": FmVer2.totalAverage1, 
+            "Process 1 Frame Inspection 2 Average Data": FmVer2.totalAverage2, 
+            "Process 1 Frame Inspection 3 Average Data": FmVer2.totalAverage3, 
+            "Process 1 Frame Inspection 4 Average Data": FmVer2.totalAverage4, 
+            "Process 1 Frame Inspection 5 Average Data": FmVer2.totalAverage5, 
+            "Process 1 Frame Inspection 6 Average Data": FmVer2.totalAverage6, 
+            "Process 1 Frame Inspection 7 Average Data": FmVer2.totalAverage7, 
+            "Process 1 Frame Inspection 1 Median Data": FmVer2.totalMedian1, 
+            "Process 1 Frame Inspection 2 Median Data": FmVer2.totalMedian2, 
+            "Process 1 Frame Inspection 3 Median Data": FmVer2.totalMedian3, 
+            "Process 1 Frame Inspection 4 Median Data": FmVer2.totalMedian4, 
+            "Process 1 Frame Inspection 5 Median Data": FmVer2.totalMedian5, 
+            "Process 1 Frame Inspection 6 Median Data": FmVer2.totalMedian6, 
+            "Process 1 Frame Inspection 7 Median Data": FmVer2.totalMedian7, 
+            "Process 1 Bushing": tempDfVt1["Process 1 Bushing"].values,
+            "Process 1 Bushing Lot No": tempDfVt1["Process 1 Bushing Lot No"].values,
+            "Process 1 ST": tempDfVt1["Process 1 ST"].values,
+            "Process 1 Actual Time": tempDfVt1["Process 1 Actual Time"].values,
+            "Process 1 NG Cause": tempDfVt1["Process 1 NG Cause"].values,
+            "Process 1 Repaired Action": tempDfVt1["Process 1 Repaired Action"].values,
 
-        "Process 2 S/N": tempDfVt2["Process 2 S/N"].values,
-        "Process 2 ID": tempDfVt2["Process 2 ID"].values,
-        "Process 2 NAME": tempDfVt2["Process 2 NAME"].values,
-        "Process 2 M4x40 Screw": tempDfVt2["Process 2 M4x40 Screw"].values,
-        "Process 2 M4x40 Screw Lot No": tempDfVt2["Process 2 M4x40 Screw Lot No"].values,
-        "Process 2 Rod Blk": tempDfVt2["Process 2 Rod Blk"].values,
-        "Process 2 Rod Blk Lot No": tempDfVt2["Process 2 Rod Blk Lot No"].values,
-        "Process 2 Rod Blk Tesla 1 Average Data": RdbVer2.rdbTeslaTotalAverage1,
-        "Process 2 Rod Blk Tesla 2 Average Data": RdbVer2.rdbTeslaTotalAverage2,
-        "Process 2 Rod Blk Tesla 3 Average Data": RdbVer2.rdbTeslaTotalAverage3,
-        "Process 2 Rod Blk Tesla 4 Average Data": RdbVer2.rdbTeslaTotalAverage4,
-        "Process 2 Rod Blk Tesla 1 Median Data": RdbVer2.rdbTeslaTotalMedian1,
-        "Process 2 Rod Blk Tesla 2 Median Data": RdbVer2.rdbTeslaTotalMedian2,
-        "Process 2 Rod Blk Tesla 3 Median Data": RdbVer2.rdbTeslaTotalMedian3,
-        "Process 2 Rod Blk Tesla 4 Median Data": RdbVer2.rdbTeslaTotalMedian4,
-        "Process 2 Rod Blk Inspection 1 Average Data": RdbVer2.rdbTotalAverage1,
-        "Process 2 Rod Blk Inspection 2 Average Data": RdbVer2.rdbTotalAverage2,
-        "Process 2 Rod Blk Inspection 3 Average Data": RdbVer2.rdbTotalAverage3,
-        "Process 2 Rod Blk Inspection 4 Average Data": RdbVer2.rdbTotalAverage4,
-        "Process 2 Rod Blk Inspection 5 Average Data": RdbVer2.rdbTotalAverage5,
-        "Process 2 Rod Blk Inspection 6 Average Data": RdbVer2.rdbTotalAverage6,
-        "Process 2 Rod Blk Inspection 7 Average Data": RdbVer2.rdbTotalAverage7,
-        "Process 2 Rod Blk Inspection 8 Average Data": RdbVer2.rdbTotalAverage8,
-        "Process 2 Rod Blk Inspection 9 Average Data": RdbVer2.rdbTotalAverage9,
-        "Process 2 Rod Blk Inspection 1 Median Data": RdbVer2.rdbTotalMedian1,
-        "Process 2 Rod Blk Inspection 2 Median Data": RdbVer2.rdbTotalMedian2,
-        "Process 2 Rod Blk Inspection 3 Median Data": RdbVer2.rdbTotalMedian3,
-        "Process 2 Rod Blk Inspection 4 Median Data": RdbVer2.rdbTotalMedian4,
-        "Process 2 Rod Blk Inspection 5 Median Data": RdbVer2.rdbTotalMedian5,
-        "Process 2 Rod Blk Inspection 6 Median Data": RdbVer2.rdbTotalMedian6,
-        "Process 2 Rod Blk Inspection 7 Median Data": RdbVer2.rdbTotalMedian7,
-        "Process 2 Rod Blk Inspection 8 Median Data": RdbVer2.rdbTotalMedian8,
-        "Process 2 Rod Blk Inspection 9 Median Data": RdbVer2.rdbTotalMedian9,
-        "Process 2 Df Blk": tempDfVt2["Process 2 Df Blk"].values,
-        "Process 2 Df Blk Lot No": tempDfVt2["Process 2 Df Blk Lot No"].values,
-        "Process 2 Df Blk Inspection 1 Average Data": DfbVer2.totalAverage1,
-        "Process 2 Df Blk Inspection 2 Average Data": DfbVer2.totalAverage2,
-        "Process 2 Df Blk Inspection 3 Average Data": DfbVer2.totalAverage3,
-        "Process 2 Df Blk Inspection 4 Average Data": DfbVer2.totalAverage4,
-        "Process 2 Df Blk Inspection 1 Median Data": DfbVer2.totalMedian1,
-        "Process 2 Df Blk Inspection 2 Median Data": DfbVer2.totalMedian2,
-        "Process 2 Df Blk Inspection 3 Median Data": DfbVer2.totalMedian3,
-        "Process 2 Df Blk Inspection 4 Median Data": DfbVer2.totalMedian4,
-        "Process 2 Df Blk Tensile Rate Of Change Average" : DfbVer2.rateOfChangeTotalAverage,
-        "Process 2 Df Blk Tensile Rate Of Change Median" : DfbVer2.rateOfChangeTotalMedian,
-        "Process 2 Df Blk Tensile Start Force Average" : DfbVer2.startForceTotalAverage,
-        "Process 2 Df Blk Tensile Start Force Median" : DfbVer2.startForceTotalMedian,
-        "Process 2 Df Blk Tensile Terminating Force Average" : DfbVer2.terminatingForceTotalAverage,
-        "Process 2 Df Blk Tensile Terminating Force Median" : DfbVer2.terminatingForceTotalMedian,
-        "Process 2 Df Ring": tempDfVt2["Process 2 Df Ring"].values,
-        "Process 2 Df Ring Lot No": tempDfVt2["Process 2 Df Ring Lot No"].values,
-        "Process 2 Washer": tempDfVt2["Process 2 Washer"].values,
-        "Process 2 Washer Lot No": tempDfVt2["Process 2 Washer Lot No"].values,
-        "Process 2 Lock Nut": tempDfVt2["Process 2 Lock Nut"].values,
-        "Process 2 Lock Nut Lot No": tempDfVt2["Process 2 Lock Nut Lot No"].values,
-        "Process 2 ST": tempDfVt2["Process 2 ST"].values,
-        "Process 2 Actual Time": tempDfVt2["Process 2 Actual Time"].values,
-        "Process 2 NG Cause": tempDfVt2["Process 2 NG Cause"].values,
-        "Process 2 Repaired Action": tempDfVt2["Process 2 Repaired Action"].values,
+            "Process 2 S/N": tempDfVt2["Process 2 S/N"].values,
+            "Process 2 ID": tempDfVt2["Process 2 ID"].values,
+            "Process 2 NAME": tempDfVt2["Process 2 NAME"].values,
+            "Process 2 M4x40 Screw": tempDfVt2["Process 2 M4x40 Screw"].values,
+            "Process 2 M4x40 Screw Lot No": tempDfVt2["Process 2 M4x40 Screw Lot No"].values,
+            "Process 2 Rod Blk": tempDfVt2["Process 2 Rod Blk"].values,
+            "Process 2 Rod Blk Lot No": tempDfVt2["Process 2 Rod Blk Lot No"].values,
+            "Process 2 Rod Blk Tesla 1 Average Data": RdbVer2.rdbTeslaTotalAverage1,
+            "Process 2 Rod Blk Tesla 2 Average Data": RdbVer2.rdbTeslaTotalAverage2,
+            "Process 2 Rod Blk Tesla 3 Average Data": RdbVer2.rdbTeslaTotalAverage3,
+            "Process 2 Rod Blk Tesla 4 Average Data": RdbVer2.rdbTeslaTotalAverage4,
+            "Process 2 Rod Blk Tesla 1 Median Data": RdbVer2.rdbTeslaTotalMedian1,
+            "Process 2 Rod Blk Tesla 2 Median Data": RdbVer2.rdbTeslaTotalMedian2,
+            "Process 2 Rod Blk Tesla 3 Median Data": RdbVer2.rdbTeslaTotalMedian3,
+            "Process 2 Rod Blk Tesla 4 Median Data": RdbVer2.rdbTeslaTotalMedian4,
+            "Process 2 Rod Blk Inspection 1 Average Data": RdbVer2.rdbTotalAverage1,
+            "Process 2 Rod Blk Inspection 2 Average Data": RdbVer2.rdbTotalAverage2,
+            "Process 2 Rod Blk Inspection 3 Average Data": RdbVer2.rdbTotalAverage3,
+            "Process 2 Rod Blk Inspection 4 Average Data": RdbVer2.rdbTotalAverage4,
+            "Process 2 Rod Blk Inspection 5 Average Data": RdbVer2.rdbTotalAverage5,
+            "Process 2 Rod Blk Inspection 6 Average Data": RdbVer2.rdbTotalAverage6,
+            "Process 2 Rod Blk Inspection 7 Average Data": RdbVer2.rdbTotalAverage7,
+            "Process 2 Rod Blk Inspection 8 Average Data": RdbVer2.rdbTotalAverage8,
+            "Process 2 Rod Blk Inspection 9 Average Data": RdbVer2.rdbTotalAverage9,
+            "Process 2 Rod Blk Inspection 1 Median Data": RdbVer2.rdbTotalMedian1,
+            "Process 2 Rod Blk Inspection 2 Median Data": RdbVer2.rdbTotalMedian2,
+            "Process 2 Rod Blk Inspection 3 Median Data": RdbVer2.rdbTotalMedian3,
+            "Process 2 Rod Blk Inspection 4 Median Data": RdbVer2.rdbTotalMedian4,
+            "Process 2 Rod Blk Inspection 5 Median Data": RdbVer2.rdbTotalMedian5,
+            "Process 2 Rod Blk Inspection 6 Median Data": RdbVer2.rdbTotalMedian6,
+            "Process 2 Rod Blk Inspection 7 Median Data": RdbVer2.rdbTotalMedian7,
+            "Process 2 Rod Blk Inspection 8 Median Data": RdbVer2.rdbTotalMedian8,
+            "Process 2 Rod Blk Inspection 9 Median Data": RdbVer2.rdbTotalMedian9,
+            "Process 2 Df Blk": tempDfVt2["Process 2 Df Blk"].values,
+            "Process 2 Df Blk Lot No": tempDfVt2["Process 2 Df Blk Lot No"].values,
+            "Process 2 Df Blk Inspection 1 Average Data": DfbVer2.totalAverage1,
+            "Process 2 Df Blk Inspection 2 Average Data": DfbVer2.totalAverage2,
+            "Process 2 Df Blk Inspection 3 Average Data": DfbVer2.totalAverage3,
+            "Process 2 Df Blk Inspection 4 Average Data": DfbVer2.totalAverage4,
+            "Process 2 Df Blk Inspection 1 Median Data": DfbVer2.totalMedian1,
+            "Process 2 Df Blk Inspection 2 Median Data": DfbVer2.totalMedian2,
+            "Process 2 Df Blk Inspection 3 Median Data": DfbVer2.totalMedian3,
+            "Process 2 Df Blk Inspection 4 Median Data": DfbVer2.totalMedian4,
+            "Process 2 Df Blk Tensile Rate Of Change Average" : DfbVer2.rateOfChangeTotalAverage,
+            "Process 2 Df Blk Tensile Rate Of Change Median" : DfbVer2.rateOfChangeTotalMedian,
+            "Process 2 Df Blk Tensile Start Force Average" : DfbVer2.startForceTotalAverage,
+            "Process 2 Df Blk Tensile Start Force Median" : DfbVer2.startForceTotalMedian,
+            "Process 2 Df Blk Tensile Terminating Force Average" : DfbVer2.terminatingForceTotalAverage,
+            "Process 2 Df Blk Tensile Terminating Force Median" : DfbVer2.terminatingForceTotalMedian,
+            "Process 2 Df Ring": tempDfVt2["Process 2 Df Ring"].values,
+            "Process 2 Df Ring Lot No": tempDfVt2["Process 2 Df Ring Lot No"].values,
+            "Process 2 Washer": tempDfVt2["Process 2 Washer"].values,
+            "Process 2 Washer Lot No": tempDfVt2["Process 2 Washer Lot No"].values,
+            "Process 2 Lock Nut": tempDfVt2["Process 2 Lock Nut"].values,
+            "Process 2 Lock Nut Lot No": tempDfVt2["Process 2 Lock Nut Lot No"].values,
+            "Process 2 ST": tempDfVt2["Process 2 ST"].values,
+            "Process 2 Actual Time": tempDfVt2["Process 2 Actual Time"].values,
+            "Process 2 NG Cause": tempDfVt2["Process 2 NG Cause"].values,
+            "Process 2 Repaired Action": tempDfVt2["Process 2 Repaired Action"].values,
 
-        "Process 3 S/N": tempDfVt3["Process 3 S/N"].values,
-        "Process 3 ID": tempDfVt3["Process 3 ID"].values,
-        "Process 3 NAME": tempDfVt3["Process 3 NAME"].values,
-        "Process 3 Frame Gasket": tempDfVt3["Process 3 Frame Gasket"].values,
-        "Process 3 Frame Gasket Lot No": tempDfVt3["Process 3 Frame Gasket Lot No"].values,
-        "Process 3 Casing Block": tempDfVt3["Process 3 Casing Block"].values,
-        "Process 3 Casing Block Lot No": tempDfVt3["Process 3 Casing Block Lot No"].values,
-        "Process 3 Casing Block Inspection 1 Average Data": CsbVer2.totalAverage1,
-        "Process 3 Casing Block Inspection 1 Median Data": CsbVer2.totalMedian1,
-        "Process 3 Casing Gasket": tempDfVt3["Process 3 Casing Gasket"].values,
-        "Process 3 Casing Gasket Lot No": tempDfVt3["Process 3 Casing Gasket Lot No"].values,
-        "Process 3 M4x16 Screw 1": tempDfVt3["Process 3 M4x16 Screw 1"].values,
-        "Process 3 M4x16 Screw 1 Lot No": tempDfVt3["Process 3 M4x16 Screw 1 Lot No"].values,
-        "Process 3 M4x16 Screw 2": tempDfVt3["Process 3 M4x16 Screw 2"].values,
-        "Process 3 M4x16 Screw 2 Lot No": tempDfVt3["Process 3 M4x16 Screw 2 Lot No"].values,
-        "Process 3 Ball Cushion": tempDfVt3["Process 3 Ball Cushion"].values,
-        "Process 3 Ball Cushion Lot No": tempDfVt3["Process 3 Ball Cushion Lot No"].values,
-        "Process 3 Frame Cover": tempDfVt3["Process 3 Frame Cover"].values,
-        "Process 3 Frame Cover Lot No": tempDfVt3["Process 3 Frame Cover Lot No"].values,
-        "Process 3 Partition Board": tempDfVt3["Process 3 Partition Board"].values,
-        "Process 3 Partition Board Lot No": tempDfVt3["Process 3 Partition Board Lot No"].values,
-        "Process 3 Built In Tube 1": tempDfVt3["Process 3 Built In Tube 1"].values,
-        "Process 3 Built In Tube 1 Lot No": tempDfVt3["Process 3 Built In Tube 1 Lot No"].values,
-        "Process 3 Built In Tube 2": tempDfVt3["Process 3 Built In Tube 2"].values,
-        "Process 3 Built In Tube 2 Lot No": tempDfVt3["Process 3 Built In Tube 2 Lot No"].values,
-        "Process 3 Head Cover": tempDfVt3["Process 3 Head Cover"].values,
-        "Process 3 Head Cover Lot No": tempDfVt3["Process 3 Head Cover Lot No"].values,
-        "Process 3 Casing Packing": tempDfVt3["Process 3 Casing Packing"].values,
-        "Process 3 Casing Packing Lot No": tempDfVt3["Process 3 Casing Packing Lot No"].values,
-        "Process 3 M4x12 Screw": tempDfVt3["Process 3 M4x12 Screw"].values,
-        "Process 3 M4x12 Screw Lot No": tempDfVt3["Process 3 M4x12 Screw Lot No"].values,
-        "Process 3 Csb L": tempDfVt3["Process 3 Csb L"].values,
-        "Process 3 Csb L Lot No": tempDfVt3["Process 3 Csb L Lot No"].values,
-        "Process 3 Csb R": tempDfVt3["Process 3 Csb R"].values,
-        "Process 3 Csb R Lot No": tempDfVt3["Process 3 Csb R Lot No"].values,
-        "Process 3 Head Packing": tempDfVt3["Process 3 Head Packing"].values,
-        "Process 3 Head Packing Lot No": tempDfVt3["Process 3 Head Packing Lot No"].values,
-        "Process 3 ST": tempDfVt3["Process 3 ST"].values,
-        "Process 3 Actual Time": tempDfVt3["Process 3 Actual Time"].values,
-        "Process 3 NG Cause": tempDfVt3["Process 3 NG Cause"].values,
-        "Process 3 Repaired Action": tempDfVt3["Process 3 Repaired Action"].values,
+            "Process 3 S/N": tempDfVt3["Process 3 S/N"].values,
+            "Process 3 ID": tempDfVt3["Process 3 ID"].values,
+            "Process 3 NAME": tempDfVt3["Process 3 NAME"].values,
+            "Process 3 Frame Gasket": tempDfVt3["Process 3 Frame Gasket"].values,
+            "Process 3 Frame Gasket Lot No": tempDfVt3["Process 3 Frame Gasket Lot No"].values,
+            "Process 3 Casing Block": tempDfVt3["Process 3 Casing Block"].values,
+            "Process 3 Casing Block Lot No": tempDfVt3["Process 3 Casing Block Lot No"].values,
+            "Process 3 Casing Block Inspection 1 Average Data": CsbVer2.totalAverage1,
+            "Process 3 Casing Block Inspection 1 Median Data": CsbVer2.totalMedian1,
+            "Process 3 Casing Gasket": tempDfVt3["Process 3 Casing Gasket"].values,
+            "Process 3 Casing Gasket Lot No": tempDfVt3["Process 3 Casing Gasket Lot No"].values,
+            "Process 3 M4x16 Screw 1": tempDfVt3["Process 3 M4x16 Screw 1"].values,
+            "Process 3 M4x16 Screw 1 Lot No": tempDfVt3["Process 3 M4x16 Screw 1 Lot No"].values,
+            "Process 3 M4x16 Screw 2": tempDfVt3["Process 3 M4x16 Screw 2"].values,
+            "Process 3 M4x16 Screw 2 Lot No": tempDfVt3["Process 3 M4x16 Screw 2 Lot No"].values,
+            "Process 3 Ball Cushion": tempDfVt3["Process 3 Ball Cushion"].values,
+            "Process 3 Ball Cushion Lot No": tempDfVt3["Process 3 Ball Cushion Lot No"].values,
+            "Process 3 Frame Cover": tempDfVt3["Process 3 Frame Cover"].values,
+            "Process 3 Frame Cover Lot No": tempDfVt3["Process 3 Frame Cover Lot No"].values,
+            "Process 3 Partition Board": tempDfVt3["Process 3 Partition Board"].values,
+            "Process 3 Partition Board Lot No": tempDfVt3["Process 3 Partition Board Lot No"].values,
+            "Process 3 Built In Tube 1": tempDfVt3["Process 3 Built In Tube 1"].values,
+            "Process 3 Built In Tube 1 Lot No": tempDfVt3["Process 3 Built In Tube 1 Lot No"].values,
+            "Process 3 Built In Tube 2": tempDfVt3["Process 3 Built In Tube 2"].values,
+            "Process 3 Built In Tube 2 Lot No": tempDfVt3["Process 3 Built In Tube 2 Lot No"].values,
+            "Process 3 Head Cover": tempDfVt3["Process 3 Head Cover"].values,
+            "Process 3 Head Cover Lot No": tempDfVt3["Process 3 Head Cover Lot No"].values,
+            "Process 3 Casing Packing": tempDfVt3["Process 3 Casing Packing"].values,
+            "Process 3 Casing Packing Lot No": tempDfVt3["Process 3 Casing Packing Lot No"].values,
+            "Process 3 M4x12 Screw": tempDfVt3["Process 3 M4x12 Screw"].values,
+            "Process 3 M4x12 Screw Lot No": tempDfVt3["Process 3 M4x12 Screw Lot No"].values,
+            "Process 3 Csb L": tempDfVt3["Process 3 Csb L"].values,
+            "Process 3 Csb L Lot No": tempDfVt3["Process 3 Csb L Lot No"].values,
+            "Process 3 Csb R": tempDfVt3["Process 3 Csb R"].values,
+            "Process 3 Csb R Lot No": tempDfVt3["Process 3 Csb R Lot No"].values,
+            "Process 3 Head Packing": tempDfVt3["Process 3 Head Packing"].values,
+            "Process 3 Head Packing Lot No": tempDfVt3["Process 3 Head Packing Lot No"].values,
+            "Process 3 ST": tempDfVt3["Process 3 ST"].values,
+            "Process 3 Actual Time": tempDfVt3["Process 3 Actual Time"].values,
+            "Process 3 NG Cause": tempDfVt3["Process 3 NG Cause"].values,
+            "Process 3 Repaired Action": tempDfVt3["Process 3 Repaired Action"].values,
 
-        "Process 4 S/N": tempDfVt4["Process 4 S/N"].values,
-        "Process 4 ID": tempDfVt4["Process 4 ID"].values,
-        "Process 4 NAME": tempDfVt4["Process 4 NAME"].values,
-        "Process 4 Tank": tempDfVt4["Process 4 Tank"].values,
-        "Process 4 Tank Lot No": tempDfVt4["Process 4 Tank Lot No"].values,
-        "Process 4 Upper Housing": tempDfVt4["Process 4 Upper Housing"].values,
-        "Process 4 Upper Housing Lot No": tempDfVt4["Process 4 Upper Housing Lot No"].values,
-        "Process 4 Cord Hook": tempDfVt4["Process 4 Cord Hook"].values,
-        "Process 4 Cord Hook Lot No": tempDfVt4["Process 4 Cord Hook Lot No"].values,
-        "Process 4 M4x16 Screw": tempDfVt4["Process 4 M4x16 Screw"].values,
-        "Process 4 M4x16 Screw Lot No": tempDfVt4["Process 4 M4x16 Screw Lot No"].values,
-        "Process 4 Tank Gasket": tempDfVt4["Process 4 Tank Gasket"].values,
-        "Process 4 Tank Gasket Lot No": tempDfVt4["Process 4 Tank Gasket Lot No"].values,
-        "Process 4 Tank Cover": tempDfVt4["Process 4 Tank Cover"].values,
-        "Process 4 Tank Cover Lot No": tempDfVt4["Process 4 Tank Cover Lot No"].values,
-        "Process 4 Housing Gasket": tempDfVt4["Process 4 Housing Gasket"].values,
-        "Process 4 Housing Gasket Lot No": tempDfVt4["Process 4 Housing Gasket Lot No"].values,
-        "Process 4 M4x40 Screw": tempDfVt4["Process 4 M4x40 Screw"].values,
-        "Process 4 M4x40 Screw Lot No": tempDfVt4["Process 4 M4x40 Screw Lot No"].values,
-        "Process 4 PartitionGasket": tempDfVt4["Process 4 PartitionGasket"].values,
-        "Process 4 PartitionGasket Lot No": tempDfVt4["Process 4 PartitionGasket Lot No"].values,
-        "Process 4 M4x12 Screw": tempDfVt4["Process 4 M4x12 Screw"].values,
-        "Process 4 M4x12 Screw Lot No": tempDfVt4["Process 4 M4x12 Screw Lot No"].values,
-        "Process 4 Muffler": tempDfVt4["Process 4 Muffler"].values,
-        "Process 4 Muffler Lot No": tempDfVt4["Process 4 Muffler Lot No"].values,
-        "Process 4 Muffler Gasket": tempDfVt4["Process 4 Muffler Gasket"].values,
-        "Process 4 Muffler Gasket Lot No": tempDfVt4["Process 4 Muffler Gasket Lot No"].values,
-        "Process 4 VCR": tempDfVt4["Process 4 VCR"].values,
-        "Process 4 VCR Lot No": tempDfVt4["Process 4 VCR Lot No"].values,
-        "Process 4 ST": tempDfVt4["Process 4 ST"].values,
-        "Process 4 Actual Time": tempDfVt4["Process 4 Actual Time"].values,
-        "Process 4 NG Cause": tempDfVt4["Process 4 NG Cause"].values,
-        "Process 4 Repaired Action": tempDfVt4["Process 4 Repaired Action"].values,
-        
-        "Process 5 S/N": tempDfVt5["Process 5 S/N"].values,
-        "Process 5 ID": tempDfVt5["Process 5 ID"].values,
-        "Process 5 NAME": tempDfVt5["Process 5 NAME"].values,
-        "Process 5 Rating Label": tempDfVt5["Process 5 Rating Label"].values,
-        "Process 5 Rating Label Lot No": tempDfVt5["Process 5 Rating Label Lot No"].values,
-        "Process 5 ST": tempDfVt5["Process 5 ST"].values,
-        "Process 5 Actual Time": tempDfVt5["Process 5 Actual Time"].values,
-        "Process 5 NG Cause": tempDfVt5["Process 5 NG Cause"].values,
-        "Process 5 Repaired Action": tempDfVt5["Process 5 Repaired Action"].values,
-        
-        "Process 6 S/N": tempDfVt6["Process 6 S/N"].values,
-        "Process 6 ID": tempDfVt6["Process 6 ID"].values,
-        "Process 6 NAME": tempDfVt6["Process 6 NAME"].values,
-        "Process 6 Vinyl": tempDfVt6["Process 6 Vinyl"].values,
-        "Process 6 Vinyl Lot No": tempDfVt6["Process 6 Vinyl Lot No"].values,
-        "Process 6 ST": tempDfVt6["Process 6 ST"].values,
-        "Process 6 Actual Time": tempDfVt6["Process 6 Actual Time"].values,
-        "Process 6 NG Cause": tempDfVt6["Process 6 NG Cause"].values,
-        "Process 6 Repaired Action": tempDfVt6["Process 6 Repaired Action"].values,
+            "Process 4 S/N": tempDfVt4["Process 4 S/N"].values,
+            "Process 4 ID": tempDfVt4["Process 4 ID"].values,
+            "Process 4 NAME": tempDfVt4["Process 4 NAME"].values,
+            "Process 4 Tank": tempDfVt4["Process 4 Tank"].values,
+            "Process 4 Tank Lot No": tempDfVt4["Process 4 Tank Lot No"].values,
+            "Process 4 Upper Housing": tempDfVt4["Process 4 Upper Housing"].values,
+            "Process 4 Upper Housing Lot No": tempDfVt4["Process 4 Upper Housing Lot No"].values,
+            "Process 4 Cord Hook": tempDfVt4["Process 4 Cord Hook"].values,
+            "Process 4 Cord Hook Lot No": tempDfVt4["Process 4 Cord Hook Lot No"].values,
+            "Process 4 M4x16 Screw": tempDfVt4["Process 4 M4x16 Screw"].values,
+            "Process 4 M4x16 Screw Lot No": tempDfVt4["Process 4 M4x16 Screw Lot No"].values,
+            "Process 4 Tank Gasket": tempDfVt4["Process 4 Tank Gasket"].values,
+            "Process 4 Tank Gasket Lot No": tempDfVt4["Process 4 Tank Gasket Lot No"].values,
+            "Process 4 Tank Cover": tempDfVt4["Process 4 Tank Cover"].values,
+            "Process 4 Tank Cover Lot No": tempDfVt4["Process 4 Tank Cover Lot No"].values,
+            "Process 4 Housing Gasket": tempDfVt4["Process 4 Housing Gasket"].values,
+            "Process 4 Housing Gasket Lot No": tempDfVt4["Process 4 Housing Gasket Lot No"].values,
+            "Process 4 M4x40 Screw": tempDfVt4["Process 4 M4x40 Screw"].values,
+            "Process 4 M4x40 Screw Lot No": tempDfVt4["Process 4 M4x40 Screw Lot No"].values,
+            "Process 4 PartitionGasket": tempDfVt4["Process 4 PartitionGasket"].values,
+            "Process 4 PartitionGasket Lot No": tempDfVt4["Process 4 PartitionGasket Lot No"].values,
+            "Process 4 M4x12 Screw": tempDfVt4["Process 4 M4x12 Screw"].values,
+            "Process 4 M4x12 Screw Lot No": tempDfVt4["Process 4 M4x12 Screw Lot No"].values,
+            "Process 4 Muffler": tempDfVt4["Process 4 Muffler"].values,
+            "Process 4 Muffler Lot No": tempDfVt4["Process 4 Muffler Lot No"].values,
+            "Process 4 Muffler Gasket": tempDfVt4["Process 4 Muffler Gasket"].values,
+            "Process 4 Muffler Gasket Lot No": tempDfVt4["Process 4 Muffler Gasket Lot No"].values,
+            "Process 4 VCR": tempDfVt4["Process 4 VCR"].values,
+            "Process 4 VCR Lot No": tempDfVt4["Process 4 VCR Lot No"].values,
+            "Process 4 ST": tempDfVt4["Process 4 ST"].values,
+            "Process 4 Actual Time": tempDfVt4["Process 4 Actual Time"].values,
+            "Process 4 NG Cause": tempDfVt4["Process 4 NG Cause"].values,
+            "Process 4 Repaired Action": tempDfVt4["Process 4 Repaired Action"].values,
+            
+            "Process 5 S/N": tempDfVt5["Process 5 S/N"].values,
+            "Process 5 ID": tempDfVt5["Process 5 ID"].values,
+            "Process 5 NAME": tempDfVt5["Process 5 NAME"].values,
+            "Process 5 Rating Label": tempDfVt5["Process 5 Rating Label"].values,
+            "Process 5 Rating Label Lot No": tempDfVt5["Process 5 Rating Label Lot No"].values,
+            "Process 5 ST": tempDfVt5["Process 5 ST"].values,
+            "Process 5 Actual Time": tempDfVt5["Process 5 Actual Time"].values,
+            "Process 5 NG Cause": tempDfVt5["Process 5 NG Cause"].values,
+            "Process 5 Repaired Action": tempDfVt5["Process 5 Repaired Action"].values,
+            
+            "Process 6 S/N": tempDfVt6["Process 6 S/N"].values,
+            "Process 6 ID": tempDfVt6["Process 6 ID"].values,
+            "Process 6 NAME": tempDfVt6["Process 6 NAME"].values,
+            "Process 6 Vinyl": tempDfVt6["Process 6 Vinyl"].values,
+            "Process 6 Vinyl Lot No": tempDfVt6["Process 6 Vinyl Lot No"].values,
+            "Process 6 ST": tempDfVt6["Process 6 ST"].values,
+            "Process 6 Actual Time": tempDfVt6["Process 6 Actual Time"].values,
+            "Process 6 NG Cause": tempDfVt6["Process 6 NG Cause"].values,
+            "Process 6 Repaired Action": tempDfVt6["Process 6 Repaired Action"].values,
 
-        "Process 1 SERIAL NO" : tempDfVt1["Process 1 S/N"].values,
-        "Process 2 SERIAL NO" : tempDfVt2["Process 2 S/N"].values,
-        "Process 3 SERIAL NO" : tempDfVt3["Process 3 S/N"].values,
-        "Process 4 SERIAL NO" : tempDfVt4["Process 4 S/N"].values,
-        "Process 5 SERIAL NO" : tempDfVt5["Process 5 S/N"].values,
-        "Process 6 SERIAL NO" : tempDfVt6["Process 6 S/N"].values
-    }
-    excelData = pd.DataFrame(excelData)
+            "Process 1 SERIAL NO" : tempDfVt1["Process 1 S/N"].values,
+            "Process 2 SERIAL NO" : tempDfVt2["Process 2 S/N"].values,
+            "Process 3 SERIAL NO" : tempDfVt3["Process 3 S/N"].values,
+            "Process 4 SERIAL NO" : tempDfVt4["Process 4 S/N"].values,
+            "Process 5 SERIAL NO" : tempDfVt5["Process 5 S/N"].values,
+            "Process 6 SERIAL NO" : tempDfVt6["Process 6 S/N"].values
+        }
+        excelData = pd.DataFrame(excelData)
+
+    else:
+        excelData = {
+            # "DATETIME": pd.to_datetime(PiMachineManager.tempdfPi['DATE'] + ' ' + PiMachineManager.tempdfPi['TIME']),
+            "DATETIME": "",
+            "DATE": PiMachineManager.tempdfPi["DATE"].values,
+            "TIME": PiMachineManager.tempdfPi["TIME"].values,
+            "MODEL CODE": PiMachineManager.tempdfPi["MODEL_CODE"].str.replace('"', '', regex=False),
+            "PROCESS S/N": PiMachineManager.tempdfPi["PROCESS_S_N"].values,
+            "S/N": PiMachineManager.tempdfPi["S_N"].values,
+            "PASS/NG": PiMachineManager.tempdfPi["PASS_NG"].values,
+            "VOLTAGE MAX (V)": PiMachineManager.tempdfPi["VOLTAGE_MAX_V"].values,
+            "WATTAGE MAX (W)": PiMachineManager.tempdfPi["WATTAGE_MAX_W"].values,
+            "CLOSED PRESSURE_MAX (kPa)": PiMachineManager.tempdfPi["CLOSED_PRESSURE_MAX_kPa"].values,
+            "VOLTAGE Middle (V)": PiMachineManager.tempdfPi["VOLTAGE_Middle_V"].values,
+            "WATTAGE Middle (W)": PiMachineManager.tempdfPi["WATTAGE_Middle_W"].values,
+            "AMPERAGE Middle (A)": PiMachineManager.tempdfPi["AMPERAGE_Middle_A"].values,
+            "CLOSED PRESSURE Middle (kPa)": PiMachineManager.tempdfPi["CLOSED_PRESSURE_Middle_kPa"].values,
+            "VOLTAGE MIN (V)": PiMachineManager.tempdfPi["VOLTAGE_MIN_V"].values,
+            "WATTAGE MIN (W)": PiMachineManager.tempdfPi["WATTAGE_MIN_W"].values,
+            "CLOSED PRESSURE MIN (kPa)": PiMachineManager.tempdfPi["CLOSED_PRESSURE_MIN_kPa"].values,
+
+            "Process 1 S/N": "",
+            "Process 1 ID": "",
+            "Process 1 NAME": "",
+            "Process 1 Em2p": "",
+            "Process 1 Em2p Lot No": "",
+            "Process 1 Em2p Inspection 3 Average Data": "",
+            "Process 1 Em2p Inspection 4 Average Data": "",
+            "Process 1 Em2p Inspection 5 Average Data": "",
+            "Process 1 Em2p Inspection 10 Average Data": "",
+            "Process 1 Em2p Inspection 3 Median Data": "",
+            "Process 1 Em2p Inspection 4 Median Data": "",
+            "Process 1 Em2p Inspection 5 Median Data": "",
+            "Process 1 Em3p": "",
+            "Process 1 Em3p Lot No": "",
+            "Process 1 Em3p Inspection 3 Average Data": "",
+            "Process 1 Em3p Inspection 4 Average Data": "",
+            "Process 1 Em3p Inspection 5 Average Data": "",
+            "Process 1 Em3p Inspection 10 Average Data": "",
+            "Process 1 Em3p Inspection 3 Median Data": "",
+            "Process 1 Em3p Inspection 4 Median Data": "",
+            "Process 1 Em3p Inspection 5 Median Data": "",
+            "Process 1 Harness": "",
+            "Process 1 Harness Lot No": "",
+            "Process 1 Frame": "",
+            "Process 1 Frame Lot No": "",
+            "Process 1 Frame Inspection 1 Average Data": "",
+            "Process 1 Frame Inspection 2 Average Data": "",
+            "Process 1 Frame Inspection 3 Average Data": "",
+            "Process 1 Frame Inspection 4 Average Data": "",
+            "Process 1 Frame Inspection 5 Average Data": "",
+            "Process 1 Frame Inspection 6 Average Data": "",
+            "Process 1 Frame Inspection 7 Average Data": "",
+            "Process 1 Frame Inspection 1 Median Data": "",
+            "Process 1 Frame Inspection 2 Median Data": "",
+            "Process 1 Frame Inspection 3 Median Data": "",
+            "Process 1 Frame Inspection 4 Median Data": "",
+            "Process 1 Frame Inspection 5 Median Data": "",
+            "Process 1 Frame Inspection 6 Median Data": "",
+            "Process 1 Frame Inspection 7 Median Data": "",
+            "Process 1 Bushing": "",
+            "Process 1 Bushing Lot No": "",
+            "Process 1 ST": "",
+            "Process 1 Actual Time": "",
+            "Process 1 NG Cause": "",
+            "Process 1 Repaired Action": "",
+
+            "Process 2 S/N": "",
+            "Process 2 ID": "",
+            "Process 2 NAME": "",
+            "Process 2 M4x40 Screw": "",
+            "Process 2 M4x40 Screw Lot No": "",
+            "Process 2 Rod Blk": "",
+            "Process 2 Rod Blk Lot No": "",
+            "Process 2 Rod Blk Tesla 1 Average Data": "",
+            "Process 2 Rod Blk Tesla 2 Average Data": "",
+            "Process 2 Rod Blk Tesla 3 Average Data": "",
+            "Process 2 Rod Blk Tesla 4 Average Data": "",
+            "Process 2 Rod Blk Tesla 1 Median Data": "",
+            "Process 2 Rod Blk Tesla 2 Median Data": "",
+            "Process 2 Rod Blk Tesla 3 Median Data": "",
+            "Process 2 Rod Blk Tesla 4 Median Data": "",
+            "Process 2 Rod Blk Inspection 1 Average Data": "",
+            "Process 2 Rod Blk Inspection 2 Average Data": "",
+            "Process 2 Rod Blk Inspection 3 Average Data": "",
+            "Process 2 Rod Blk Inspection 4 Average Data": "",
+            "Process 2 Rod Blk Inspection 5 Average Data": "",
+            "Process 2 Rod Blk Inspection 6 Average Data": "",
+            "Process 2 Rod Blk Inspection 7 Average Data": "",
+            "Process 2 Rod Blk Inspection 8 Average Data": "",
+            "Process 2 Rod Blk Inspection 9 Average Data": "",
+            "Process 2 Rod Blk Inspection 1 Median Data": "",
+            "Process 2 Rod Blk Inspection 2 Median Data": "",
+            "Process 2 Rod Blk Inspection 3 Median Data": "",
+            "Process 2 Rod Blk Inspection 4 Median Data": "",
+            "Process 2 Rod Blk Inspection 5 Median Data": "",
+            "Process 2 Rod Blk Inspection 6 Median Data": "",
+            "Process 2 Rod Blk Inspection 7 Median Data": "",
+            "Process 2 Rod Blk Inspection 8 Median Data": "",
+            "Process 2 Rod Blk Inspection 9 Median Data": "",
+            "Process 2 Df Blk": "",
+            "Process 2 Df Blk Lot No": "",
+            "Process 2 Df Blk Inspection 1 Average Data": "",
+            "Process 2 Df Blk Inspection 2 Average Data": "",
+            "Process 2 Df Blk Inspection 3 Average Data": "",
+            "Process 2 Df Blk Inspection 4 Average Data": "",
+            "Process 2 Df Blk Inspection 1 Median Data": "",
+            "Process 2 Df Blk Inspection 2 Median Data": "",
+            "Process 2 Df Blk Inspection 3 Median Data": "",
+            "Process 2 Df Blk Inspection 4 Median Data": "",
+            "Process 2 Df Blk Tensile Rate Of Change Average": "",
+            "Process 2 Df Blk Tensile Rate Of Change Median": "",
+            "Process 2 Df Blk Tensile Start Force Average": "",
+            "Process 2 Df Blk Tensile Start Force Median": "",
+            "Process 2 Df Blk Tensile Terminating Force Average": "",
+            "Process 2 Df Blk Tensile Terminating Force Median": "",
+            "Process 2 Df Ring": "",
+            "Process 2 Df Ring Lot No": "",
+            "Process 2 Washer": "",
+            "Process 2 Washer Lot No": "",
+            "Process 2 Lock Nut": "",
+            "Process 2 Lock Nut Lot No": "",
+            "Process 2 ST": "",
+            "Process 2 Actual Time": "",
+            "Process 2 NG Cause": "",
+            "Process 2 Repaired Action": "",
+
+            "Process 3 S/N": "",
+            "Process 3 ID": "",
+            "Process 3 NAME": "",
+            "Process 3 Frame Gasket": "",
+            "Process 3 Frame Gasket Lot No": "",
+            "Process 3 Casing Block": "",
+            "Process 3 Casing Block Lot No": "",
+            "Process 3 Casing Block Inspection 1 Average Data": "",
+            "Process 3 Casing Block Inspection 1 Median Data": "",
+            "Process 3 Casing Gasket": "",
+            "Process 3 Casing Gasket Lot No": "",
+            "Process 3 M4x16 Screw 1": "",
+            "Process 3 M4x16 Screw 1 Lot No": "",
+            "Process 3 M4x16 Screw 2": "",
+            "Process 3 M4x16 Screw 2 Lot No": "",
+            "Process 3 Ball Cushion": "",
+            "Process 3 Ball Cushion Lot No": "",
+            "Process 3 Frame Cover": "",
+            "Process 3 Frame Cover Lot No": "",
+            "Process 3 Partition Board": "",
+            "Process 3 Partition Board Lot No": "",
+            "Process 3 Built In Tube 1": "",
+            "Process 3 Built In Tube 1 Lot No": "",
+            "Process 3 Built In Tube 2": "",
+            "Process 3 Built In Tube 2 Lot No": "",
+            "Process 3 Head Cover": "",
+            "Process 3 Head Cover Lot No": "",
+            "Process 3 Casing Packing": "",
+            "Process 3 Casing Packing Lot No": "",
+            "Process 3 M4x12 Screw": "",
+            "Process 3 M4x12 Screw Lot No": "",
+            "Process 3 Csb L": "",
+            "Process 3 Csb L Lot No": "",
+            "Process 3 Csb R": "",
+            "Process 3 Csb R Lot No": "",
+            "Process 3 Head Packing": "",
+            "Process 3 Head Packing Lot No": "",
+            "Process 3 ST": "",
+            "Process 3 Actual Time": "",
+            "Process 3 NG Cause": "",
+            "Process 3 Repaired Action": "",
+
+            "Process 4 S/N": "",
+            "Process 4 ID": "",
+            "Process 4 NAME": "",
+            "Process 4 Tank": "",
+            "Process 4 Tank Lot No": "",
+            "Process 4 Upper Housing": "",
+            "Process 4 Upper Housing Lot No": "",
+            "Process 4 Cord Hook": "",
+            "Process 4 Cord Hook Lot No": "",
+            "Process 4 M4x16 Screw": "",
+            "Process 4 M4x16 Screw Lot No": "",
+            "Process 4 Tank Gasket": "",
+            "Process 4 Tank Gasket Lot No": "",
+            "Process 4 Tank Cover": "",
+            "Process 4 Tank Cover Lot No": "",
+            "Process 4 Housing Gasket": "",
+            "Process 4 Housing Gasket Lot No": "",
+            "Process 4 M4x40 Screw": "",
+            "Process 4 M4x40 Screw Lot No": "",
+            "Process 4 PartitionGasket": "",
+            "Process 4 PartitionGasket Lot No": "",
+            "Process 4 M4x12 Screw": "",
+            "Process 4 M4x12 Screw Lot No": "",
+            "Process 4 Muffler": "",
+            "Process 4 Muffler Lot No": "",
+            "Process 4 Muffler Gasket": "",
+            "Process 4 Muffler Gasket Lot No": "",
+            "Process 4 VCR": "",
+            "Process 4 VCR Lot No": "",
+            "Process 4 ST": "",
+            "Process 4 Actual Time": "",
+            "Process 4 NG Cause": "",
+            "Process 4 Repaired Action": "",
+
+            "Process 5 S/N": "",
+            "Process 5 ID": "",
+            "Process 5 NAME": "",
+            "Process 5 Rating Label": "",
+            "Process 5 Rating Label Lot No": "",
+            "Process 5 ST": "",
+            "Process 5 Actual Time": "",
+            "Process 5 NG Cause": "",
+            "Process 5 Repaired Action": "",
+
+            "Process 6 S/N": "",
+            "Process 6 ID": "",
+            "Process 6 NAME": "",
+            "Process 6 Vinyl": "",
+            "Process 6 Vinyl Lot No": "",
+            "Process 6 ST": "",
+            "Process 6 Actual Time": "",
+            "Process 6 NG Cause": "",
+            "Process 6 Repaired Action": "",
+
+            "Process 1 SERIAL NO": "",
+            "Process 2 SERIAL NO": "",
+            "Process 3 SERIAL NO": "",
+            "Process 4 SERIAL NO": "",
+            "Process 5 SERIAL NO": "",
+            "Process 6 SERIAL NO": ""
+        }
+        excelData = pd.DataFrame(excelData)
 
     try:
         excelData["DATETIME"] = pd.to_datetime(PiMachineManager.tempdfPi['DATE'].values + ' ' + PiMachineManager.tempdfPi['TIME'].values)
@@ -1066,6 +1315,30 @@ def CompileCsv():
         pass
 
     if piStatus == "INSPECTION ONLY":
+        PiMachineManager.piRow += 1
+
+        for column in ColumnCreator.process1Column:
+            excelData[column] = piStatus
+        for column in ColumnCreator.process2Column:
+            excelData[column] = piStatus
+        for column in ColumnCreator.process3Column:
+            excelData[column] = piStatus
+        for column in ColumnCreator.process4Column:
+            excelData[column] = piStatus
+        for column in ColumnCreator.process5Column:
+            excelData[column] = piStatus
+        for column in ColumnCreator.process6Column:
+            excelData[column] = piStatus
+
+        excelData["Process 1 SERIAL NO"] = piStatus
+        excelData["Process 2 SERIAL NO"] = piStatus
+        excelData["Process 3 SERIAL NO"] = piStatus
+        excelData["Process 4 SERIAL NO"] = piStatus
+        excelData["Process 5 SERIAL NO"] = piStatus
+        excelData["Process 6 SERIAL NO"] = piStatus
+
+    elif piStatus == "TRIAL":
+        print("Writing Trial In Columns")
         PiMachineManager.piRow += 1
 
         for column in ColumnCreator.process1Column:
